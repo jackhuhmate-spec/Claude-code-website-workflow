@@ -4,9 +4,12 @@ One email per verified lead. Each references the real, specific flaw found on th
 business's homepage. Group A rules applied: named area, exact flaw, fixed price + fast
 turnaround, 3 sentences. Every opening, structure and tone deliberately varied.
 
-**5 of the 8 have a usable published email address** (marked ✅). The other 3 publish no
+**9 of the 13 have a usable published email address** (marked ✅). The other 4 publish no
 email — only a website contact form — so they will be **skipped** by the sender and flagged
-in `sent_log.csv`. See README for how to reach those three.
+in `sent_log.csv`. See README for how to reach those.
+
+Entries 1–8 are Group A (bad website). 9–12 are more Group A. Entry 13 is Group B (no
+website) and uses the no-website opening the brief specifies.
 
 ---
 
@@ -63,3 +66,38 @@ I found Thomas Roofing while looking at roofers covering Barnet, and honestly th
 **Subject:** Harris Electrical — your site on mobile
 
 Looking at electricians around Walthamstow your site came up, but it's a dated, text-heavy old template with no mobile version and no sign of a recent update, so on a phone it's genuinely hard to use. For an established name like Harris that's a real shame, because the site is underselling you badly. I can rebuild it into something clean, quick and mobile-friendly for a fixed one-off price — want to see what that would look like?
+
+---
+
+## 9. Ebden Electrical Services — Electrician, Woolwich ✅ enquiries@ebden-electrical.co.uk
+**Subject:** Your Woolwich electrician site on a phone
+
+I found Ebden Electrical while looking at electricians around Woolwich, and while your work clearly speaks for itself, the website is an early-2000s build with no mobile version — so on a phone, where most people search now, it's a real struggle to use. That first impression quietly turns customers away before they've even seen how good you are. I can rebuild it into something clean, fast and mobile-friendly for a fixed one-off price, live within a few days — want me to put a quick mockup together?
+
+---
+
+## 10. Handyman Hackney — Electrician, Hackney ❌ no email (contact form only)
+**Subject:** Your Hackney site still shows 2021
+
+I was looking through handymen and electricians around Hackney and landed on yours — the footer still reads 2021 and the page is a dense wall of repeated keywords, which makes an active local business look like it's wound down. People searching on their phone make a snap judgement, and a stale-looking site sends them straight to the next result. I build clean, modern sites that load fast and read well, live in a couple of days for a fixed fee — shall I send you an example?
+
+---
+
+## 11. Collier Roofing — Roofer, Croydon ✅ collierroofing@hotmail.co.uk
+**Subject:** A quick note on your Croydon roofing site
+
+I came across Collier Roofing while looking at roofers in Croydon, and the reviews are great — but the site's footer still says 2018 and the whole look is stuck in the early 2010s, which makes an established firm seem behind the times to anyone comparing options. A fresh, modern site would match the quality of the work far better and win you more of the jobs you're currently losing on first impression. I can rebuild it for a fixed one-off price with a quick turnaround — want to see a design first?
+
+---
+
+## 12. 1st Plumbers — Plumber, Lewisham ✅ info@1st-plumbers.co.uk
+**Subject:** Your Lewisham plumbing site — small fixes, big difference
+
+Looking at plumbers around Lewisham I had a look at your site, and while the booking and WhatsApp options are handy, the design feels unpolished and the footer even shows a glitched 2026 copyright, which chips away at trust for anyone deciding who to call. A cleaner, more professional look would make the good stuff you already offer actually land. For a fixed fee I can tidy or rebuild it, live within a couple of days — happy to send a couple of ideas over?
+
+---
+
+## 13. East Peckham Plumbers — Plumber, Peckham (GROUP B — no website) ✅ epplumbers@btinternet.com
+**Subject:** Peckham customers are searching — but can't find you
+
+Right now people across Peckham are searching Google for a plumber and, because you've only got a Facebook page and no website, they simply aren't finding you. Every day without a proper site is another day those calls go to a competitor who does show up in the results. I can build and launch a professional, mobile-friendly website for you within 48 hours for a fixed one-off price — want me to show you what it would look like?

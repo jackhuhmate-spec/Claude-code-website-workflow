@@ -18,10 +18,14 @@ and build the site when a deal closes.
 
 ## The leads (honest state)
 
-**8 verified Group-A leads**, every one hand-audited by actually loading the homepage.
-Only sites scoring **under 7/10** are kept — anything modern was dropped, per the brief.
-Areas covered: Walthamstow ×2, Enfield, Ilford, Shepherds Bush, Brixton, Tottenham, Barnet.
-**5 publish a usable email; 3 only have a contact form** and are skipped by the sender.
+**13 verified leads** (12 Group A + 1 Group B), every one hand-audited by actually loading
+the homepage. Only sites scoring **under 7/10** are kept — anything modern was dropped, per
+the brief. Areas covered: Walthamstow ×2, Enfield, Ilford, Shepherds Bush, Brixton,
+Tottenham, Barnet, Woolwich, Hackney, Croydon, Lewisham, Peckham (12 of your 15 target
+areas; Wandsworth, Ealing and Stratford returned only modern sites or duplicates).
+**9 publish a usable email; 4 only have a contact form** and are skipped by the sender.
+The Group B lead (East Peckham Plumbers) is a genuine no-website business — Facebook page
+only — with a real published phone and email.
 
 ### Two things you should know about the data
 
