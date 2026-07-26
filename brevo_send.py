@@ -81,6 +81,8 @@ def main():
     ap.add_argument("--from-email", default=os.environ.get("FROM_EMAIL", ""))
     ap.add_argument("--api-key", default=os.environ.get("BREVO_API_KEY", ""))
     ap.add_argument("--delay", type=int, default=5)
+    ap.add_argument("--limit", type=int, default=0,
+                    help="Cap new sends this run (deliverability). 0 = no cap.")
     args = ap.parse_args()
 
     live = args.send
@@ -162,6 +164,12 @@ def main():
             base["Status"] = "Skipped - Opted Out"
             skipped += 1
             print(f"SKIP  {name} (opted out)")
+            rows.append(base)
+            continue
+
+        if args.limit and sent >= args.limit:
+            base["Status"] = "Deferred - daily cap reached"
+            print(f"DEFER {name} (cap {args.limit} reached; will send next run)")
             rows.append(base)
             continue
 
