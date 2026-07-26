@@ -45,6 +45,18 @@ def _opener():
     return urllib.request.build_opener(*handlers)
 
 
+def brevo_report(opener, api_key):
+    """Return today's Brevo delivery counters (requests/delivered/error/blocked)."""
+    try:
+        req = urllib.request.Request(
+            "https://api.brevo.com/v3/smtp/statistics/aggregatedReport?days=1",
+            headers={"api-key": api_key, "accept": "application/json"})
+        with opener.open(req, timeout=30) as r:
+            return json.loads(r.read().decode("utf-8", "ignore"))
+    except Exception:  # noqa: BLE001
+        return {}
+
+
 def send_one(opener, api_key, sender_name, from_email, to_email, subject, text):
     payload = {
         "sender": {"name": sender_name, "email": from_email},
@@ -99,6 +111,7 @@ def main():
 
     opener = _opener() if live else None
     sign = args.sign or "[YOUR NAME]"
+    base_report = brevo_report(opener, args.api_key) if live else {}
     rows, sent, skipped, already = [], 0, 0, 0
 
     for lead in leads:
@@ -166,6 +179,17 @@ def main():
 
     print(f"\n{'LIVE SEND' if live else 'DRY-RUN (nothing sent)'}: {sent} sent, "
           f"{skipped} skipped. Log -> {SENT_LOG.name}")
+
+    # Delivery verification: confirm Brevo actually delivered (not silently errored).
+    if live and sent:
+        after = brevo_report(opener, args.api_key)
+        d_err = after.get("error", 0) - base_report.get("error", 0)
+        d_del = after.get("delivered", 0) - base_report.get("delivered", 0)
+        print(f"DELIVERY CHECK (this batch): ~{d_del} delivered, {d_err} errored so far "
+              f"(delivery can lag a few seconds).")
+        if d_err > 0:
+            print(f"⚠️  WARNING: {d_err} email(s) ERRORED at Brevo — likely an unverified "
+                  f"sender or bad address. Check the sender '{args.from_email}' is verified.")
 
 
 if __name__ == "__main__":

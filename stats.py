@@ -4,6 +4,13 @@ import csv
 from collections import Counter
 from pathlib import Path
 
+# Behave like a normal Unix tool when piped to head/less (no BrokenPipe traceback).
+try:
+    from signal import signal, SIGPIPE, SIG_DFL
+    signal(SIGPIPE, SIG_DFL)
+except (ImportError, ValueError):
+    pass
+
 HERE = Path(__file__).resolve().parent
 
 
