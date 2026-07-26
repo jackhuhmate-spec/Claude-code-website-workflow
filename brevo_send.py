@@ -33,7 +33,8 @@ API_URL = "https://api.brevo.com/v3/smtp/email"
 DEFAULT_CA = os.environ.get("SSL_CERT_FILE") or "/root/.ccr/ca-bundle.crt"
 
 SIGNOFF = ("\n\nBest,\n{name}\n"
-           "Freelance web designer — websites for London tradesmen\n")
+           "Freelance web designer — websites for London tradesmen\n"
+           "(If you'd rather I didn't follow up, just reply and let me know.)\n")
 
 
 def _opener():
