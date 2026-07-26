@@ -69,9 +69,12 @@ def build_zip(cfg):
             pass
 
 
-def deploy(cfg, token):
+def deploy(cfg, token, final=False):
     op = _opener()
-    name = f"{slug(cfg['business_name'])}-{os.urandom(3).hex()}"
+    # Previews are prefixed 'preview-' so cleanup_previews.py can retire them safely.
+    # Final (paid client) sites get a clean name and are never auto-deleted.
+    prefix = "" if final else "preview-"
+    name = f"{prefix}{slug(cfg['business_name'])}-{os.urandom(3).hex()}"
     # 1. create the site
     req = urllib.request.Request(f"{API}/sites", data=json.dumps({"name": name}).encode(),
                                  method="POST", headers={"Authorization": f"Bearer {token}",
@@ -112,6 +115,7 @@ def main():
     ap.add_argument("--phone", default=""); ap.add_argument("--email", default="")
     ap.add_argument("--services", default="")
     ap.add_argument("--token", default=os.environ.get("NETLIFY_TOKEN", ""))
+    ap.add_argument("--final", action="store_true", help="Paid client site: clean name, never auto-cleaned.")
     a = ap.parse_args()
     if not a.token:
         sys.exit("ERROR: set NETLIFY_TOKEN (or --token).")
@@ -125,8 +129,8 @@ def main():
                "email": a.email, "accent": "#1a6fb5",
                "services": [s.strip() for s in a.services.split(",") if s.strip()] or default_services(a.trade)}
 
-    url, state = deploy(cfg, a.token)
-    print(f"PREVIEW LIVE: {url}  (deploy state: {state})")
+    url, state = deploy(cfg, a.token, a.final)
+    print(f"{'SITE' if a.final else 'PREVIEW'} LIVE: {url}  (deploy state: {state})")
     print(url)
 
 
