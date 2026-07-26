@@ -178,5 +178,35 @@
     "email": "info@rproofingbrixton.co.uk",
     "subject": "Your whole portfolio gallery is broken",
     "body": "Your R&P Roofing site is otherwise tidy, but every single photo in the Brixton portfolio gallery is a broken missing-image placeholder — so the one section meant to prove your work shows nothing but empty boxes. That's an easy fix that would noticeably lift enquiries. I can sort the gallery and sharpen the rest for a fixed price, fast — shall I send you a quick preview?"
+  },
+  "Flowline Heating & Plumbing Ltd": {
+    "email": "info@flowline247.co.uk",
+    "subject": "Your Hackney plumbing site looks off-the-shelf",
+    "body": "I came across Flowline while looking at plumbers in Hackney, and the site's a dated template leaning on generic stock photos with a 2022 copyright, so it reads as off-the-shelf rather than a real local firm. Homeowners trust a site that clearly shows your own work and looks current. I can rebuild it modern and mobile-first for a fixed one-off price, live in a few days — want me to send a quick mockup?"
+  },
+  "Greenstone Electrical Ltd": {
+    "email": "info@greenstoneelectrical.co.uk",
+    "subject": "A quick note on your Hackney electrical site",
+    "body": "Looking at electricians in Hackney I found Greenstone, and the site's a dated, basic layout padded with stock images and repeated copy, which really undersells an established electrician. A cleaner, modern site would build far more trust with homeowners comparing options. I can rebuild it for a fixed one-off price with a quick turnaround — happy to send a design over?"
+  },
+  "Bromley Roofer Ltd": {
+    "email": "bromleyrooferltd@gmail.com",
+    "subject": "Your Bromley roofing site still has the demo content",
+    "body": "I had a look at Bromley Roofer, and the website still has the WordPress theme's demo content left in — placeholder filler text and 'project' links that point back to the theme author's demo site rather than your work. It looks half-built, which costs you trust the moment someone in Bromley lands on it. I can finish it properly or rebuild it clean for a fixed fee, fast — shall I send you a preview?"
+  },
+  "K2 Gas Plumbing & Heating": {
+    "email": "info@k2gas.co.uk",
+    "subject": "Placeholder images on your Croydon plumbing site",
+    "body": "Checking plumbers around Croydon I came across K2 Gas, and the homepage still shows the slider plugin's 'dummy' placeholder images with no copyright year, so it looks unfinished and dated. Swapping in your real work on a modern site would win more of the homeowners comparing quotes. I can rebuild it for a fixed one-off price with a quick turnaround — want to see a design first?"
+  },
+  "Ohmatic Electrical Ltd": {
+    "email": "info@ohmaticelectrical.co.uk",
+    "subject": "Your Peckham electrical site says '© [year]'",
+    "body": "I found Ohmatic while looking at electricians in Peckham, and the footer literally still reads '© [year]' — the template placeholder was never filled in — with fairly generic service copy throughout. Little unfinished details like that quietly make people doubt a business. I can rebuild it into something clean, modern and properly finished for a fixed fee, fast — want me to mock one up?"
+  },
+  "Mr Banah Gas & Electrical": {
+    "email": "Mrbanahgas@hotmail.com",
+    "subject": "Lewisham customers can't find you online",
+    "body": "When people in Lewisham search Google for a gas or heating engineer you don't come up — your own domain is dead and all that's left is a free Wix page and a Facebook profile, so you're effectively invisible. Every one of those searches is a job going to a competitor with a proper site. I can build and launch a professional, mobile-friendly website for you within 48 hours at a fixed one-off price — want to see what it'd look like?"
   }
 }
