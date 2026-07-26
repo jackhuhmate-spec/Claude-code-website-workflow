@@ -12,7 +12,7 @@ Safety: defaults to --dry-run. Sends nothing until you pass --send.
 
 Usage:
     BREVO_API_KEY="xkeysib-..." python3 brevo_send.py --send \
-        --sign "Jake" --from-email jakehuhmate@gmail.com --delay 5
+        --sign "Jake" --from-email jackhuhmate@gmail.com --delay 5
 """
 import argparse
 import csv
