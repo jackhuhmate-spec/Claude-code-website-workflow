@@ -32,12 +32,48 @@ import csv
 import json
 import os
 import smtplib
+import socket
 import ssl
 import sys
 import time
+import urllib.parse
 from datetime import date
 from email.message import EmailMessage
 from pathlib import Path
+
+DEFAULT_CA = os.environ.get("SSL_CERT_FILE") or "/root/.ccr/ca-bundle.crt"
+
+
+def smtp_connect(host, port):
+    """Connect to an SMTPS server, tunnelling through HTTPS_PROXY via CONNECT when
+    outbound sockets are proxied (as in sandboxed CI/agent environments). Falls back
+    to a direct SMTP_SSL connection when no proxy is configured."""
+    proxy = os.environ.get("HTTPS_PROXY") or os.environ.get("https_proxy")
+    ca = DEFAULT_CA if os.path.exists(DEFAULT_CA) else None
+    ctx = ssl.create_default_context(cafile=ca)
+    if not proxy:
+        return smtplib.SMTP_SSL(host, port, context=ctx)
+
+    pu = urllib.parse.urlparse(proxy)
+    raw = socket.create_connection((pu.hostname, pu.port), timeout=30)
+    raw.sendall(f"CONNECT {host}:{port} HTTP/1.1\r\nHost: {host}:{port}\r\n\r\n".encode())
+    buf = b""
+    while b"\r\n\r\n" not in buf:
+        chunk = raw.recv(1024)
+        if not chunk:
+            break
+        buf += chunk
+    status = buf.split(b"\r\n", 1)[0]
+    if b" 200 " not in status:
+        raise RuntimeError(f"proxy CONNECT to {host}:{port} failed: {status!r}")
+    tls = ctx.wrap_socket(raw, server_hostname=host)
+    server = smtplib.SMTP()
+    server.sock = tls
+    code, msg = server.getreply()
+    if code != 220:
+        raise RuntimeError(f"SMTP greeting failed: {code} {msg!r}")
+    server._host = host
+    return server
 
 HERE = Path(__file__).resolve().parent
 LEADS = HERE / "leads.csv"
@@ -91,8 +127,8 @@ def main():
     sign = args.sign or "[YOUR NAME]"
     server = None
     if live:
-        ctx = ssl.create_default_context()
-        server = smtplib.SMTP_SSL("smtp.gmail.com", 465, context=ctx)
+        server = smtp_connect("smtp.gmail.com", 465)
+        server.ehlo()
         server.login(args.gmail, args.app_password)
 
     rows = []
