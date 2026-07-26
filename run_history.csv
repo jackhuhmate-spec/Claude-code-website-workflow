@@ -1,0 +1,4 @@
+date,run_type,new_leads,emails_sent,replies_handled,notes
+2026-07-26,manual-batch-1,13,9,0,Initial 13 verified leads across 12 areas; 9 emailed via Brevo
+2026-07-26,manual-batch-2,28,20,0,Four borough research agents; 28 verified leads; 20 emailed
+2026-07-26,manual-batch-3,10,6,0,NE+South re-run agents; 10 verified leads; 6 emailed
