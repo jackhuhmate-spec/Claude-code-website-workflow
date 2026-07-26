@@ -1,0 +1,6 @@
+# Reply drafts (may contain real correspondence)
+drafts/
+# Generated client sites are built on demand
+Demo*/
+__pycache__/
+*.pyc

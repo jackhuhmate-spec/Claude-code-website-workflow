@@ -1,0 +1,10 @@
+{
+  "business_name": "Demo Plumbing Co",
+  "trade": "Plumber",
+  "area": "Hackney",
+  "phone": "020 1234 5678",
+  "email": "info@demoplumbing.co.uk",
+  "services": ["Emergency plumbing", "Boiler repair & servicing", "Bathroom installation", "Leak detection", "Blocked drains", "Radiators & heating"],
+  "has_logo": false,
+  "accent": "#1a6fb5"
+}
