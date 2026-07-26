@@ -16,6 +16,7 @@ follows up, and builds + deploys their sites when they buy. Owner's real email:
 | `deploy_preview.py` | Build a lead's 5-page site and deploy it live to Netlify; prints the URL. |
 | `build_site.py` | Generate a 5-page site from a client JSON (Job 6 delivery). |
 | `stats.py` | Pipeline dashboard. |
+| `selftest.py` | One-command health check — compiles scripts, verifies data files, and tests the Gmail bridge / Brevo / Netlify credentials are live. Run it if anything seems off. |
 | `gmail_bridge.gs` | Google Apps Script deployed in Jake's account = the inbox bridge (read+send over one secret URL). |
 
 ## Data / logs
