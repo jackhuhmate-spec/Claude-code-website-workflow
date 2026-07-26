@@ -84,6 +84,8 @@ def main():
     args = ap.parse_args()
 
     live = args.send
+    if live and (HERE / "PAUSED").exists():
+        sys.exit("PAUSED file present — outreach is paused. Delete PAUSED to resume sending.")
     if live and (not args.api_key or not args.from_email or not args.sign):
         sys.exit("ERROR: --send needs --api-key, --from-email and --sign "
                  "(or BREVO_API_KEY / FROM_EMAIL / SIGN_NAME env vars).")

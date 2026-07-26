@@ -103,9 +103,14 @@ def read(days, show_all, only_new):
     print(f"\n# {len(rows)} message(s) ({label}).", file=sys.stderr)
 
 
-def send(to, subject, body, thread):
+def send(to, subject, body, thread, force=False):
     if not URL or not SECRET:
         sys.exit("ERROR: set BRIDGE_URL and BRIDGE_SECRET.")
+    # Anti-injection guard: only reply to businesses we actually emailed, unless --force.
+    # A malicious inbound email cannot trick the agent into mailing an arbitrary address.
+    if not force and _addr(to) not in sent_emails():
+        sys.exit(f"REFUSED: {to} is not in sent_log.csv (a business we contacted). "
+                 f"Use --force only if you are certain this is a legitimate recipient.")
     payload = {"token": SECRET, "to": to, "subject": subject, "body": body}
     if thread:
         payload["threadId"] = thread
@@ -129,6 +134,7 @@ def main():
     sd.add_argument("--subject", default="Re:")
     sd.add_argument("--body", required=True)
     sd.add_argument("--thread", default="")
+    sd.add_argument("--force", action="store_true", help="Override the known-recipient guard.")
     a = ap.parse_args()
     if a.cmd == "read":
         read(a.days, a.all, a.new)
@@ -136,7 +142,7 @@ def main():
         mark_handled(a.id)
         print(f"marked {len(a.id)} message(s) handled")
     else:
-        send(a.to, a.subject, a.body, a.thread)
+        send(a.to, a.subject, a.body, a.thread, a.force)
 
 
 if __name__ == "__main__":

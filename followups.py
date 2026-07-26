@@ -63,6 +63,8 @@ def main():
     ap.add_argument("--api-key", default=os.environ.get("BREVO_API_KEY", ""))
     ap.add_argument("--delay", type=int, default=5)
     a = ap.parse_args()
+    if a.send and (HERE / "PAUSED").exists():
+        sys.exit("PAUSED file present — outreach is paused. Delete PAUSED to resume follow-ups.")
 
     leads = {r["Business Name"]: r for r in load(LEADS)}
     sent = [r for r in load(SENT_LOG) if r.get("Status") == "Sent"]
