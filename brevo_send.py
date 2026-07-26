@@ -87,6 +87,15 @@ def main():
             for r in csv.DictReader(f):
                 prior[r["Business Name"]] = r
 
+    # Respect opt-outs: never email anyone on the do-not-contact list.
+    dnc = set()
+    dnc_path = HERE / "do_not_contact.csv"
+    if dnc_path.exists():
+        with open(dnc_path, newline="", encoding="utf-8") as f:
+            for r in csv.reader(f):
+                if r:
+                    dnc.add(r[0].strip().lower())
+
     opener = _opener() if live else None
     sign = args.sign or "[YOUR NAME]"
     rows, sent, skipped, already = [], 0, 0, 0
@@ -115,6 +124,13 @@ def main():
             base["Status"] = "Skipped - No Email Found"
             skipped += 1
             print(f"SKIP  {name} (no email)")
+            rows.append(base)
+            continue
+
+        if to_addr.lower() in dnc:
+            base["Status"] = "Skipped - Opted Out"
+            skipped += 1
+            print(f"SKIP  {name} (opted out)")
             rows.append(base)
             continue
 
