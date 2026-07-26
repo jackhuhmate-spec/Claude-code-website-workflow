@@ -80,12 +80,24 @@ def main():
     with open(EMAILS, encoding="utf-8") as f:
         emails = json.load(f)
 
+    # Idempotency: never re-send to a business already logged as Sent.
+    prior = {}
+    if SENT_LOG.exists():
+        with open(SENT_LOG, newline="", encoding="utf-8") as f:
+            for r in csv.DictReader(f):
+                prior[r["Business Name"]] = r
+
     opener = _opener() if live else None
     sign = args.sign or "[YOUR NAME]"
-    rows, sent, skipped = [], 0, 0
+    rows, sent, skipped, already = [], 0, 0, 0
 
     for lead in leads:
         name = lead["Business Name"]
+        if prior.get(name, {}).get("Status", "").startswith("Sent"):
+            rows.append(prior[name])  # preserve original send record, do not resend
+            already += 1
+            print(f"KEPT  {name} (already sent {prior[name].get('Date Sent','')})")
+            continue
         meta = emails.get(name, {})
         to_addr = (lead.get("Email") or meta.get("email") or "").strip()
         subject = meta.get("subject", "")
