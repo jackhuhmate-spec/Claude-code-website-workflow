@@ -289,11 +289,14 @@ def main():
     if len(sys.argv) != 2:
         sys.exit("Usage: python3 build_site.py client.json")
     cfg = json.loads(Path(sys.argv[1]).read_text(encoding="utf-8"))
-    cfg.setdefault("accent", "#1a6fb5")
+    if not re.match(r"^#[0-9a-fA-F]{3,8}$", str(cfg.get("accent", ""))):
+        cfg["accent"] = "#1a6fb5"  # reject anything that isn't a hex colour (CSS-injection guard)
     cfg.setdefault("email", "")
     cfg.setdefault("services", ["General repairs", "Installations", "Maintenance", "Emergency call-outs"])
 
-    outdir = Path(cfg["business_name"])
+    # Safe folder name: strip path separators / leading dots so business_name can't escape cwd.
+    safe = re.sub(r"[/\\]+", "-", str(cfg["business_name"])).strip().strip(".-") or "site"
+    outdir = Path(safe)
     outdir.mkdir(exist_ok=True)
     (outdir / "style.css").write_text(css(cfg["accent"]), encoding="utf-8")
     for page, builder in BUILDERS.items():

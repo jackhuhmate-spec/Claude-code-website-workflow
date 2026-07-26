@@ -115,9 +115,24 @@ def main():
     sign = args.sign or "[YOUR NAME]"
     base_report = brevo_report(opener, args.api_key) if live else {}
     rows, sent, skipped, already = [], 0, 0, 0
+    FIELDS = ["Business Name", "Trade", "London Area", "Phone", "Email",
+              "Website", "Biggest Flaw", "Email Subject", "Date Sent", "Status"]
+
+    def _safe(v):  # neutralise spreadsheet formula-injection in CSV fields
+        s = "" if v is None else str(v)
+        return ("'" + s) if s[:1] in "=+-@\t\r" else s
+
+    def flush():   # write the log now so a mid-batch crash never loses a 'Sent' record
+        with open(SENT_LOG, "w", newline="", encoding="utf-8") as f:
+            w = csv.DictWriter(f, fieldnames=FIELDS)
+            w.writeheader()
+            for row in rows:
+                w.writerow({k: _safe(row.get(k, "")) for k in FIELDS})
 
     for lead in leads:
-        name = lead["Business Name"]
+        name = (lead.get("Business Name") or "").strip()
+        if not name:
+            continue
         if prior.get(name, {}).get("Status", "").startswith("Sent"):
             rows.append(prior[name])  # preserve original send record, do not resend
             already += 1
@@ -163,21 +178,18 @@ def main():
                     print(f"FAIL  {name} -> {to_addr}: HTTP {status} {body[:120]}")
             except Exception as exc:  # noqa: BLE001
                 detail = getattr(exc, "read", lambda: b"")()
+                detail = detail.decode("utf-8", "ignore") if isinstance(detail, bytes) else str(detail)
                 base["Status"] = f"Failed - {exc} {detail[:120]}"
                 print(f"FAIL  {name} -> {to_addr}: {exc} {detail[:120]}")
             rows.append(base)
+            flush()  # checkpoint after every send (idempotency: never re-send on a crash)
             time.sleep(args.delay)
         else:
             base["Status"] = "DRY-RUN - would send"
             print(f"DRAFT {name} -> {to_addr} | {subject}")
             rows.append(base)
 
-    with open(SENT_LOG, "w", newline="", encoding="utf-8") as f:
-        fieldnames = ["Business Name", "Trade", "London Area", "Phone", "Email",
-                      "Website", "Biggest Flaw", "Email Subject", "Date Sent", "Status"]
-        w = csv.DictWriter(f, fieldnames=fieldnames)
-        w.writeheader()
-        w.writerows(rows)
+    flush()
 
     print(f"\n{'LIVE SEND' if live else 'DRY-RUN (nothing sent)'}: {sent} sent, "
           f"{skipped} skipped. Log -> {SENT_LOG.name}")

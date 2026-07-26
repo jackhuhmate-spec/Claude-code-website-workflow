@@ -13,7 +13,8 @@ Usage:
     NETLIFY_TOKEN=nfp_... python3 deploy_preview.py --name "KFM Roofing" \
         --trade Roofer --area Stratford --phone "07708 570709" --email info@kfmroofing.co.uk
 """
-import argparse, csv, io, json, os, re, ssl, sys, time, urllib.request, zipfile
+import argparse, csv, io, json, os, re, shutil, ssl, sys, tempfile, time
+import urllib.error, urllib.request, zipfile
 from pathlib import Path
 
 import build_site  # reuse the site generator
@@ -43,11 +44,21 @@ def default_services(trade):
     return table.get(t, ["Free quotes", "Expert workmanship", "Reliable local service", "Emergency call-outs"])
 
 
+def _call(op, req, timeout=60, tries=4):
+    """Open a Netlify API request with retry/backoff on 429/5xx; always closes the response."""
+    for i in range(tries):
+        try:
+            with op.open(req, timeout=timeout) as r:
+                return json.loads(r.read().decode("utf-8", "ignore") or "{}")
+        except urllib.error.HTTPError as e:
+            if e.code in (429, 500, 502, 503, 504) and i < tries - 1:
+                time.sleep(2 ** i)
+                continue
+            raise
+
+
 def build_zip(cfg):
-    tmp = HERE / f".preview_{slug(cfg['business_name'])}"
-    tmp.mkdir(exist_ok=True)
-    for f in tmp.iterdir():          # clear any leftovers from a prior crash
-        f.unlink()
+    tmp = Path(tempfile.mkdtemp(prefix="swiftsite_preview_"))  # unique per call, outside the repo
     try:
         (tmp / "style.css").write_text(build_site.css(cfg.get("accent", "#1a6fb5")), encoding="utf-8")
         for page, builder in build_site.BUILDERS.items():
@@ -57,16 +68,8 @@ def build_zip(cfg):
             for f in tmp.iterdir():
                 z.write(f, f.name)
         return buf.getvalue()
-    finally:                          # always clean up, even on error
-        for f in tmp.iterdir():
-            try:
-                f.unlink()
-            except OSError:
-                pass
-        try:
-            tmp.rmdir()
-        except OSError:
-            pass
+    finally:
+        shutil.rmtree(tmp, ignore_errors=True)
 
 
 def deploy(cfg, token, final=False):
@@ -79,19 +82,19 @@ def deploy(cfg, token, final=False):
     req = urllib.request.Request(f"{API}/sites", data=json.dumps({"name": name}).encode(),
                                  method="POST", headers={"Authorization": f"Bearer {token}",
                                  "Content-Type": "application/json"})
-    site = json.loads(op.open(req, timeout=60).read().decode())
+    site = _call(op, req, timeout=60)
     site_id, url = site["id"], site.get("ssl_url") or site.get("url")
     # 2. deploy the zip
     zip_bytes = build_zip(cfg)
     req = urllib.request.Request(f"{API}/sites/{site_id}/deploys", data=zip_bytes, method="POST",
                                  headers={"Authorization": f"Bearer {token}", "Content-Type": "application/zip"})
-    dep = json.loads(op.open(req, timeout=120).read().decode())
+    dep = _call(op, req, timeout=120)
     # 3. poll until ready
     for _ in range(30):
         req = urllib.request.Request(f"{API}/deploys/{dep['id']}",
                                      headers={"Authorization": f"Bearer {token}"})
-        dep = json.loads(op.open(req, timeout=30).read().decode())
-        if dep.get("state") == "ready":
+        dep = _call(op, req, timeout=30)
+        if dep.get("state") in ("ready", "error"):
             break
         time.sleep(2)
     return url, dep.get("state")

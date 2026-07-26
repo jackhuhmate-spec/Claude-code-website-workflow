@@ -119,12 +119,16 @@ def main():
             print(f"DUE  touch{touch}  {biz} -> {email}")
 
     if log_new:
+        def _safe(v):
+            s = "" if v is None else str(v)
+            return ("'" + s) if s[:1] in "=+-@\t\r" else s
         new = not FU_LOG.exists()
         with open(FU_LOG, "a", newline="", encoding="utf-8") as f:
             w = csv.writer(f)
             if new:
                 w.writerow(["business", "email", "touch", "date"])
-            w.writerows(log_new)
+            for row in log_new:
+                w.writerow([_safe(c) for c in row])
     print(f"\n{'SENT' if live else 'DRY-RUN'}: {len(todo)} follow-up(s) due.")
 
 

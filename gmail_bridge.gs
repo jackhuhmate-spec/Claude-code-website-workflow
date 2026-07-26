@@ -55,7 +55,8 @@ function doPost(e) {
   try {
     if (p.threadId) {
       var t = GmailApp.getThreadById(p.threadId);
-      if (t) { t.replyAll(p.body); return _json({ ok: true, mode: "reply" }); }
+      // reply() goes only to the thread's last sender (the customer), not every participant.
+      if (t) { t.reply(p.body); return _json({ ok: true, mode: "reply" }); }
     }
     GmailApp.sendEmail(p.to, p.subject || "Re:", p.body);
     return _json({ ok: true, mode: "new" });
