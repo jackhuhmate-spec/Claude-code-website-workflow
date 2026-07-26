@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": ["Bash(python3 deploy_preview.py:*)"]
+  },
+  "autoMode": {
+    "allow": [
+      "$defaults",
+      "Running python3 deploy_preview.py (optionally prefixed with a NETLIFY_TOKEN env var) to build and deploy the repo owner's own website previews and client sites to Netlify. The owner has explicitly authorized automatic Netlify deploys."
+    ]
+  }
+}
