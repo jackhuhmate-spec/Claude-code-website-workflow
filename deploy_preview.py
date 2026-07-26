@@ -46,17 +46,27 @@ def default_services(trade):
 def build_zip(cfg):
     tmp = HERE / f".preview_{slug(cfg['business_name'])}"
     tmp.mkdir(exist_ok=True)
-    (tmp / "style.css").write_text(build_site.css(cfg.get("accent", "#1a6fb5")), encoding="utf-8")
-    for page, builder in build_site.BUILDERS.items():
-        (tmp / f"{page}.html").write_text(builder(cfg), encoding="utf-8")
-    buf = io.BytesIO()
-    with zipfile.ZipFile(buf, "w", zipfile.ZIP_DEFLATED) as z:
-        for f in tmp.iterdir():
-            z.write(f, f.name)
-    for f in tmp.iterdir():
+    for f in tmp.iterdir():          # clear any leftovers from a prior crash
         f.unlink()
-    tmp.rmdir()
-    return buf.getvalue()
+    try:
+        (tmp / "style.css").write_text(build_site.css(cfg.get("accent", "#1a6fb5")), encoding="utf-8")
+        for page, builder in build_site.BUILDERS.items():
+            (tmp / f"{page}.html").write_text(builder(cfg), encoding="utf-8")
+        buf = io.BytesIO()
+        with zipfile.ZipFile(buf, "w", zipfile.ZIP_DEFLATED) as z:
+            for f in tmp.iterdir():
+                z.write(f, f.name)
+        return buf.getvalue()
+    finally:                          # always clean up, even on error
+        for f in tmp.iterdir():
+            try:
+                f.unlink()
+            except OSError:
+                pass
+        try:
+            tmp.rmdir()
+        except OSError:
+            pass
 
 
 def deploy(cfg, token):

@@ -2,5 +2,9 @@
 drafts/
 # Generated client sites are built on demand
 Demo*/
+# Netlify preview build temp dirs
+.preview_*/
+# Local settings may hold secrets — never commit
+.claude/settings.local.json
 __pycache__/
 *.pyc

@@ -1,19 +1,24 @@
 #!/usr/bin/env python3
 """
 reply_bridge.py — read inbound replies and send responses via the Gmail Apps Script
-bridge (HTTPS), for the autonomous reply routine. Works where IMAP/SMTP are blocked.
+bridge (HTTPS). Works where IMAP/SMTP are blocked.
 
-Config (env vars, set by the reply routine — never hard-coded/committed):
+Config (env vars):
     BRIDGE_URL     the Apps Script /exec web-app URL
     BRIDGE_SECRET  the shared secret token
 
-Usage:
-    python3 reply_bridge.py read [--days 4] [--all]
-        Prints JSON of inbound emails. By default only those whose sender matches an
-        address we actually emailed (sent_log.csv). --all shows every inbound message.
+Commands:
+    read [--days 4] [--all] [--new]
+        Print JSON of inbound emails. Default: only senders we emailed (sent_log.csv).
+        --all    every inbound message.
+        --new    exclude messages already recorded in handled_messages.txt
+                 (so an hourly poll never replies to the same message twice).
 
-    python3 reply_bridge.py send --to addr --subject "..." --body "..." [--thread ID]
-        Sends a reply from the user's real Gmail (in-thread if --thread given).
+    mark --id <messageId> [--id <messageId> ...]
+        Record message id(s) as handled so --new skips them next run.
+
+    send --to addr --subject "..." --body "..." [--thread ID]
+        Send a reply from the user's real Gmail (threaded when --thread given).
 """
 import argparse
 import csv
@@ -28,6 +33,7 @@ from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
 SENT_LOG = HERE / "sent_log.csv"
+HANDLED = HERE / "handled_messages.txt"
 CA = os.environ.get("SSL_CERT_FILE") or "/root/.ccr/ca-bundle.crt"
 URL = os.environ.get("BRIDGE_URL", "")
 SECRET = os.environ.get("BRIDGE_SECRET", "")
@@ -56,7 +62,20 @@ def sent_emails():
     return out
 
 
-def read(days, show_all):
+def load_handled():
+    if not HANDLED.exists():
+        return set()
+    return {ln.strip() for ln in HANDLED.read_text(encoding="utf-8").splitlines() if ln.strip()}
+
+
+def mark_handled(ids):
+    with open(HANDLED, "a", encoding="utf-8") as f:
+        for mid in ids:
+            if mid:
+                f.write(mid + "\n")
+
+
+def read(days, show_all, only_new):
     if not URL or not SECRET:
         sys.exit("ERROR: set BRIDGE_URL and BRIDGE_SECRET.")
     u = f"{URL}?token={urllib.parse.quote(SECRET)}&days={days}"
@@ -66,18 +85,22 @@ def read(days, show_all):
         sys.exit(f"BRIDGE ERROR: {data['error']}")
     msgs = data.get("messages", [])
     known = sent_emails()
+    handled = load_handled() if only_new else set()
     rows = []
     for m in msgs:
         frm = _addr(m.get("from", ""))
         if not show_all and frm not in known:
             continue
+        if only_new and m.get("messageId") in handled:
+            continue
         m["from_email"] = frm
         m["matched_business"] = known.get(frm, "")
         rows.append(m)
     print(json.dumps(rows, indent=2, ensure_ascii=False))
-    print(f"\n# {len(rows)} relevant inbound message(s)"
-          f"{' (all inbound shown)' if show_all else ' from businesses we emailed'}.",
-          file=sys.stderr)
+    label = "all inbound" if show_all else "from businesses we emailed"
+    if only_new:
+        label += ", new only"
+    print(f"\n# {len(rows)} message(s) ({label}).", file=sys.stderr)
 
 
 def send(to, subject, body, thread):
@@ -98,6 +121,9 @@ def main():
     rd = sub.add_parser("read")
     rd.add_argument("--days", type=int, default=4)
     rd.add_argument("--all", action="store_true")
+    rd.add_argument("--new", action="store_true")
+    mk = sub.add_parser("mark")
+    mk.add_argument("--id", action="append", default=[], required=True)
     sd = sub.add_parser("send")
     sd.add_argument("--to", required=True)
     sd.add_argument("--subject", default="Re:")
@@ -105,7 +131,10 @@ def main():
     sd.add_argument("--thread", default="")
     a = ap.parse_args()
     if a.cmd == "read":
-        read(a.days, a.all)
+        read(a.days, a.all, a.new)
+    elif a.cmd == "mark":
+        mark_handled(a.id)
+        print(f"marked {len(a.id)} message(s) handled")
     else:
         send(a.to, a.subject, a.body, a.thread)
 

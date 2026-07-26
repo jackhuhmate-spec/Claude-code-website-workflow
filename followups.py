@@ -38,7 +38,7 @@ def emails_in(path, col=0):
     out = set()
     if path.exists():
         for r in csv.reader(open(path, newline="", encoding="utf-8")):
-            if r and "@" in r[col]:
+            if len(r) > col and "@" in r[col]:
                 out.add(r[col].strip().lower())
     return out
 
