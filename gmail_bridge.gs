@@ -23,13 +23,14 @@ var SECRET = "CHANGE_ME_to_a_random_word";
 function doGet(e) {
   if (!e || e.parameter.token !== SECRET) return _json({ error: "unauthorized" });
   var days = parseInt(e.parameter.days || "4", 10);
-  var me = Session.getActiveUser().getEmail().toLowerCase();
-  var threads = GmailApp.search('newer_than:' + days + 'd -in:chats -from:me', 0, 50);
+  var me = (Session.getActiveUser().getEmail() || "").toLowerCase();
+  // in:anywhere catches replies that land in Spam; -from:me excludes own sent mail server-side.
+  var threads = GmailApp.search('newer_than:' + days + 'd in:anywhere -in:trash -in:drafts -in:chats -from:me', 0, 50);
   var out = [];
   threads.forEach(function (t) {
     t.getMessages().forEach(function (m) {
       var from = m.getFrom().toLowerCase();
-      if (from.indexOf(me) !== -1) return; // skip Jake's own messages
+      if (me && from.indexOf(me) !== -1) return; // only skip own mail when we actually know our address
       out.push({
         from: m.getFrom(),
         to: m.getTo(),
