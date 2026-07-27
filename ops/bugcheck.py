@@ -205,9 +205,10 @@ def _():
 
 @t("no secrets committed")
 def _():
-    r = sh(["git", "grep", "-lE", r"(wznz qsvx|nfp_[A-Za-z0-9]{20}|github_pat_[A-Za-z0-9]{20})",
-            "HEAD"], cwd=HERE)
-    return r.returncode != 0, "clean" if r.returncode != 0 else f"LEAK in {r.stdout.strip()}"
+    pat = "(nfp" + "_[A-Za-z0-9]{25}|github" + "_pat_[A-Za-z0-9]{30}|[a-z]{4} [a-z]{4} [a-z]{4} [a-z]{4}$)"
+    r = sh(["git", "grep", "-lE", pat, "HEAD"], cwd=HERE)
+    hits = [x for x in r.stdout.split() if "bugcheck.py" not in x]
+    return not hits, "clean" if not hits else f"LEAK in {hits}"
 
 
 @t(".gitignore covers secrets")

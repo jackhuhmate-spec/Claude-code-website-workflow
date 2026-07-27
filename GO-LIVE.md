@@ -17,9 +17,9 @@ Click **New repository secret** and add these four, one at a time:
 | Name | Value |
 |---|---|
 | `GMAIL_USER` | `jackhuhmate@gmail.com` |
-| `GMAIL_APP_PASSWORD` | `wznz qsvx ocwz ldig` |
+| `GMAIL_APP_PASSWORD` | your 16-char Gmail app password |
 | `SIGN_NAME` | `Jake` |
-| `NETLIFY_TOKEN` | `nfp_yJvwcGiyY5jR8e6CDFKUPEuX5zWbbA6R799d` |
+| `NETLIFY_TOKEN` | your `nfp_…` Netlify token |
 
 Secrets are encrypted. They never appear in logs, and nobody can read them back — not
 even you. GitHub masks them automatically if a script tries to print one.
