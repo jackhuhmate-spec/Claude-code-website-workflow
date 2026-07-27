@@ -269,6 +269,38 @@ def _():
         "0 leads left - run the lead hunter or outreach sends nothing"
 
 
+@t("no franchise/chain pages in leads")
+def _():
+    bad = []
+    with (HERE / "leads.csv").open(newline="", encoding="utf-8") as f:
+        for r in csv.DictReader(f):
+            w = r.get("Website") or ""
+            if re.search(r"/franchise|/stores?/|/locations?/|/branch(es)?/", w, re.I):
+                bad.append(r["Business Name"])
+    return not bad, "none" if not bad else f"chain pages: {bad[:3]}"
+
+
+@t("scraped emails belong to their business", critical=False)
+def _():
+    sys.path.insert(0, str(HERE / "ops"))
+    import lead_hunter as lh
+    bad = []
+    with (HERE / "leads.csv").open(newline="", encoding="utf-8") as f:
+        for r in csv.DictReader(f):
+            e, w, n = (r.get("Email") or "").strip(), r.get("Website") or "", r.get("Business Name", "")
+            if e and w and not lh._plausible(e, w, n):
+                bad.append(f"{n}:{e}")
+    return not bad, ("all plausible" if not bad else
+                     f"{len(bad)} to eyeball (abbreviations are usually fine): {bad[:3]}")
+
+
+@t("subprocess calls are bounded")
+def _():
+    src = (HERE / "ops" / "run_cycle.py").read_text()
+    return "subprocess.TimeoutExpired" in src and "timeout=timeout" in src, \
+        "a hung lead hunter can't stall the send window"
+
+
 @t("no duplicate emails in leads.csv")
 def _():
     seen, dupes = set(), []

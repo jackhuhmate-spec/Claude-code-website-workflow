@@ -45,9 +45,12 @@ INJECTION = ["ignore previous", "ignore all previous", "disregard your instructi
              "forward this to", "run the following"]
 
 
-def sh(args):
-    r = subprocess.run(args, capture_output=True, text=True)
-    return r.returncode, r.stdout, r.stderr
+def sh(args, timeout=900):
+    try:
+        r = subprocess.run(args, capture_output=True, text=True, timeout=timeout)
+        return r.returncode, r.stdout, r.stderr
+    except subprocess.TimeoutExpired:
+        return 124, "", f"timed out after {timeout}s: {' '.join(str(x) for x in args[-3:])}"
 
 
 def categorise_ai(m):
@@ -227,13 +230,15 @@ def cmd_outreach(a):
 
     # Top the funnel up first: hunt fresh leads, rotating London tile by day.
     tile = date.today().toordinal() % 8
-    h = sh([sys.executable, str(HERE / "ops" / "lead_hunter.py"),
-            "--write", "--tile", str(tile), "--max", "15"])
-    print(h.stdout.strip()[-600:] or h.stderr.strip()[:300])
+    hc, ho, he = sh([sys.executable, str(HERE / "ops" / "lead_hunter.py"),
+                     "--write", "--tile", str(tile), "--max", "15"], timeout=600)
+    print(ho.strip()[-600:] or he.strip()[:300])
+    if hc == 124:
+        print("Lead hunter timed out — carrying on with existing leads.")
 
     # Write copy for any new leads first (no-op without GROQ_API_KEY).
-    w = sh([sys.executable, str(HERE / "ops" / "write_emails.py"), "--write"])
-    print(w.stdout.strip()[-800:] or w.stderr.strip()[:300])
+    wc, wo, we = sh([sys.executable, str(HERE / "ops" / "write_emails.py"), "--write"], timeout=600)
+    print(wo.strip()[-800:] or we.strip()[:300])
     code, out, err = sh(GMAIL + ["test"])
     print(out or err)
     if code != 0:

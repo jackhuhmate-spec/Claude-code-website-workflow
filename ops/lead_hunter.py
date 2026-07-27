@@ -211,7 +211,41 @@ BAD_MAIL = re.compile(r"(no-?reply|example\.|sentry|wixpress|@2x|\.png|\.jpg|\.g
                       r"godaddy|squarespace|wordpress|@sentry|protection)", re.I)
 
 
-def find_email(base_url, html=""):
+FREEMAIL = ("gmail.com", "googlemail.com", "yahoo.co.uk", "yahoo.com", "ymail.com",
+            "hotmail.com", "hotmail.co.uk", "outlook.com", "outlook.co.uk",
+            "live.com", "live.co.uk", "msn.com", "icloud.com", "me.com", "mac.com",
+            "aol.com", "aol.co.uk", "btinternet.com", "sky.com", "virginmedia.com",
+            "talktalk.net", "protonmail.com", "proton.me", "gmx.com", "mail.com")
+
+
+def _plausible(addr, base_url, name):
+    """A scraped address must plausibly belong to THIS business - not a webmaster,
+    not a person merely named on the page, not another company's contact."""
+    norm = lambda x: re.sub(r"[^a-z0-9]", "", (x or "").lower())
+    local, _, dom = addr.lower().partition("@")
+    base_url = (base_url or "").strip().lower()
+
+    if base_url in ("", "none", "n/a", "-"):
+        return True                       # no site to contradict it
+
+    site_dom = re.sub(r"^https?://(www\.)?|/.*$", "", base_url)
+    site_stem = norm(site_dom.split(".")[0])
+    mail_stem = norm(dom.split(".")[0])
+    local_flat = norm(local)
+
+    if dom not in FREEMAIL:
+        # A company domain must relate to the site's domain, else it's someone else's.
+        return bool(site_stem) and (site_stem in mail_stem or mail_stem in site_stem)
+
+    # Freemail: only if it's a role address, echoes the name, or echoes the domain.
+    if local in ("info", "hello", "enquiries", "contact", "bookings", "sales", "admin"):
+        return True
+    if any(w in local_flat for w in re.findall(r"[a-z]{4,}", name.lower())):
+        return True
+    return bool(site_stem) and (site_stem in local_flat or local_flat in site_stem)
+
+
+def find_email(base_url, html="", name=""):
     """Look for a published address on the homepage, then the contact page."""
     pages = [html] if html else []
     for path in ("contact", "contact-us", "about"):
@@ -222,8 +256,11 @@ def find_email(base_url, html=""):
             break
     for page in pages:
         for m in EMAIL_RE.findall(page):
-            if not BAD_MAIL.search(m) and len(m) < 60:
-                return m.lower()
+            m = m.lower()
+            if BAD_MAIL.search(m) or len(m) >= 60:
+                continue
+            if _plausible(m, base_url, name):
+                return m
     return ""
 
 
@@ -312,6 +349,9 @@ def main():
                 print(f"  + [B] {name} ({area}) {email or phone}")
                 continue
 
+            if re.search(r"/franchise|/stores?/|/locations?/|/branch(es)?/|/find-us/",
+                         site, re.I):
+                continue  # a page on a national chain's site, not an independent business
             dom = re.sub(r"^https?://(www\.)?|/.*$", "", site.lower())
             if dom in domains or dom in seen:
                 continue
@@ -321,7 +361,7 @@ def main():
             if score is None:
                 continue
             if not email and score >= 2:  # dead sites have no page to scrape
-                email = find_email(site, box[0] if box else "")
+                email = find_email(site, box[0] if box else "", name)
                 if email and email in mails:
                     continue
             kept.append([name, trade, area, phone, email, site, str(score), flaw, "A"])
