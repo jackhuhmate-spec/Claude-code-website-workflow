@@ -103,11 +103,13 @@ def header(cfg, active):
         href = f"{page}.html"
         cur = ' aria-current="page"' if page == active else ""
         links += f'<li><a href="{href}"{cur}>{html.escape(lbl)}</a></li>'
+    call_li = (f'<li><a class="call-btn" href="tel:{tel}">Call {html.escape(cfg["phone"])}</a></li>'
+               if tel else '<li><a class="call-btn" href="contact.html">Get a quote</a></li>')
     return f"""<header>
 <div class="bar">
 <a class="logo" href="index.html">{name}</a>
 <button class="menu-toggle" aria-label="Menu" onclick="document.getElementById('nav').classList.toggle('open')">&#9776;</button>
-<nav><ul id="nav">{links}<li><a class="call-btn" href="tel:{tel}">Call {html.escape(cfg['phone'])}</a></li></ul></nav>
+<nav><ul id="nav">{links}{call_li}</ul></nav>
 </div>
 </header>"""
 
@@ -117,10 +119,19 @@ def footer(cfg):
     area = html.escape(cfg["area"])
     trade = html.escape(cfg["trade"].lower())
     tel = re.sub(r"[^0-9+]", "", cfg["phone"])
-    return f"""<a class="float-call" href="tel:{tel}">&#128222; Call now</a>
+    float_call = (f'<a class="float-call" href="tel:{tel}">&#128222; Call now</a>' if tel
+                  else '<a class="float-call" href="contact.html">&#9993; Get a quote</a>')
+    if tel:
+        contact_line = (f'<p>Call <a href="tel:{tel}">{html.escape(cfg["phone"])}</a>'
+                        f'{" · " + html.escape(cfg["email"]) if cfg.get("email") else ""}</p>')
+    elif cfg.get("email"):
+        contact_line = f'<p>Email <a href="mailto:{html.escape(cfg["email"])}">{html.escape(cfg["email"])}</a></p>'
+    else:
+        contact_line = ""
+    return f"""{float_call}
 <footer>
 <p><strong>{name}</strong> — trusted {trade} serving {area} and surrounding areas.</p>
-<p>Call <a href="tel:{tel}">{html.escape(cfg['phone'])}</a>{" · " + html.escape(cfg['email']) if cfg.get('email') else ""}</p>
+{contact_line}
 <p style="margin-top:10px;opacity:.7;">&copy; 2026 {name}. All rights reserved.</p>
 </footer>"""
 
@@ -155,7 +166,7 @@ def page_index(cfg):
     body = f"""<section class="hero">
 <h1>{html.escape(area)}'s Trusted {html.escape(trade)}</h1>
 <p>{html.escape(name)} provides reliable, professional {html.escape(tl)} services across {html.escape(area)} and nearby areas — fast response, fair prices, quality work.</p>
-<a class="btn" href="tel:{tel}">Call {html.escape(cfg['phone'])}</a>
+{f'<a class="btn" href="tel:{tel}">Call {html.escape(cfg["phone"])}</a>' if tel else ''}
 <a class="btn alt" href="contact.html">Get a Free Quote</a>
 </section>
 <section>
@@ -244,7 +255,7 @@ def page_contact(cfg):
 <section>
 <div class="container">
 <div class="contact-info">
-Call us on <a href="tel:{tel}">{html.escape(cfg['phone'])}</a>{email_line}
+{f'Call us on <a href="tel:{tel}">{html.escape(cfg["phone"])}</a>' if tel else 'Send us a message and we will get straight back to you.'}{email_line}
 </div>
 <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field">
 <input type="hidden" name="form-name" value="contact">
