@@ -1,6 +1,8 @@
 name: Reply agent (hourly)
 
 on:
+  push:
+    paths: [".github/workflows/replies.yml"]   # lets a push kick off a verification run
   schedule:
     # Every hour, on the hour. GitHub cron is UTC and can lag 5-15 min at busy times.
     - cron: "0 * * * *"
