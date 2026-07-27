@@ -7,7 +7,7 @@ bugcheck.py — full system test. Run this whenever anything feels off.
 Tests credentials, guards, data integrity and the kill switch.
 Exits non-zero if any CRITICAL test fails.
 """
-import csv, json, os, re, subprocess, sys, tempfile
+import csv, json, os, re, subprocess, sys
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent.parent
@@ -162,6 +162,46 @@ def _():
     return "DRY RUN" in r.stdout, r.stdout.strip().splitlines()[0] if r.stdout else "?"
 
 
+@t("daily cap counts today's real sends")
+def _():
+    src = (HERE / "ops" / "gmail_send_batch.py").read_text()
+    return "def sent_today" in src and "DAILY_CAP - done_today" in src, \
+        "cap survives repeated runs in one day"
+
+
+@t("mark is append-only (concurrency safe)")
+def _():
+    src = (HERE / "ops" / "gmail.py").read_text()
+    return 'HANDLED.open("a"' in src and "HANDLED.write_text" not in src, \
+        "no read-modify-write race between runners"
+
+
+@t("SUSPICIOUS and REVIEW get marked handled")
+def _():
+    src = (HERE / "ops" / "run_cycle.py").read_text()
+    i = src.find('if cat == "SUSPICIOUS"')
+    j = src.find("REVIEW   {m['from']}")
+    return ("mark" in src[i:i + 400]) and ("mark" in src[max(0, j - 400):j]), \
+        "no infinite re-flagging loop"
+
+
+@t("model refusals are never emailed")
+def _():
+    src = (HERE / "ops" / "run_cycle.py").read_text()
+    return "I can'?t assist" in src or "cannot help with that" in src, \
+        "refusal text filtered before send"
+
+
+@t("every brain category has a branch")
+def _():
+    sys.path.insert(0, str(HERE / "ops"))
+    import brain as _b
+    src = (HERE / "ops" / "run_cycle.py").read_text()
+    miss = [c for c in _b.CATEGORIES
+            if f'"{c}"' not in src]
+    return not miss, "all handled" if not miss else f"unhandled: {miss}"
+
+
 print("\n=== 4. DATA INTEGRITY ===")
 
 
@@ -188,6 +228,45 @@ def _():
     d = json.loads((HERE / "emails.json").read_text(encoding="utf-8"))
     bad = [k for k, v in d.items() if re.search(r"£\s?\d|449|39/mo", v.get("body", ""))]
     return not bad, "none quote a price" if not bad else f"price in: {bad[:3]}"
+
+
+@t("sent_log emails are well-formed")
+def _():
+    bad = []
+    with (HERE / "sent_log.csv").open(newline="", encoding="utf-8") as f:
+        for r in csv.DictReader(f):
+            e = (r.get("Email") or "").strip()
+            if e and "@" not in e:
+                bad.append((r.get("Business Name"), e))
+    return not bad, "all valid or blank" if not bad else f"{len(bad)} malformed"
+
+
+@t("nobody emailed twice")
+def _():
+    from collections import Counter
+    with (HERE / "sent_log.csv").open(newline="", encoding="utf-8") as f:
+        c = Counter((r.get("Email") or "").strip().lower() for r in csv.DictReader(f)
+                    if "@" in (r.get("Email") or "") and (r.get("Status") or "").startswith("Sent"))
+    d = {k: v for k, v in c.items() if v > 1}
+    return not d, f"{len(c)} contacted once each" if not d else f"DUPLICATES: {list(d)[:3]}"
+
+
+@t("pipeline has fuel", critical=False)
+def _():
+    sent = set()
+    with (HERE / "sent_log.csv").open(newline="", encoding="utf-8") as f:
+        for r in csv.DictReader(f):
+            a = (r.get("Email") or "").strip().lower()
+            if a and (r.get("Status") or "").startswith("Sent"):
+                sent.add(a)
+    ready = 0
+    with (HERE / "leads.csv").open(newline="", encoding="utf-8") as f:
+        for r in csv.DictReader(f):
+            a = (r.get("Email") or "").strip().lower()
+            if a and "@" in a and a not in sent:
+                ready += 1
+    return ready > 0, f"{ready} uncontacted leads ready" if ready else \
+        "0 leads left - run the lead hunter or outreach sends nothing"
 
 
 @t("no duplicate emails in leads.csv")

@@ -12,7 +12,7 @@ Modes:
     outreach   dry-run the send batch and report                     (safe: needs --auto to send)
     status     pipeline snapshot
 """
-import argparse, csv, json, os, re, subprocess, sys
+import argparse, csv, json, re, subprocess, sys
 from datetime import date, datetime
 from pathlib import Path
 
@@ -84,7 +84,6 @@ def categorise(m):
 
 
 def draft_for(cat, m):
-    who = m["from"]
     if cat == "INTERESTED":
         return (f"Thanks for getting back to me.\n\n"
                 f"It's {PRICE} — the care plan covers hosting, updates and any fixes, "

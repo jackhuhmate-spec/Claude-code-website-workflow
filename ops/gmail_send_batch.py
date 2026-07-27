@@ -32,6 +32,19 @@ FIELDS = ["Business Name", "Trade", "London Area", "Phone", "Email", "Website",
           "Biggest Flaw", "Email Subject", "Date Sent", "Status"]
 
 
+def sent_today():
+    """How many we have already sent today - the cap must survive repeated runs."""
+    if not SENT_LOG.exists():
+        return 0
+    today = date.today().isoformat()
+    n = 0
+    with SENT_LOG.open(newline="", encoding="utf-8") as f:
+        for r in csv.DictReader(f):
+            if (r.get("Date Sent") or "").strip() == today and (r.get("Status") or "").startswith("Sent"):
+                n += 1
+    return n
+
+
 def already_sent():
     out = set()
     if SENT_LOG.exists():
@@ -82,7 +95,14 @@ def main():
             skipped.append((lead, "Skipped - No Copy Written")); continue
         queue.append((lead, addr, meta))
 
-    queue = queue[: max(0, min(a.limit, DAILY_CAP))]
+    done_today = sent_today()
+    remaining = max(0, DAILY_CAP - done_today)
+    if done_today:
+        print(f"Already sent {done_today} today; {remaining} left under the {DAILY_CAP}/day cap.")
+    if remaining == 0:
+        print(f"DAILY CAP REACHED ({DAILY_CAP}). Nothing sent — protects the Gmail account.")
+        return
+    queue = queue[: max(0, min(a.limit, remaining))]
     print(f"{'SEND' if a.send else 'DRY RUN'}: {len(queue)} to send, {len(skipped)} skipped")
     for lead, addr, meta in queue:
         print(f"  -> {lead['Business Name']} <{addr}> | {meta['subject']}")

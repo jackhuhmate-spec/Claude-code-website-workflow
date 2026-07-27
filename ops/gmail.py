@@ -15,7 +15,7 @@ Commands:
     python3 ops/gmail.py mark --id <message-id>
     python3 ops/gmail.py test
 """
-import argparse, csv, email, html as _html, imaplib, json, os, re, smtplib, ssl, sys, time
+import argparse, csv, email, imaplib, json, os, re, smtplib, ssl, sys
 from email.header import decode_header, make_header
 from email.message import EmailMessage
 from email.utils import make_msgid, parseaddr
@@ -79,14 +79,19 @@ def recently_replied(days=45):
             typ, data = M.search(None, f'(SINCE "{since}")')
             if typ != "OK":
                 continue
-            for i in data[0].split()[-400:]:
-                typ, d = M.fetch(i, "(BODY.PEEK[HEADER.FIELDS (TO DATE)])")
-                if typ != "OK" or not d or not d[0]:
-                    continue
-                hdr = email.message_from_bytes(d[0][1])
-                addr = parseaddr(hdr.get("To", ""))[1].lower()
-                if addr:
-                    out[addr] = hdr.get("Date", "")
+            ids = data[0].split()[-500:]
+            if not ids:
+                break
+            # One batched FETCH instead of one round-trip per message.
+            typ, d = M.fetch(b",".join(ids).decode(), "(BODY.PEEK[HEADER.FIELDS (TO DATE)])")
+            if typ == "OK":
+                for part in d:
+                    if not isinstance(part, tuple) or len(part) < 2:
+                        continue
+                    hdr = email.message_from_bytes(part[1])
+                    addr = parseaddr(hdr.get("To", ""))[1].lower()
+                    if addr:
+                        out[addr] = hdr.get("Date", "")
             break
         M.logout()
     except Exception as e:
@@ -225,10 +230,14 @@ def cmd_read(a):
 
 
 def cmd_mark(a):
+    """Append-only + O_APPEND is atomic for small writes, so two concurrent runs
+    can't clobber each other's handled IDs (a read-modify-write would)."""
     cur = handled_ids()
-    cur.update(x.strip() for x in a.id)
-    HANDLED.write_text("\n".join(sorted(cur)) + "\n", encoding="utf-8")
-    print(json.dumps({"ok": True, "handled_total": len(cur)}))
+    new = [x.strip() for x in a.id if x.strip() and x.strip() not in cur]
+    if new:
+        with HANDLED.open("a", encoding="utf-8") as f:
+            f.write("\n".join(new) + "\n")
+    print(json.dumps({"ok": True, "added": len(new), "handled_total": len(cur) + len(new)}))
 
 
 def cmd_test(a):

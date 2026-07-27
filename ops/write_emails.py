@@ -10,7 +10,7 @@ hasn't been contacted, and has no copy in emails.json yet.
 
 Needs GROQ_API_KEY. Without it, exits cleanly and changes nothing.
 """
-import argparse, csv, json, os, re, sys
+import argparse, csv, json, sys
 from difflib import SequenceMatcher
 from pathlib import Path
 
