@@ -101,3 +101,24 @@ Looking at plumbers around Lewisham I had a look at your site, and while the boo
 **Subject:** Peckham customers are searching — but can't find you
 
 Right now people across Peckham are searching Google for a plumber and, because you've only got a Facebook page and no website, they simply aren't finding you. Every day without a proper site is another day those calls go to a competitor who does show up in the results. I can build and launch a professional, mobile-friendly website for you within 48 hours for a fixed one-off price — want me to show you what it would look like?
+
+---
+
+## PML Handyman — Handyman, Wandsworth ✅ info@pmlhandyman.co.uk
+**Subject:** PML Handyman site issue
+
+PML Handyman in Wandsworth has a review saying 'Think before using this company!!' on its homepage and service photos from 2018. This puts people off, they'll pick the next result. I can fix it for a fixed one-off price, want me to send a quick mockup?
+
+---
+
+## Building & Handyman — Handyman, Battersea ✅ info@buildinghandyman.com
+**Subject:** Battersea Handyman Site
+
+Your site's a Battersea handyman service with 2018 stock photos and a long block of text on the homepage, making prices hard to find on a phone. This costs you work as people pick the next result quickly. I can fix this for a fixed one-off price, want me to send a quick mockup?
+
+---
+
+## The Local Handyman London — Handyman, Greenford ✅ info@localhm.co.uk
+**Subject:** Slow Greenford Site
+
+The Local Handyman London's homepage has large uncompressed images, making it slow on mobile and hiding services. This costs you work as users pick the next result quickly. I can fix it for a fixed one-off price, want me to send a quick mockup?
