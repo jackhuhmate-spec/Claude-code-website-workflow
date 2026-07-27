@@ -82,6 +82,24 @@ def _():
     return True, json.loads(r.read())["login"]
 
 
+@t("Groq AI brain", critical=False)
+def _():
+    if not os.environ.get("GROQ_API_KEY"):
+        return False, "GROQ_API_KEY not set - agents run on keyword fallback"
+    r = sh([PY, str(HERE / "ops" / "brain.py"), "test"])
+    line = [l for l in r.stdout.splitlines() if l.strip().startswith("->")]
+    return r.returncode == 0, (line[0].strip() if line else "ran") + " classification accuracy"
+
+
+@t("AI failure falls back safely")
+def _():
+    env = {k: v for k, v in os.environ.items() if k != "GROQ_API_KEY"}
+    env["GROQ_API_KEY"] = "gsk_deliberately_invalid_key_for_testing"
+    r = subprocess.run([PY, str(HERE / "ops" / "run_cycle.py"), "replies", "--days", "1"],
+                       capture_output=True, text=True, env=env, timeout=600)
+    return r.returncode == 0 and "engine=keywords" in r.stdout, "bad key -> keyword fallback, no crash"
+
+
 print("\n=== 3. SAFETY GUARDS ===")
 
 

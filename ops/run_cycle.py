@@ -17,6 +17,11 @@ from datetime import date, datetime
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+try:
+    import brain
+except Exception:
+    brain = None
 GMAIL = [sys.executable, str(HERE / "ops" / "gmail.py")]
 REPLIES_LOG = HERE / "replies_log.csv"
 DNC = HERE / "do_not_contact.csv"
@@ -43,6 +48,20 @@ INJECTION = ["ignore previous", "ignore all previous", "disregard your instructi
 def sh(args):
     r = subprocess.run(args, capture_output=True, text=True)
     return r.returncode, r.stdout, r.stderr
+
+
+def categorise_ai(m):
+    """LLM classification. Returns (category, meta) or (None, None) to fall back."""
+    if not (brain and brain.available()):
+        return None, None
+    d = brain.classify(m.get("subject", ""), m.get("body", ""), m.get("from", ""))
+    if not d:
+        return None, None
+    cat, conf = d["category"], d.get("confidence", 0)
+    # Low confidence must never auto-send. Push it to a human.
+    if conf < 70 and cat in ("DEAL", "INTERESTED", "QUESTION", "OBJECTION", "OPTOUT"):
+        return "REVIEW", d
+    return cat, d
 
 
 def categorise(m):
@@ -98,8 +117,17 @@ def cmd_replies(a):
     msgs = json.loads(out)
 
     buckets, actions = {}, []
+    ai_used = 0
     for m in msgs:
-        cat = categorise(m)
+        cat, meta = categorise_ai(m)
+        if cat:
+            ai_used += 1
+            m["_ai"] = meta
+        else:
+            cat = categorise(m)
+        # Keyword injection check always runs as a second opinion, even when AI is used.
+        if categorise(m) == "SUSPICIOUS":
+            cat = "SUSPICIOUS"
         buckets.setdefault(cat, []).append(m)
 
         if cat == "OPTOUT":
@@ -127,7 +155,14 @@ def cmd_replies(a):
             actions.append(f"UNKNOWN  {m['from']} ({cat}) → not a lead we contacted, left for Jake")
             continue
 
-        body = draft_for(cat, m)
+        body = None
+        if brain and brain.available() and cat in ("INTERESTED", "QUESTION", "DEAL", "OBJECTION"):
+            body = brain.write_reply(cat, m.get("subject", ""), m.get("body", ""),
+                                     m.get("fromName", ""), m.get("from", ""))
+            if body and len(body.split()) > 160:
+                body = None  # too long, model rambled - use the safe template
+        if not body:
+            body = draft_for(cat, m)
         if body:
             if a.auto:
                 c, o, e = sh(GMAIL + ["send", "--to", m["from"], "--thread", m["messageId"],
@@ -150,7 +185,9 @@ def cmd_replies(a):
             actions.append(f"REVIEW   {m['from']} → needs Jake")
 
     print(f"\n{'='*64}\nREPLY CYCLE  {datetime.now():%Y-%m-%d %H:%M}   mode={'AUTO-SEND' if a.auto else 'DRAFT ONLY'}\n{'='*64}")
-    print(f"Real messages: {len(msgs)}   " + "  ".join(f"{k}:{len(v)}" for k, v in buckets.items()))
+    engine = f"AI ({brain.MODEL})" if ai_used else "keywords"
+    print(f"Real messages: {len(msgs)}   engine={engine} ({ai_used} AI-classified)   "
+          + "  ".join(f"{k}:{len(v)}" for k, v in buckets.items()))
     print()
     for x in actions:
         print("  " + x)
@@ -159,6 +196,8 @@ def cmd_replies(a):
         print(f"\n🔥 ESCALATE TO JAKE — {len(hot)} hot lead(s):")
         for m in hot:
             print(f"   {m['from']}  |  {m['subject']}")
+            if m.get("_ai"):
+                print(f"      summary: {m['_ai'].get('summary','')}")
             print(f"      \"{' '.join(m['body'].split())[:160]}\"")
     print()
 
