@@ -1,0 +1,56 @@
+name: Outreach agent (daily)
+
+on:
+  schedule:
+    # 09:00 UTC = 10am London in summer. Cold emails land mid-morning.
+    - cron: "0 9 * * *"
+  workflow_dispatch:
+    inputs:
+      auto:
+        description: "Actually send (false = dry run)"
+        type: boolean
+        default: false
+      limit:
+        description: "Max emails to send"
+        default: "30"
+
+concurrency:
+  group: outreach-agent
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  outreach:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Send today's batch
+        env:
+          GMAIL_USER: ${{ secrets.GMAIL_USER }}
+          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
+          SIGN_NAME: ${{ secrets.SIGN_NAME }}
+        run: |
+          python3 ops/run_cycle.py outreach \
+            --limit "${{ github.event.inputs.limit || '30' }}" \
+            ${{ (github.event_name == 'schedule' || github.event.inputs.auto == 'true') && '--auto' || '' }}
+
+      - name: Persist state
+        run: |
+          git config user.name  "Outreach Agent"
+          git config user.email "agent@users.noreply.github.com"
+          git add sent_log.csv run_history.csv do_not_contact.csv runs/ 2>/dev/null || true
+          if git diff --staged --quiet; then
+            echo "No state change."
+          else
+            git commit -m "outreach: $(date -u '+%Y-%m-%d') UTC"
+            git pull --rebase --autostash || true
+            git push
+          fi

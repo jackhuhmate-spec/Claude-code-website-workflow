@@ -1,0 +1,39 @@
+name: Health check (weekly)
+
+on:
+  schedule:
+    - cron: "0 8 * * 1"   # Monday 8am UTC
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  bugcheck:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Run full bug check
+        env:
+          GMAIL_USER: ${{ secrets.GMAIL_USER }}
+          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
+          SIGN_NAME: ${{ secrets.SIGN_NAME }}
+          NETLIFY_TOKEN: ${{ secrets.NETLIFY_TOKEN }}
+        run: python3 ops/bugcheck.py | tee health.log
+
+      - name: Email Jake the result
+        if: always()
+        env:
+          GMAIL_USER: ${{ secrets.GMAIL_USER }}
+          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
+          SIGN_NAME: ${{ secrets.SIGN_NAME }}
+        run: |
+          python3 ops/gmail.py send --force --no-signoff \
+            --to "$GMAIL_USER" \
+            --subject "Weekly system health check" \
+            --body "$(cat health.log 2>/dev/null || echo 'Health check failed to run — the agents may be down.')"

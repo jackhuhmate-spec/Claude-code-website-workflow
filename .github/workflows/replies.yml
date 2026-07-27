@@ -1,0 +1,72 @@
+name: Reply agent (hourly)
+
+on:
+  schedule:
+    # Every hour, on the hour. GitHub cron is UTC and can lag 5-15 min at busy times.
+    - cron: "0 * * * *"
+  workflow_dispatch:
+    inputs:
+      auto:
+        description: "Actually send replies (false = draft only)"
+        type: boolean
+        default: true
+      days:
+        description: "How many days of inbox to scan"
+        default: "3"
+
+concurrency:
+  group: reply-agent
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  replies:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Check inbox and reply
+        env:
+          GMAIL_USER: ${{ secrets.GMAIL_USER }}
+          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
+          SIGN_NAME: ${{ secrets.SIGN_NAME }}
+          NETLIFY_TOKEN: ${{ secrets.NETLIFY_TOKEN }}
+        run: |
+          python3 ops/run_cycle.py replies \
+            --days "${{ github.event.inputs.days || '3' }}" \
+            ${{ (github.event_name == 'schedule' || github.event.inputs.auto == 'true') && '--auto' || '' }} \
+            | tee cycle.log
+
+      - name: Persist state
+        run: |
+          git config user.name  "Reply Agent"
+          git config user.email "agent@users.noreply.github.com"
+          git add handled_messages.txt replies_log.csv do_not_contact.csv payments.csv 2>/dev/null || true
+          if git diff --staged --quiet; then
+            echo "No state change."
+          else
+            git commit -m "reply agent: $(date -u '+%Y-%m-%d %H:%M') UTC"
+            git pull --rebase --autostash || true
+            git push
+          fi
+
+      - name: Alert Jake if a deal landed
+        if: always()
+        env:
+          GMAIL_USER: ${{ secrets.GMAIL_USER }}
+          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
+          SIGN_NAME: ${{ secrets.SIGN_NAME }}
+        run: |
+          if grep -q "ESCALATE TO JAKE" cycle.log 2>/dev/null; then
+            python3 ops/gmail.py send --force --no-signoff \
+              --to "$GMAIL_USER" \
+              --subject "HOT LEAD - action needed" \
+              --body "$(sed -n '/ESCALATE TO JAKE/,$p' cycle.log)"
+          fi
