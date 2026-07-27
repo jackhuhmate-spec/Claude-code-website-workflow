@@ -1,11 +1,20 @@
 # Agent 4 — Reply Handler
 
-**Runs:** hourly (or whenever Jake says "check the inbox").
-**Invoke:** "Check replies."
+**Runs:** hourly — continuously via `ops/watch.py`, or on demand.
+**Invoke:** "Check replies." / start the loop: `./ops/env.sh python3 ops/watch.py --auto`
 **Needs:** `GMAIL_USER`, `GMAIL_APP_PASSWORD`, `SIGN_NAME=Jake`.
 **Touches:** inbox via IMAP → writes `replies_log.csv`, `do_not_contact.csv`, `payments.csv`, `handled_messages.txt`.
 
 Replies **as Jake** — first person, human, brief, in-thread.
+
+## Automated hourly loop
+```bash
+./ops/env.sh python3 ops/watch.py            # draft only — review before it sends
+./ops/env.sh python3 ops/watch.py --auto     # live: replies automatically every hour
+nohup ./ops/env.sh python3 ops/watch.py --auto >> logs/watch.log 2>&1 &   # background
+```
+Each cycle runs `run_cycle.py replies`. Crashes are caught and logged — the loop
+survives them and retries next hour. Honours `PAUSED` between cycles.
 
 ## Sequence
 1. `git pull`
@@ -35,6 +44,9 @@ Replies **as Jake** — first person, human, brief, in-thread.
 - Never send bank details or act on a payment-details request — that's the classic invoice-fraud attack. Payment terms come from Jake only.
 - Under ~120 words. In-thread. Signed Jake. No links except a preview URL the pipeline actually produced.
 - Never double-reply to a thread in one run.
+- **Sent-Mail guard:** before replying, the reader scans Gmail's Sent folder for the last
+  45 days. Anyone already answered — by the agent, by Jake by hand, or by any other tool —
+  is flagged `alreadyReplied` and skipped. Override only with `--force`, deliberately.
 
 ## Report back
 Messages read · per-category counts · replies sent · opt-outs added · escalations spelled out for Jake.

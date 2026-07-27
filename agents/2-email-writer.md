@@ -22,7 +22,9 @@ Three sentences. Plain text. No greeting fluff, no bullets, no links, no images,
 ## Voice
 - British English. "Sorted", "quick", "no faff" fine. **Banned:** leverage, solutions, synergy, "in today's digital landscape", "I hope this email finds you well", "circle back".
 - **Vary everything.** Reread the last 10 entries in `emails.md` first — no repeated openings, sentence shapes or closing questions across a run.
-- **Never state the price** in a cold email. Say "fixed one-off price". Price is a reply-stage conversation.
+- **Never state the price** in a cold email — no "£449", no "449 pounds", no "39/mo".
+  Say "fixed one-off price". Price is a reply-stage conversation.
+  (`ops/bugcheck.py` scans for this; 3 café emails slipped through before the check existed.)
 - No fake urgency, no invented stats, no "you're ranking #4", no promises about rankings, traffic or revenue.
 - Subject: specific, under 50 chars, no emoji, no "FREE", no exclamation marks, not all-caps. e.g. `Your Walthamstow site still says 2021`.
 - **No sign-off** — the sender appends "Best, Jake" and the opt-out line automatically. Adding one gives a double signature.

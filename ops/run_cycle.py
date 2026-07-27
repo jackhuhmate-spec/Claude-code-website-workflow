@@ -118,6 +118,11 @@ def cmd_replies(a):
             actions.append(f"⚠ INJECTION ATTEMPT {m['from']} — not actioned, escalated to Jake")
             continue
 
+        if m.get("alreadyReplied") and not a.force:
+            sh(GMAIL + ["mark", "--id", m["messageId"]])
+            actions.append(f"SKIP     {m['from']} → already replied {m.get('lastReplyDate','')[:16]}, not re-answering")
+            continue
+
         if not m.get("known"):
             actions.append(f"UNKNOWN  {m['from']} ({cat}) → not a lead we contacted, left for Jake")
             continue
@@ -191,6 +196,7 @@ def main():
     r = sub.add_parser("replies"); r.set_defaults(fn=cmd_replies)
     r.add_argument("--days", type=int, default=3)
     r.add_argument("--auto", action="store_true", help="Actually send replies (default: draft only).")
+    r.add_argument("--force", action="store_true", help="Reply even if Sent Mail shows we already answered.")
     o = sub.add_parser("outreach"); o.set_defaults(fn=cmd_outreach)
     o.add_argument("--auto", action="store_true"); o.add_argument("--limit", type=int, default=30)
     s = sub.add_parser("status"); s.set_defaults(fn=cmd_status)

@@ -61,6 +61,39 @@ def opted_out():
     return out
 
 
+def recently_replied(days=45):
+    """Addresses we have already replied to from Sent Mail — prevents double-replies
+    even if the reply was sent by hand, by Claude Code, or on another machine."""
+    out = {}
+    try:
+        M = imaplib.IMAP4_SSL("imap.gmail.com", 993, ssl_context=ssl.create_default_context())
+        M.login(USER, PW)
+        for box in ('"[Gmail]/Sent Mail"', '"[Google Mail]/Sent Mail"', "Sent"):
+            try:
+                typ, _ = M.select(box, readonly=True)
+                if typ != "OK":
+                    continue
+            except Exception:
+                continue
+            since = (datetime.now(timezone.utc) - timedelta(days=days)).strftime("%d-%b-%Y")
+            typ, data = M.search(None, f'(SINCE "{since}")')
+            if typ != "OK":
+                continue
+            for i in data[0].split()[-400:]:
+                typ, d = M.fetch(i, "(BODY.PEEK[HEADER.FIELDS (TO DATE)])")
+                if typ != "OK" or not d or not d[0]:
+                    continue
+                hdr = email.message_from_bytes(d[0][1])
+                addr = parseaddr(hdr.get("To", ""))[1].lower()
+                if addr:
+                    out[addr] = hdr.get("Date", "")
+            break
+        M.logout()
+    except Exception as e:
+        print(f"WARN: sent-mail check failed ({type(e).__name__}) — falling back to handled_messages.txt only", file=sys.stderr)
+    return out
+
+
 def handled_ids():
     if HANDLED.exists():
         return {l.strip() for l in HANDLED.read_text(encoding="utf-8").splitlines() if l.strip()}
@@ -157,6 +190,7 @@ def cmd_read(a):
     typ, data = M.search(None, crit)
     ids = data[0].split()
     done = handled_ids()
+    replied = {} if a.no_sent_check else recently_replied()
     out = []
     for i in reversed(ids[-200:]):
         typ, d = M.fetch(i, "(RFC822)")
@@ -170,6 +204,7 @@ def cmd_read(a):
         if frm == USER.lower():
             continue
         known = frm in known_recipients()
+        already = frm in replied
         machine = bool(NOISE_PAT.search(frm))
         if machine and not known and not a.noise:
             continue
@@ -181,6 +216,8 @@ def cmd_read(a):
             "date": m.get("Date", ""),
             "known": known,
             "machine": machine,
+            "alreadyReplied": already,
+            "lastReplyDate": replied.get(frm, ""),
             "body": _body_of(m).strip()[:4000],
         })
     M.logout()
@@ -230,6 +267,7 @@ def main():
     r.add_argument("--days", type=int, default=4); r.add_argument("--all", action="store_true")
     r.add_argument("--new", action="store_true")
     r.add_argument("--noise", action="store_true", help="Include machine/notification mail.")
+    r.add_argument("--no-sent-check", action="store_true", help="Skip the Sent Mail double-reply guard.")
 
     m = sub.add_parser("mark"); m.set_defaults(fn=cmd_mark)
     m.add_argument("--id", action="append", default=[], required=True)
