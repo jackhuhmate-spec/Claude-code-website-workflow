@@ -225,6 +225,12 @@ def cmd_outreach(a):
     if (HERE / "PAUSED").exists():
         print("PAUSED — nothing sent."); return
 
+    # Top the funnel up first: hunt fresh leads, rotating London tile by day.
+    tile = date.today().toordinal() % 8
+    h = sh([sys.executable, str(HERE / "ops" / "lead_hunter.py"),
+            "--write", "--tile", str(tile), "--max", "15"])
+    print(h.stdout.strip()[-600:] or h.stderr.strip()[:300])
+
     # Write copy for any new leads first (no-op without GROQ_API_KEY).
     w = sh([sys.executable, str(HERE / "ops" / "write_emails.py"), "--write"])
     print(w.stdout.strip()[-800:] or w.stderr.strip()[:300])

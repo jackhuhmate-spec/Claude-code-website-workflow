@@ -122,3 +122,45 @@ Your site's a Battersea handyman service with 2018 stock photos and a long block
 **Subject:** Slow Greenford Site
 
 The Local Handyman London's homepage has large uncompressed images, making it slow on mobile and hiding services. This costs you work as users pick the next result quickly. I can fix it for a fixed one-off price, want me to send a quick mockup?
+
+---
+
+## The Tanning Shop — Beauty Salon, Islington ✅ siannalartey@hotmail.com
+**Subject:** Islington salon site issue
+
+The Tanning Shop in Islington has a site that doesn't load, it returns a 404 error. This costs you work as people pick the next result. I can fix it for a fixed one-off price, want me to send a quick mockup?
+
+---
+
+## Top Dog Joinery Limited — Carpenter, Leytonstone ✅ john@topdogjoinery.co.uk
+**Subject:** Leytonstone carpentry online
+
+Top Dog Joinery Limited in Leytonstone has no website. Locals searching for a carpenter pick the next result in seconds. I can build your site for a fixed one-off price, want me to send a quick mockup?
+
+---
+
+## John Lawler — Upholsterer, Crouch End ✅ info@johnlawlerupholstery.co.uk
+**Subject:** Crouch End Upholsterer
+
+John Lawler's site lacks SSL, showing 'Not secure' in Chrome. This costs work as people pick the next result. I can fix it for a fixed one-off price, want me to send a quick mockup?
+
+---
+
+## Muswell Hill Joinery — Carpenter, Crouch End ✅ muswellhilljoinery@gmail.com
+**Subject:** Crouch End carpentry online
+
+Muswell Hill Joinery in Crouch End has no site. Locals search and pick the next result. Want me to send a quick mockup?
+
+---
+
+## Tablemaker — Carpenter, Crouch End ✅ hello@tablemaker.co.uk
+**Subject:** Crouch End Carpenter
+
+Tablemaker in Crouch End has no clickable phone number on its homepage. This costs work as customers pick the next result. I can fix it for a fixed one-off price, want me to send a quick mockup?
+
+---
+
+## Meta Scaffolding — Scaffolder, Barnet ✅ info@metascaffolding.co.uk
+**Subject:** Barnet scaffolder site
+
+Meta Scaffolding in Barnet has a nearly empty homepage with barely any content. This costs you work as people pick the next result in seconds. I can fix it for a fixed one-off price, want me to send a quick mockup?
