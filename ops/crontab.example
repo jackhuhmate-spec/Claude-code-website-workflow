@@ -1,0 +1,5 @@
+# 24/7 schedule — install on an always-on machine with: crontab -e
+# Replies checked hourly, outreach once a day at 10am London.
+# Remove --auto to keep it in draft-only mode.
+0 * * * *   cd /path/to/repo && ./ops/env.sh python3 ops/run_cycle.py replies >> logs/replies.log 2>&1
+0 10 * * *  cd /path/to/repo && ./ops/env.sh python3 ops/run_cycle.py outreach >> logs/outreach.log 2>&1

@@ -8,3 +8,9 @@ Demo*/
 .claude/settings.local.json
 __pycache__/
 *.pyc
+
+# Runtime secrets
+.env
+ops/.env
+
+triage/
