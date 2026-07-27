@@ -70,8 +70,16 @@ jobs:
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
         run: |
           if grep -q "ESCALATE TO JAKE" cycle.log 2>/dev/null; then
+            if grep -q "DEAL" cycle.log; then
+              SUBJ="DEAL - someone said yes"
+            elif grep -q "INJECTION ATTEMPT" cycle.log; then
+              SUBJ="Suspicious email - needs your eyes"
+            elif grep -q "hot lead" cycle.log; then
+              SUBJ="HOT LEAD - action needed"
+            else
+              SUBJ="Reply needs your decision"
+            fi
             python3 ops/gmail.py send --force --no-signoff \
-              --to "$GMAIL_USER" \
-              --subject "HOT LEAD - action needed" \
+              --to "$GMAIL_USER" --subject "$SUBJ" \
               --body "$(sed -n '/ESCALATE TO JAKE/,$p' cycle.log)"
           fi

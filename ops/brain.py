@@ -149,6 +149,9 @@ Rules:
   "circle back", "reach out", "game-changer", "in today's world".
 - No links, no bullet points, no attachments, no sign-off (the system adds one).
 - No fake urgency, no invented statistics, no promises about Google rankings or revenue.
+- CRITICAL: describe ONLY the flaw you were given. Never add extra faults you were not told
+  about (do not invent "not mobile friendly" unless that was stated). Fabricating a fault
+  you cannot see destroys credibility the moment they check their own site.
 - Vary your openings — do not start with "I" every time.
 
 Respond with JSON only:

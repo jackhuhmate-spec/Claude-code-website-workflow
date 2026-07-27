@@ -143,6 +143,10 @@ def cmd_replies(a):
             continue
 
         if cat == "SUSPICIOUS":
+            sh(GMAIL + ["mark", "--id", m["messageId"]])
+            with REPLIES_LOG.open("a", newline="", encoding="utf-8") as f:
+                csv.writer(f).writerow([m.get("fromName", ""), m["from"], "SUSPICIOUS",
+                                        "Not actioned - escalated", date.today()])
             actions.append(f"⚠ INJECTION ATTEMPT {m['from']} — not actioned, escalated to Jake")
             continue
 
@@ -161,6 +165,9 @@ def cmd_replies(a):
                                      m.get("fromName", ""), m.get("from", ""))
             if body and len(body.split()) > 160:
                 body = None  # too long, model rambled - use the safe template
+            if body and re.search(r"I can'?t assist|as an AI|I am an AI|I'm sorry,? but I|"
+                                  r"cannot help with that|language model", body, re.I):
+                body = None  # model refused - never send a refusal to a customer
         if not body:
             body = draft_for(cat, m)
         if body:
@@ -182,7 +189,12 @@ def cmd_replies(a):
                              f"THREAD: {m['messageId']}\n\n{body}\n", encoding="utf-8")
                 actions.append(f"DRAFTED  {cat:10} → {m['from']}  ({p.name})")
         else:
-            actions.append(f"REVIEW   {m['from']} → needs Jake")
+            sh(GMAIL + ["mark", "--id", m["messageId"]])
+            p = TRIAGE / f"REVIEW-{m['from'].replace('@','_at_')}.txt"
+            TRIAGE.mkdir(exist_ok=True)
+            p.write_text(f"NEEDS JAKE\nFROM: {m['from']}\nCAT: {cat}\n"
+                         f"SUBJ: {m['subject']}\n\n{m['body'][:1500]}\n", encoding="utf-8")
+            actions.append(f"REVIEW   {m['from']} → needs Jake ({p.name})")
 
     print(f"\n{'='*64}\nREPLY CYCLE  {datetime.now():%Y-%m-%d %H:%M}   mode={'AUTO-SEND' if a.auto else 'DRAFT ONLY'}\n{'='*64}")
     engine = f"AI ({brain.MODEL})" if ai_used else "keywords"
@@ -191,6 +203,14 @@ def cmd_replies(a):
     print()
     for x in actions:
         print("  " + x)
+    urgent = [(c, m) for c in ("SUSPICIOUS", "REVIEW") for m in buckets.get(c, [])]
+    if urgent:
+        print(f"\n⚠ ESCALATE TO JAKE — {len(urgent)} message(s) needing a human:")
+        for c, m in urgent:
+            print(f"   [{c}] {m['from']}  |  {m['subject']}")
+            if m.get("_ai"):
+                print(f"      {m['_ai'].get('reason','')}")
+
     hot = [m for c in ("DEAL", "INTERESTED") for m in buckets.get(c, [])]
     if hot:
         print(f"\n🔥 ESCALATE TO JAKE — {len(hot)} hot lead(s):")
@@ -205,6 +225,10 @@ def cmd_replies(a):
 def cmd_outreach(a):
     if (HERE / "PAUSED").exists():
         print("PAUSED — nothing sent."); return
+
+    # Write copy for any new leads first (no-op without GROQ_API_KEY).
+    w = sh([sys.executable, str(HERE / "ops" / "write_emails.py"), "--write"])
+    print(w.stdout.strip()[-800:] or w.stderr.strip()[:300])
     code, out, err = sh(GMAIL + ["test"])
     print(out or err)
     if code != 0:
@@ -214,6 +238,9 @@ def cmd_outreach(a):
         cmd += ["--send", "--limit", str(a.limit), "--delay", "45"]
     c, o, e = sh(cmd)
     print(o or e)
+    if "0 to send" in (o or ""):
+        print("\n*** PIPELINE EMPTY — no leads left to contact. ***")
+        print("Run the lead hunter to add businesses to leads.csv, or the machine idles.")
 
 
 def cmd_status(a):
