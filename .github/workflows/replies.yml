@@ -50,7 +50,8 @@ jobs:
         run: |
           git config user.name  "Reply Agent"
           git config user.email "agent@users.noreply.github.com"
-          git add handled_messages.txt replies_log.csv do_not_contact.csv payments.csv 2>/dev/null || true
+          date -u '+%Y-%m-%d %H:%M UTC  reply agent ran' > LAST_RUN.txt
+          git add LAST_RUN.txt handled_messages.txt replies_log.csv do_not_contact.csv payments.csv 2>/dev/null || true
           if git diff --staged --quiet; then
             echo "No state change."
           else
