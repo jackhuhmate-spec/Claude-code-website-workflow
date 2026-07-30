@@ -14,3 +14,8 @@ __pycache__/
 ops/.env
 
 triage/
+
+# Regenerate with `python3 ops/call_sheet.py --write`. Derived entirely from leads.csv,
+# so committing it duplicates the same names and phone numbers into a second file — and
+# while this repo is public that means publishing them twice over.
+call_sheet.md
