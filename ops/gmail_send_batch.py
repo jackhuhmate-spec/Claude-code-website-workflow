@@ -14,6 +14,9 @@ from email.message import EmailMessage
 from email.utils import make_msgid
 from pathlib import Path
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import quota
+
 HERE = Path(__file__).resolve().parent.parent
 LEADS = HERE / "leads.csv"
 EMAILS = HERE / "emails.json"
@@ -24,25 +27,14 @@ PAUSED = HERE / "PAUSED"
 USER = os.environ.get("GMAIL_USER", "")
 PW = (os.environ.get("GMAIL_APP_PASSWORD", "") or "").replace(" ", "")
 SIGN = os.environ.get("SIGN_NAME", "Jake")
-DAILY_CAP = 30  # Gmail free tier is ~500/day total; stay conservative for deliverability
+# The cap lives in quota.py because the follow-up sequence draws on the same Gmail
+# account. Two senders each counting only their own log would put the account at 60/day.
+DAILY_CAP = quota.DAILY_CAP
 
 SIGNOFF = "\n\nBest,\n{name}\n\n(If you'd rather not hear from me, just reply \"no thanks\" and I won't email again.)"
 
 FIELDS = ["Business Name", "Trade", "London Area", "Phone", "Email", "Website",
           "Biggest Flaw", "Email Subject", "Date Sent", "Status"]
-
-
-def sent_today():
-    """How many we have already sent today - the cap must survive repeated runs."""
-    if not SENT_LOG.exists():
-        return 0
-    today = date.today().isoformat()
-    n = 0
-    with SENT_LOG.open(newline="", encoding="utf-8") as f:
-        for r in csv.DictReader(f):
-            if (r.get("Date Sent") or "").strip() == today and (r.get("Status") or "").startswith("Sent"):
-                n += 1
-    return n
 
 
 def already_sent():
@@ -63,6 +55,25 @@ def opted_out():
             a = line.split(",")[0].strip().lower()
             if a and "@" in a:
                 out.add(a)
+    return out
+
+
+def already_logged():
+    """Business names that already appear anywhere in sent_log.csv.
+
+    A lead with no email is skipped on every single run, and re-logging it each time
+    grew the log by ~80 rows a day for the same handful of businesses. The log is read
+    several times per run, so unbounded growth costs real time. One skip row per lead
+    is enough — a later Sent row is still appended normally, since that comes from the
+    send queue rather than the skip list.
+    """
+    out = set()
+    if SENT_LOG.exists():
+        with SENT_LOG.open(newline="", encoding="utf-8") as f:
+            for row in csv.DictReader(f):
+                n = (row.get("Business Name") or "").strip().lower()
+                if n:
+                    out.add(n)
     return out
 
 
@@ -95,10 +106,11 @@ def main():
             skipped.append((lead, "Skipped - No Copy Written")); continue
         queue.append((lead, addr, meta))
 
-    done_today = sent_today()
-    remaining = max(0, DAILY_CAP - done_today)
+    done_today, remaining = quota.sent_today(), quota.remaining()
     if done_today:
-        print(f"Already sent {done_today} today; {remaining} left under the {DAILY_CAP}/day cap.")
+        print(f"Already sent {done_today} today "
+              f"({quota.cold_sent_today()} cold + {quota.followups_sent_today()} follow-ups); "
+              f"{remaining} left under the {DAILY_CAP}/day cap.")
     if remaining == 0:
         print(f"DAILY CAP REACHED ({DAILY_CAP}). Nothing sent — protects the Gmail account.")
         return
@@ -135,10 +147,16 @@ def main():
             if i < len(queue) - 1:
                 time.sleep(a.delay)
 
+    logged_before, resuppressed = already_logged(), 0
     for lead, status in skipped:
+        if lead["Business Name"].strip().lower() in logged_before:
+            resuppressed += 1
+            continue  # already on record — don't re-log the same skip every day
         rows.append({**{k: lead.get(k, "") for k in FIELDS if k in lead},
                      "Email Subject": copy.get(lead["Business Name"], {}).get("subject", ""),
                      "Date Sent": date.today().isoformat(), "Status": status})
+    if resuppressed:
+        print(f"({resuppressed} previously-logged skips not re-recorded)")
 
     new = not SENT_LOG.exists() or SENT_LOG.stat().st_size == 0
     with SENT_LOG.open("a", newline="", encoding="utf-8") as f:

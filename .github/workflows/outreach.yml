@@ -24,7 +24,10 @@ permissions:
 jobs:
   outreach:
     runs-on: ubuntu-latest
-    timeout-minutes: 45
+    # Hunt (10m) + copywriting (10m) + up to 30 sends at 45s apart (23m) across the
+    # follow-up and cold senders. 45 minutes was not enough headroom once follow-ups
+    # were added, and a timeout here kills the job before state is committed.
+    timeout-minutes: 90
     steps:
       - uses: actions/checkout@v4
 
@@ -47,7 +50,11 @@ jobs:
         run: |
           git config user.name  "Outreach Agent"
           git config user.email "agent@users.noreply.github.com"
-          git add sent_log.csv run_history.csv do_not_contact.csv runs/ 2>/dev/null || true
+          # leads.csv and emails.json MUST be staged. The runner is destroyed after the
+          # job, so anything the hunter found and the copywriter wrote is lost unless it
+          # is committed here — which is exactly what emptied the send queue in July.
+          git add leads.csv emails.json emails.md followups_log.csv \
+                  sent_log.csv run_history.csv do_not_contact.csv runs/ 2>/dev/null || true
           if git diff --staged --quiet; then
             echo "No state change."
           else
