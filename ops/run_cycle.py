@@ -243,10 +243,22 @@ def cmd_outreach(a):
     print(out or err)
     if code != 0:
         print("Connection test failed, aborting."); sys.exit(1)
+
+    # Follow-ups run BEFORE the cold batch and share the same daily cap. A day-3 touch
+    # is due on day 3 or it is late; a lead found this morning loses nothing by being
+    # emailed tomorrow. Touch 2 and 3 also convert far better than a first contact.
+    print("\n--- follow-ups ---")
+    fu = [sys.executable, str(HERE / "ops" / "followups.py")]
+    if a.auto:
+        fu += ["--send", "--delay", "45"]
+    fc, fo, fe = sh(fu, timeout=1800)
+    print(fo.strip() or fe.strip()[:300])
+
+    print("\n--- cold batch ---")
     cmd = [sys.executable, str(HERE / "ops" / "gmail_send_batch.py")]
     if a.auto:
         cmd += ["--send", "--limit", str(a.limit), "--delay", "45"]
-    c, o, e = sh(cmd)
+    c, o, e = sh(cmd, timeout=1800)
     print(o or e)
     if "0 to send" in (o or ""):
         print("\n*** PIPELINE EMPTY — no leads left to contact. ***")
