@@ -164,9 +164,100 @@ def _():
 
 @t("daily cap counts today's real sends")
 def _():
+    """The cap must be derived from the logs, never from an in-process counter, or a
+    second run in the same day starts from zero and sends 30 more."""
+    sys.path.insert(0, str(HERE / "ops"))
+    import quota
+    src = (HERE / "ops" / "quota.py").read_text()
+    from_log = "Date Sent" in src and "csv.DictReader" in src
+    return from_log and quota.remaining() == max(0, quota.DAILY_CAP - quota.sent_today()), \
+        f"cap {quota.DAILY_CAP} derived from logs; {quota.remaining()} left today"
+
+
+@t("daily cap is shared by both senders")
+def _():
+    """Cold batch and follow-ups draw on one Gmail account. If each counted only its
+    own log the account would sit at 60/day and get rate-limited or suspended."""
+    sys.path.insert(0, str(HERE / "ops"))
+    import quota
+    batch = (HERE / "ops" / "gmail_send_batch.py").read_text()
+    fu = (HERE / "ops" / "followups.py").read_text()
+    both_import = "import quota" in batch and "import quota" in fu
+    counts_both = quota.sent_today() == quota.cold_sent_today() + quota.followups_sent_today()
+    return both_import and counts_both, \
+        f"one budget: {quota.cold_sent_today()} cold + {quota.followups_sent_today()} follow-ups today"
+
+
+@t("outreach workflow persists lead state")
+def _():
+    """The Actions runner is destroyed after the job. leads.csv and emails.json were
+    never staged, so every lead found and every email written was thrown away — which
+    is what emptied the send queue and stopped outreach entirely in July."""
+    wf = (HERE / ".github" / "workflows" / "outreach.yml").read_text()
+    add = [l for l in wf.splitlines() if "git add" in l or (l.strip().startswith("sent_log") and "csv" in l)]
+    staged = " ".join(add)
+    missing = [f for f in ("leads.csv", "emails.json", "followups_log.csv") if f not in staged]
+    return not missing, "leads, copy and follow-up state committed" if not missing \
+        else f"NOT PERSISTED: {missing} — the hunter's output is discarded each run"
+
+
+@t("skipped leads are logged once, not every run")
+def _():
     src = (HERE / "ops" / "gmail_send_batch.py").read_text()
-    return "def sent_today" in src and "DAILY_CAP - done_today" in src, \
-        "cap survives repeated runs in one day"
+    return "def already_logged" in src and "logged_before" in src, \
+        "no unbounded duplicate skip rows"
+
+
+@t("follow-ups drop anyone who replied or opted out")
+def _():
+    """Chasing someone who already answered is the fastest way to get reported as
+    spam, and chasing an opt-out is a PECR breach."""
+    sys.path.insert(0, str(HERE / "ops"))
+    import followups as fu
+    targets = {d["email"] for d in fu.due()}
+    leaked = targets & (fu.opted_out() | fu.replied())
+    return not leaked, f"{len(targets)} due, none had replied or opted out" if not leaked \
+        else f"VIOLATION: would chase {sorted(leaked)}"
+
+
+@t("follow-ups never quote a price")
+def _():
+    sys.path.insert(0, str(HERE / "ops"))
+    import followups as fu
+    bad = [n for _d, n, body in fu.TOUCHES
+           if re.search(r"£\s?\d|\b449\b|\b39\b\s*(/|per|a )\s*mo", body, re.I)]
+    return not bad, f"{len(fu.TOUCHES)} touches, none quote a number" if not bad \
+        else f"price in touch {bad}"
+
+
+@t("follow-ups honour the PAUSED kill switch")
+def _():
+    p = HERE / "PAUSED"
+    existed = p.exists()
+    try:
+        p.touch()
+        r = sh([PY, str(HERE / "ops" / "followups.py"), "--send"])
+        return "PAUSED" in r.stdout + r.stderr, "follow-up sender refuses while PAUSED"
+    finally:
+        if not existed and p.exists():
+            p.unlink()
+
+
+@t("follow-up sequence is wired into the outreach cycle")
+def _():
+    """followups.py existed for weeks but nothing invoked it, so 96 businesses were
+    contacted once and never chased. A script nobody calls is not a feature."""
+    src = (HERE / "ops" / "run_cycle.py").read_text()
+    return "followups.py" in src, "run_cycle outreach invokes the follow-up sender"
+
+
+@t("follow-ups log each send immediately", critical=False)
+def _():
+    """Logging the whole batch at the end means an SMTP disconnect halfway through
+    re-sends everything tomorrow."""
+    src = (HERE / "ops" / "followups.py").read_text()
+    i = src.find("s.send_message(msg)")
+    return i > 0 and "log_sent([row])" in src[i:i + 700], "logged per send, not per batch"
 
 
 @t("mark is append-only (concurrency safe)")
@@ -316,28 +407,63 @@ def _():
 
 @t("sent_log has no one from do_not_contact")
 def _():
-    dnc = set()
+    """Only a send dated AFTER the opt-out is a breach. Being mailed before opting out
+    is not just allowed, it is the normal sequence — that email is usually what
+    prompted the opt-out. Comparing without dates flags a correct send forever."""
+    dnc = {}
     p = HERE / "do_not_contact.csv"
     if p.exists():
         for line in p.read_text(encoding="utf-8").splitlines()[1:]:
-            a = line.split(",")[0].strip().lower()
-            if "@" in a:
-                dnc.add(a)
+            parts = line.split(",")
+            a = parts[0].strip().lower()
+            if "@" not in a:
+                continue
+            m = re.search(r"\d{4}-\d{2}-\d{2}", ",".join(parts[1:]))
+            dnc[a] = m.group(0) if m else "0000-00-00"
     bad = []
     with (HERE / "sent_log.csv").open(newline="", encoding="utf-8") as f:
         for r in csv.DictReader(f):
             a = (r.get("Email") or "").strip().lower()
             if a in dnc and (r.get("Status") or "").startswith("Sent"):
-                bad.append(a)
-    return not bad, f"{len(dnc)} opted out, none were mailed" if not bad else f"VIOLATION: {bad}"
+                when = (r.get("Date Sent") or "").strip()
+                if when > dnc[a]:          # ISO dates compare correctly as strings
+                    bad.append(f"{a} mailed {when}, opted out {dnc[a]}")
+    return not bad, f"{len(dnc)} opted out, none mailed after opting out" if not bad \
+        else f"VIOLATION: {bad}"
 
 
 @t("no secrets committed")
 def _():
-    pat = "(nfp" + "_[A-Za-z0-9]{25}|github" + "_pat_[A-Za-z0-9]{30}|[a-z]{4} [a-z]{4} [a-z]{4} [a-z]{4}$)"
-    r = sh(["git", "grep", "-lE", pat, "HEAD"], cwd=HERE)
-    hits = [x for x in r.stdout.split() if "bugcheck.py" not in x]
-    return not hits, "clean" if not hits else f"LEAK in {hits}"
+    """Scans ALL history, not just HEAD.
+
+    The previous version grepped HEAD only, so a live Netlify token committed in
+    GO-LIVE.md and 'removed' in a later commit passed cleanly for weeks while staying
+    anonymously readable at the old commit SHA. Deleting a secret from the working
+    tree does not unpublish it — git keeps every blob, and on a public repo that means
+    anyone with the SHA has it.
+
+    Once a finding is genuinely dealt with (credential REVOKED, not merely deleted),
+    record it in .secrets-acknowledged as 'sha:path  # reason' to stop it blocking.
+    """
+    # Split literals so this file never matches its own pattern.
+    pat = ("(nfp" + "_[A-Za-z0-9]{20,}|github" + "_pat_[A-Za-z0-9_]{30,}|gh[pous]"
+           + "_[A-Za-z0-9]{30,}|gsk" + "_[A-Za-z0-9]{30,}|xkeysib" + "-[A-Za-z0-9]{30,}"
+           + "|AIza" + "[0-9A-Za-z_-]{30,}|-----BEGIN [A-Z ]*PRIVATE KEY-----)")
+    revs = sh(["git", "rev-list", "--all"], cwd=HERE).stdout.split()
+    if not revs:
+        return True, "no history to scan"
+    ack = set()
+    ap = HERE / ".secrets-acknowledged"
+    if ap.exists():
+        for line in ap.read_text(encoding="utf-8").splitlines():
+            line = line.split("#")[0].strip()
+            if line:
+                ack.add(line)
+    r = sh(["git", "grep", "-lIE", pat] + revs, cwd=HERE)
+    hits = sorted({x for x in r.stdout.split()
+                   if "bugcheck.py" not in x and x not in ack})
+    return not hits, f"{len(revs)} commits scanned, clean" if not hits else \
+        f"LEAK (revoke the credential, then acknowledge): {hits[:3]}"
 
 
 @t(".gitignore covers secrets")

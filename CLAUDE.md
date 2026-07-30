@@ -9,17 +9,26 @@ follows up, and builds + deploys their sites when they buy. Owner's real email:
 
 | Script | What it does |
 |--------|--------------|
-| `brevo_send.py` | Send personalised emails via Brevo HTTPS API. Idempotent (never re-sends), skips `do_not_contact.csv`, verifies delivery after each batch. |
-| `followups.py` | Day 3/7/14 follow-up touches to non-repliers. Idempotent via `followups_log.csv`. |
-| `suppress_bounces.py` | Pull hard-bounces/blocked/invalid/spam from Brevo → append to `do_not_contact.csv`. |
-| `reply_bridge.py` | `read [--new]` inbox / `mark --id` handled / `send` a reply, all via the Gmail bridge. |
+| `ops/gmail.py` | Send/read/mark/test over Gmail SMTP+IMAP. The live transport. |
+| `ops/gmail_send_batch.py` | Idempotent cold-email batch. Honours the daily cap and `PAUSED`. |
+| `ops/followups.py` | Day 3/7/14 follow-up touches to non-repliers, over Gmail. Idempotent via `followups_log.csv`. Drops anyone who replied or opted out. |
+| `ops/quota.py` | The shared daily send budget. Cold batch and follow-ups draw on one Gmail account, so both count against the same 30/day. |
+| `ops/call_sheet.py` | Worksheet of leads with no email address, which the sender structurally cannot reach. Contacts nobody. |
 | `deploy_preview.py` | Build a lead's 5-page site and deploy it live to Netlify; prints the URL. |
 | `build_site.py` | Generate a 5-page site from a client JSON (Job 6 delivery). |
 | `stats.py` | Pipeline dashboard. |
-| `selftest.py` | One-command health check — compiles scripts, verifies data files, and tests the Gmail bridge / Brevo / Netlify credentials are live. Run it if anything seems off. |
-| `weekly_digest.py` | Plain-English weekly summary (sent, replies, deals, open leads). The Monday routine posts it. |
+| `ops/lead_hunter.py` | OSM lead sourcing + live site auditing + email scraping. |
+| `ops/write_emails.py` | LLM copywriter; rejects copy too similar to recent sends. |
+| `ops/brain.py` | Groq LLM layer; falls back to keywords if the API fails. |
+| `ops/run_cycle.py` | Orchestrator: `replies` / `outreach` / `status`. |
+| `ops/bugcheck.py` | Full test suite. **Run after any change.** |
+| `weekly_digest.py` | Plain-English weekly summary (sent, replies, deals, open leads). |
 | `cleanup_previews.py` | Retire old Netlify `preview-` sites (never touches paid `--final` client sites). |
-| `gmail_bridge.gs` | Google Apps Script deployed in Jake's account = the inbox bridge (read+send over one secret URL). |
+
+**Legacy — do not use.** The Brevo + Apps Script path is dead; SMTP 587 and IMAP 993
+are reachable directly. Kept only as fallback: `brevo_send.py`, `followups.py` (root),
+`reply_bridge.py`, `reply_monitor.py`, `send_emails.py`, `suppress_bounces.py`,
+`gmail_bridge.gs`, `selftest.py`.
 
 ## Data / logs
 
@@ -28,21 +37,32 @@ follows up, and builds + deploys their sites when they buy. Owner's real email:
 answered — prevents double-replies) · `payments.csv` (cash records) · `run_history.csv` ·
 `runs/<date>/` (daily archives).
 
-## Secrets (NEVER commit; provided via routine env / settings.local.json)
+## Secrets (NEVER commit; GitHub Actions secrets, or `ops/env.sh` locally)
 
-- `BREVO_API_KEY` — email sending
-- `BRIDGE_URL` + `BRIDGE_SECRET` — Gmail bridge (both supplied via routine env only; never commit them)
+- `GMAIL_USER` — the sending account (`jackhuhmate@gmail.com`)
+- `GMAIL_APP_PASSWORD` — Google app password for SMTP 587 + IMAP 993 (not the account password)
+- `SIGN_NAME` — name every email signs off as ("Jake")
+- `GROQ_API_KEY` — LLM layer; absent, everything falls back to keywords and still runs
 - `NETLIFY_TOKEN` — preview/site deploys
 
-## Autonomous routines (scheduled triggers, fire into the persistent session)
+## Autonomous routines (GitHub Actions — the live runtime)
 
-- **Reply handling (hourly):** `git pull` → `reply_bridge.py read --new` → for each NEW message:
-  categorise, auto-reply in-thread as Jake, **`reply_bridge.py mark --id <messageId>`**, log to
-  `replies_log.csv`. Escalate real DEAL moments (a "yes", price/contract talk, complaints) to Jake.
-  Then commit + push (so `handled_messages.txt` persists).
-- **Lead-gen + outreach (daily 10am):** 4 research agents find verified leads → merge/dedupe →
-  write emails → `suppress_bounces.py` → `brevo_send.py --send` (cap 50/day) → `followups.py --send`
-  → archive + commit + push.
+- **`replies.yml` (hourly):** `run_cycle.py replies` → read new mail over IMAP → classify
+  (Groq, keyword fallback; confidence <70 → REVIEW) → auto-reply in-thread as Jake → mark
+  handled → append to `replies_log.csv` → commit + push. DEAL moments and anything off-script
+  escalate to Jake rather than auto-closing.
+- **`outreach.yml` (daily 09:00 UTC / 10am London):** `run_cycle.py outreach --auto` →
+  `lead_hunter.py` (OSM + live audit) → `write_emails.py` → `followups.py --send` (day 3/7/14)
+  → `gmail_send_batch.py --send` → commit + push. Follow-ups run **first** and share the cap.
+- **`healthcheck.yml` (Mon 08:00):** runs `bugcheck.py`; a failure is the only routine alert.
+
+**Daily cap: 30 sends, shared.** `ops/quota.py` is the single budget — cold batch and
+follow-ups both count against it, because both use the one Gmail account.
+
+**Every workflow must stage its state.** The runner is destroyed after the job, so
+`leads.csv`, `emails.json`, `followups_log.csv`, `sent_log.csv`, `handled_messages.txt` and
+`do_not_contact.csv` are lost unless committed. An unstaged `leads.csv` is what silently
+emptied the send queue in July.
 
 ## Rules
 
@@ -55,8 +75,10 @@ answered — prevents double-replies) · `payments.csv` (cash records) · `run_h
 ## Safety controls
 
 - **Kill switch:** create a file named `PAUSED` in the repo root to instantly halt all cold
-  outreach (`brevo_send.py` and `followups.py` refuse to send while it exists). Delete it to resume.
-- **Reply guard:** `reply_bridge.py send` only emails addresses already in `sent_log.csv`
+  outreach (`gmail_send_batch.py` and `ops/followups.py` refuse to send while it exists).
+  Delete it to resume.
+- **Reply guard:** `ops/gmail.py send` only emails addresses already in `sent_log.csv`
   (businesses we contacted); a prompt-injected inbound email cannot make it mail a stranger.
   Use `--force` only for a deliberately new, verified recipient.
-- **Health check:** run `selftest.py` to confirm scripts, data, and all credentials are live.
+- **Opt-out guard:** `do_not_contact.csv` blocks a send even with `--force`, permanently.
+- **Health check:** run `ops/bugcheck.py` to confirm scripts, guards, data and credentials.

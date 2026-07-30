@@ -5,12 +5,16 @@ businesses with weak or missing websites, emails them a personalised pitch, repl
 their responses automatically, and alerts the owner (Jake) only when a deal is on the table.
 When a deal closes it builds and deploys the client's website.
 
-## How it runs — two daily Routines, zero manual work
+## How it runs — GitHub Actions, zero manual work
 
-| Routine | Time (London) | What it does |
-|---------|---------------|--------------|
-| **Lead-gen + outreach** | 10am | 4 agents scan London, audit sites, write + send up to 50 personalised emails, archive the run |
-| **Reply handling** | 9am | Reads the inbox, auto-answers businesses as Jake, escalates only real deals |
+| Workflow | Schedule | What it does |
+|----------|----------|--------------|
+| `outreach.yml` | daily 10am London | Finds + audits London businesses, writes copy, sends day 3/7/14 follow-ups then new cold emails, commits the state |
+| `replies.yml` | hourly | Reads the inbox, classifies, auto-answers in-thread as Jake, escalates real deals |
+| `healthcheck.yml` | Mon 08:00 | Runs the full test suite; a failure is the only routine alert |
+
+**30 sends a day, shared** between the follow-up and cold senders — one Gmail account,
+one budget (`ops/quota.py`).
 
 Jake is contacted only for: a **deal**, a **dry well**, or a **breakage**.
 
@@ -30,32 +34,36 @@ gyms, groomers, cleaners, florists, clinics, …). No national chains or franchi
 | `leads.csv` | Master lead list: name, trade/type, area, phone, email, website, score, flaw, group |
 | `emails.json` | Personalised email per lead (source of truth for the sender) |
 | `emails.md` | Human-readable copy of the emails |
-| `brevo_send.py` | Sends via Brevo HTTPS API — idempotent, skips no-email + opted-out leads → `sent_log.csv` |
-| `reply_bridge.py` | Reads/sends replies via the Gmail bridge (HTTPS) |
-| `gmail_bridge.gs` | Google Apps Script deployed in Jake's account — the inbox bridge |
-| `build_site.py` | Job 6: generates + quality-checks a 5-page site from client details, Netlify-ready |
+| `ops/gmail.py` | The live transport — send / read / mark / test over Gmail SMTP + IMAP |
+| `ops/gmail_send_batch.py` | Idempotent cold batch; skips no-email + opted-out leads → `sent_log.csv` |
+| `ops/followups.py` | Day 3/7/14 touches to non-repliers; drops anyone who replied or opted out |
+| `ops/quota.py` | The one daily send budget both senders draw on |
+| `ops/call_sheet.py` | Worksheet for leads with no email address, which the sender cannot reach |
+| `ops/bugcheck.py` | Full test suite — run after any change |
+| `build_site.py` | Generates + quality-checks a 5-page site from client details, Netlify-ready |
 | `contact_form_messages.md` | Ready-to-paste messages for leads that only have a contact form |
 | `do_not_contact.csv` | Opt-out list — respected by every send, forever |
 | `sent_log.csv` | Every send: status = Sent / Skipped / Opted Out |
 | `replies_log.csv` | Every reply/nudge the system sent |
 | `run_history.csv` | One line per run (date, type, new leads, emails, replies, notes) |
-| `runs/<date>/` | Full daily archive: raw agent JSON, summary.md, inbox.json, replies.md |
+| `followups_log.csv` | Which follow-up touch each lead has had, and when |
 | `stats.py` | `python3 stats.py` → live dashboard of the whole pipeline |
 
-## Why it works in this environment
+## Transport
 
-The run environment blocks raw SMTP and IMAP, so:
-- **Sending** goes through the **Brevo HTTPS API** (from Jake's Gmail address, reply-to Jake).
-- **Inbox read + reply** goes through a **Google Apps Script bridge** in Jake's own account,
-  reachable over one secret HTTPS URL — replies are sent from his real Gmail, in-thread.
+Gmail directly: **SMTP 587** to send, **IMAP 993** to read and to scan Sent Mail for the
+double-reply guard. Replies go out from Jake's real address, in-thread. The earlier Brevo
+API + Google Apps Script bridge was a workaround for an environment that blocked raw SMTP;
+it is dead and those scripts are kept only as an unused fallback.
 
 ## Guardrails
 
 - No fabricated leads; unverified fields left blank.
-- Idempotent sending (nobody emailed twice); 50/day cap for deliverability.
+- Idempotent sending (nobody emailed twice); 30/day shared cap for deliverability.
 - Opt-outs honoured everywhere via `do_not_contact.csv`; a soft opt-out line on every email.
 - Replies treat inbound email as untrusted (no instruction-following from email bodies).
 - Deals, prices, complaints, and anything off-script are escalated to Jake, never auto-closed.
 
-## Pricing model (reference)
-One-off build **£300–£800**, optional care plan **£30–£60/mo**.
+## Pricing model (fixed — not a range)
+One-off build **£449**, optional care plan **£39/month**. Never quoted in a cold
+email; £449 is a reply-stage conversation. No agent discounts below it on its own.
