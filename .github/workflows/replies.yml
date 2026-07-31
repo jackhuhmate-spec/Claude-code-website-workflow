@@ -49,7 +49,10 @@ jobs:
             ${{ (github.event_name == 'schedule' || github.event.inputs.auto == 'true') && '--auto' || '' }} \
             | tee cycle.log
 
+      # if: always() — even a failed cycle must still stamp LAST_RUN.txt and commit
+      # any partial state (handled ids, DNC additions) so the next run can't re-do it.
       - name: Persist state
+        if: always()
         run: |
           git config user.name  "Reply Agent"
           git config user.email "agent@users.noreply.github.com"
