@@ -126,6 +126,7 @@ if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO)
 
     if "--test" in sys.argv:
+        from omniroute.db.session import test_connection
         result = test_connection()
         print(json.dumps(result, indent=2))
         sys.exit(0 if result["connected"] else 1)

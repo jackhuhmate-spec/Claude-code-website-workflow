@@ -45,7 +45,10 @@ class LeadHunterAgent(BaseAgent):
         tile = self.context.config.get("tile")
         max_leads = self.context.config.get("max_leads", 25)
 
-        cmd = LEAD_HUNTER + ["--write", "--max", str(max_leads)]
+        # Dry runs must never persist — only pass --write when the run is real.
+        cmd = LEAD_HUNTER + ["--max", str(max_leads)]
+        if not self.is_dry_run:
+            cmd += ["--write"]
         if tile is not None:
             cmd += ["--tile", str(tile)]
 

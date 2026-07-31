@@ -39,7 +39,10 @@ class EmailWriterAgent(BaseAgent):
             AgentResult with count of emails written.
         """
         limit = self.context.config.get("limit", 40)
-        cmd = WRITE_EMAILS + ["--write", "--limit", str(limit)]
+        # Dry runs must never persist — only pass --write when the run is real.
+        cmd = WRITE_EMAILS + ["--limit", str(limit)]
+        if not self.is_dry_run:
+            cmd += ["--write"]
 
         self.log.info("Writing emails...")
         result = subprocess.run(cmd, capture_output=True, text=True, timeout=600)

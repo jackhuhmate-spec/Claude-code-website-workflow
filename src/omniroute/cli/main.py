@@ -317,7 +317,8 @@ def cmd_deploy(args: argparse.Namespace) -> int:
 
 def cmd_db(args: argparse.Namespace) -> int:
     """Handle database commands."""
-    from omniroute.db.migrations import run_migrations, test_connection
+    from omniroute.db.migrations import run_migrations
+    from omniroute.db.session import test_connection
 
     if args.db_sub == "init":
         result = run_migrations(verbose=True)
