@@ -74,14 +74,25 @@ def _imap_login():
 
 def recently_replied(days=45):
     """Addresses we have already replied to from Sent Mail — prevents double-replies
-    even if the reply was sent by hand, by Claude Code, or on another machine."""
+    even if the reply was sent by hand, by Claude Code, or on another machine.
+
+    Fixed here: only messages carrying an In-Reply-To/References header are replies.
+    Cold emails and follow-ups also live in Sent Mail, and reading just the To: header
+    made every recipient in the last 45 days look "already replied", silently dropping
+    real inbound deals.
+
+    Box names must be passed WITH literal quotes: imaplib does not auto-quote names
+    that contain a space, so 'select("[Gmail]/Sent Mail")' would send an unquoted
+    EXAMINE and fail with "Could not parse command". The embedded double quotes are
+    required, not a bug.
+    """
     out = {}
     M = _imap_login()
     if not M:
         print("WARN: sent-mail check failed — falling back to handled_messages.txt only", file=sys.stderr)
         return out
     try:
-        for box in ('"[Gmail]/Sent Mail"', '"[Google Mail]/Sent Mail"', "Sent"):
+        for box in ('"[Gmail]/Sent Mail"', '"[Google Mail]/Sent Mail"', '"Sent"'):
             try:
                 typ, _ = M.select(box, readonly=True)
                 if typ != "OK":
@@ -96,12 +107,15 @@ def recently_replied(days=45):
             if not ids:
                 break
             # One batched FETCH instead of one round-trip per message.
-            typ, d = M.fetch(b",".join(ids).decode(), "(BODY.PEEK[HEADER.FIELDS (TO DATE)])")
+            typ, d = M.fetch(b",".join(ids).decode(), "(BODY.PEEK[HEADER.FIELDS (TO IN-REPLY-TO REFERENCES DATE)])")
             if typ == "OK":
                 for part in d:
                     if not isinstance(part, tuple) or len(part) < 2:
                         continue
                     hdr = email.message_from_bytes(part[1])
+                    # A genuine reply always carries In-Reply-To / References.
+                    if not (hdr.get("In-Reply-To") or hdr.get("References")):
+                        continue
                     addr = parseaddr(hdr.get("To", ""))[1].lower()
                     if addr:
                         out[addr] = hdr.get("Date", "")

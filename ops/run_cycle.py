@@ -33,7 +33,10 @@ OPTOUT = ["unsubscribe", "not interested", "no thanks", "no thank you", "remove 
           "stop emailing", "take me off", "don't contact", "do not contact"]
 DEAL = ["let's do it", "lets do it", "go ahead", "happy to proceed", "sign me up",
         "when can you start", "i'll take it", "deposit", "invoice", "bank details",
-        "sounds good let's", "yes please do", "deal"]
+        "sounds good let's", "yes please do"]
+# "deal" as a bare substring also matches "we already have a deal with our current
+# guy" — a brush-off that must never get the "glad to be working with you" reply.
+# It is matched in categorise() as a whole word with a negation instead.
 INTERESTED = ["how much", "price", "cost", "quote", "interested", "tell me more",
               "mockup", "send it", "what would", "keen", "ok if you can make a price"]
 QUESTION = ["?", "how long", "what's included", "whats included", "do i own", "seo",
@@ -63,14 +66,28 @@ def categorise_ai(m):
     """LLM classification. Returns (category, meta) or (None, None) to fall back."""
     if not (brain and brain.available()):
         return None, None
-    d = brain.classify(m.get("subject", ""), m.get("body", ""), m.get("from", ""))
-    if not d:
+    try:
+        d = brain.classify(m.get("subject", ""), m.get("body", ""), m.get("from", ""))
+        if not d:
+            return None, None
+        cat = d["category"]
+        # The model sometimes emits confidence as a string ("85"); a raw < comparison
+        # then raises TypeError and kills the whole cycle. Coerce defensively.
+        try:
+            conf = int(d.get("confidence", 0) or 0)
+        except (TypeError, ValueError):
+            conf = 0
+        # A request to stop contact is honoured regardless of confidence — never risk
+        # a PECR breach because the model was unsure about a "take me off your list".
+        if cat == "OPTOUT":
+            return "OPTOUT", d
+        # Low confidence must never auto-send. Push it to a human.
+        if conf < 70 and cat in ("DEAL", "INTERESTED", "QUESTION", "OBJECTION"):
+            return "REVIEW", d
+        return cat, d
+    except Exception:
+        # One malformed LLM response must degrade to keywords, not abort the cycle.
         return None, None
-    cat, conf = d["category"], d.get("confidence", 0)
-    # Low confidence must never auto-send. Push it to a human.
-    if conf < 70 and cat in ("DEAL", "INTERESTED", "QUESTION", "OBJECTION", "OPTOUT"):
-        return "REVIEW", d
-    return cat, d
 
 
 def categorise(m):
@@ -81,15 +98,22 @@ def categorise(m):
         return "SUSPICIOUS"
     if any(k in t for k in AUTO):
         return "AUTO"
-    if any(k in t for k in OPTOUT):
+    has_question = "?" in t
+    # An opt-out phrase WITH a question ("no thanks, but how much?") is a live
+    # prospect, not a stop-contact — auto-DNCing it kills a real lead. Only treat
+    # as OPTOUT when there is no question mark, so those fall through to
+    # INTERESTED/QUESTION below.
+    if any(k in t for k in OPTOUT) and not has_question:
         return "OPTOUT"
-    if any(k in t for k in DEAL):
+    # "deal" must be a whole word and not "already have a deal" (a brush-off).
+    deal_word = bool(re.search(r"\bdeal\b", t)) and "already have" not in t
+    if any(k in t for k in DEAL) or deal_word:
         return "DEAL"
     if any(k in t for k in INTERESTED):
         return "INTERESTED"
     if any(k in t for k in OBJECTION):
         return "OBJECTION"
-    if any(k in t for k in QUESTION):
+    if any(k in t for k in QUESTION) or has_question:
         return "QUESTION"
     return "REVIEW"
 

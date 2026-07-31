@@ -440,7 +440,16 @@ def main():
         print("\nDry run — pass --write to append to leads.csv.")
         return
 
+    # If leads.csv is missing/empty, write the header first — otherwise the first
+    # business row becomes the header and every downstream DictReader misreads it
+    # (gmail_send_batch then KeyErrors on 'Business Name'). Must match the columns
+    # every reader expects.
+    HEADER = ["Business Name", "Trade", "London Area", "Phone", "Email",
+              "Website", "Website Score", "Biggest Flaw", "Group"]
+    new_file = not LEADS.exists() or LEADS.stat().st_size == 0
     with LEADS.open("a", newline="", encoding="utf-8") as f:
+        if new_file:
+            csv.writer(f).writerow(HEADER)
         csv.writer(f).writerows(kept)
     print(f"Appended {len(kept)} leads to leads.csv")
 

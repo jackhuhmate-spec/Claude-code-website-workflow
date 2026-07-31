@@ -159,7 +159,10 @@ def _():
 @t("dry-run sends nothing")
 def _():
     r = sh([PY, str(HERE / "ops" / "gmail_send_batch.py")])
-    return "DRY RUN" in r.stdout, r.stdout.strip().splitlines()[0] if r.stdout else "?"
+    # Either "DRY RUN: 0 to send" (empty queue) or "DAILY CAP REACHED" (cap already
+    # used by follow-ups) is a safe no-send outcome — only a live SEND would fail.
+    safe = "DRY RUN" in r.stdout or "DAILY CAP REACHED" in r.stdout
+    return safe, r.stdout.strip().splitlines()[0] if r.stdout else "?"
 
 
 @t("daily cap counts today's real sends")

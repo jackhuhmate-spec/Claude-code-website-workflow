@@ -303,10 +303,13 @@ def main():
     if not re.match(r"^#[0-9a-fA-F]{3,8}$", str(cfg.get("accent", ""))):
         cfg["accent"] = "#1a6fb5"  # reject anything that isn't a hex colour (CSS-injection guard)
     cfg.setdefault("email", "")
+    cfg.setdefault("phone", "")
     cfg.setdefault("services", ["General repairs", "Installations", "Maintenance", "Emergency call-outs"])
 
-    # Safe folder name: strip path separators / leading dots so business_name can't escape cwd.
-    safe = re.sub(r"[/\\]+", "-", str(cfg["business_name"])).strip().strip(".-") or "site"
+    # Safe folder name: slug() strips every non-[a-z0-9] char, so business names with
+    # Windows-forbidden chars ("Roofing * Repairs", "Property: Letting & Management")
+    # can't crash outdir.mkdir() on Windows. Also can't escape cwd or traverse.
+    safe = slug(str(cfg["business_name"])) or "site"
     outdir = Path(safe)
     outdir.mkdir(exist_ok=True)
     (outdir / "style.css").write_text(css(cfg["accent"]), encoding="utf-8")

@@ -1,9 +1,4 @@
 {
- "Walthamstow Electricians": {
-  "email": "",
-  "subject": "Your Walthamstow site still says 2021",
-  "body": "I was comparing electricians around Walthamstow and your homepage stood out for the wrong reason - the footer still says 2021 and it trails off into a long wall of appliance-brand keywords that makes an established business look neglected. Most homeowners decide whether to call within a few seconds, so that page is quietly sending work to your competitors. I can rebuild it into something clean, fast and modern, live within a few days for a fixed one-off price - shall I send you a quick mockup?"
- },
  "Enfield Roofing (Practical Roofing)": {
   "email": "info@rooferenfield.co.uk",
   "subject": "A quick note about your Enfield roofing site",
@@ -13,16 +8,6 @@
   "email": "roofsingh.uk@gmail.com",
   "subject": "Roof Singh - a small thing costing you Ilford calls",
   "body": "I came across Roof Singh while looking at roofers in Ilford, and the work itself looks genuinely good - but the site has no company details, no footer and only a personal Gmail as contact, which makes cautious homeowners hesitate before letting anyone up on their roof. A few trust signals and a proper contact setup would likely turn more of your visitors into actual calls. I can tidy the whole thing up, or rebuild it cleanly, for a fixed price with a quick turnaround - happy to send a couple of ideas over?"
- },
- "Shepherds Bush Plumbers & Electricians": {
-  "email": "",
-  "subject": "Your Shepherds Bush plumbing website",
-  "body": "Searching for plumbers in Shepherds Bush I clicked through to yours, and it's an old sliding-banner design from the early 2010s with some rough wording and no way to email you - the kind of page visitors bounce off before they ever pick up the phone. You clearly have the trade skills; the website just isn't doing you justice. For a fixed one-off fee I can build you a clean, modern replacement that's live in a couple of days - want to see a sample first?"
- },
- "Brixton Emergency Plumber": {
-  "email": "",
-  "subject": "Some images are broken on your Brixton site",
-  "body": "I had a look at your Brixton plumbing site and half the homepage images aren't loading - where photos of your work should be, visitors just see empty grey boxes, which instantly makes a business feel dodgy even though yours clearly isn't. Broken images are one of the fastest ways to lose a customer who was ready to call. I can fix the whole site, or rebuild it fresh, for a fixed price with a 48-hour turnaround - shall I send you a quick preview?"
  },
  "K C Roofing & Scaffolding": {
   "email": "info@kccs.co.uk",
@@ -43,11 +28,6 @@
   "email": "enquiries@ebden-electrical.co.uk",
   "subject": "Your Woolwich electrician site on a phone",
   "body": "I found Ebden Electrical while looking at electricians around Woolwich, and while your work clearly speaks for itself, the website is an early-2000s build with no mobile version - so on a phone, where most people search now, it's a real struggle to use. That first impression quietly turns customers away before they've even seen how good you are. I can rebuild it into something clean, fast and mobile-friendly for a fixed one-off price, live within a few days - want me to put a quick mockup together?"
- },
- "Handyman Hackney": {
-  "email": "",
-  "subject": "Your Hackney site still shows 2021",
-  "body": "I was looking through handymen and electricians around Hackney and landed on yours - the footer still reads 2021 and the page is a dense wall of repeated keywords, which makes an active local business look like it's wound down. People searching on their phone make a snap judgement, and a stale-looking site sends them straight to the next result. I build clean, modern sites that load fast and read well, live in a couple of days for a fixed fee - shall I send you an example?"
  },
  "Collier Roofing": {
   "email": "collierroofing@hotmail.co.uk",
@@ -124,11 +104,6 @@
   "subject": "Your Plumstead roofing site doesn't work on a phone",
   "body": "I found HouseProud Roofing while looking at roofers in Plumstead, and it's built as old static pages with no mobile setup, so on a phone — where most people now search — it's a struggle to read. That first impression quietly loses you calls. I can rebuild it clean and mobile-first for a fixed one-off price, live in a few days — want a mockup?"
  },
- "Aldersbrook Roofing": {
-  "email": "",
-  "subject": "Your Ilford roofing site still says 2017",
-  "body": "Checking roofers around Ilford I came across Aldersbrook, and the footer copyright is stuck at 2017 with a gallery of stock and placeholder images, so a solid firm ends up looking neglected. A fresh site with your real work would win more of the homeowners comparing options. I can rebuild it for a fixed one-off price with a quick turnaround — want to see a design?"
- },
  "SW6 Fulham Ltd": {
   "email": "info@sw6fulham.co.uk",
   "subject": "Your Fulham roofing site has blank images",
@@ -153,16 +128,6 @@
   "email": "info@etsroofingltd.co.uk",
   "subject": "Your Hammersmith roofing site on mobile",
   "body": "I had a look at ETS Roofing while checking roofers in Hammersmith, and it's a mid-2010s .php site built around image-based nav tabs and an old banner carousel that don't sit well on a phone. Most of your customers are searching on mobile, and the dated feel loses some of them. I can rebuild it fast and modern for a fixed fee — want to see a design first?"
- },
- "24-7 TT Plumbing & Heating": {
-  "email": "",
-  "subject": "Your Kentish Town plumbing site still says 2013",
-  "body": "I found 24-7 TT while looking at plumbers around Kentish Town, and it's an old design on legacy .htm pages with a 2013 copyright and no mobile version, so on a phone it's dated and hard to use. Homeowners read that as a business that's fallen behind. I can rebuild it clean and mobile-first for a fixed one-off price, live in days — shall I send a mockup?"
- },
- "DN Electrics": {
-  "email": "",
-  "subject": "There's an error showing on your Crouch End site",
-  "body": "I had a look at DN Electrics while checking electricians in Crouch End, and there's literally a timeout error message rendering on your homepage, the callback form fails, and leftover 'Sample Page' and 'test' pages are live in the menu. Any visitor who sees that assumes the business is broken too. I can rebuild it into a clean, working, modern site for a fixed fee, fast — want me to show you?"
  },
  "L Jeffery Roofing": {
   "email": "info@ljefferyroofing.com",
