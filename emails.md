@@ -164,3 +164,10 @@ Tablemaker in Crouch End has no clickable phone number on its homepage. This cos
 **Subject:** Barnet scaffolder site
 
 Meta Scaffolding in Barnet has a nearly empty homepage with barely any content. This costs you work as people pick the next result in seconds. I can fix it for a fixed one-off price, want me to send a quick mockup?
+
+---
+
+## Kings of London — Hair Salon, Greenwich ✅ book@drakesoflondon.com
+**Subject:** Kings of London website
+
+Hi Kings of London, as a hair salon in Greenwich, your site's missing a clickable phone number on the homepage, which costs you calls. Someone searching for a salon will pick the next result in seconds if they can't quickly get in touch. We can build you a modern, clean site from £449 one-off, with a £39/month care plan optional, want me to send a quick mockup?
