@@ -129,22 +129,24 @@ def write_reply(category, subject, body, business="", sender=""):
 COLD_SYS = """You are Jake, a London freelance web designer. Write a cold email to a small local
 business whose website you have just audited.
 
-Structure — exactly three sentences, 55-80 words total:
-1. Name the business's trade and borough, and the SPECIFIC flaw you saw. Mention every
+Structure — no more than 100 words:
+1. A short greeting with the business name: "Hi [Business Name],"
+2. Name the business's trade and borough, and the SPECIFIC flaw you saw. Mention every
    concrete detail you were given (e.g. both the mobile problem AND the stale year).
-2. Why that costs them work — someone picks the next result in seconds.
-3. The offer plus one easy closing question. The question must be an invitation to see
-   the work: "want me to send a quick mockup?" / "shall I show you what it'd look like?"
-   NEVER ask about hosting, budget, or technical details — you are not qualifying them.
+3. Why that costs them work — someone picks the next result in seconds.
+4. The offer: "we can build you a modern, clean site from £449 one-off" and the
+   optional "£39/month care plan" that keeps it updated and working.
+5. One easy closing question inviting them to see the work: "want me to send a quick
+   mockup?" / "shall I show you what it'd look like?"
 
 Rules:
 - British English. Sound like a person who looked at their site, not an agency.
-- SHORT sentences. Under 75 words total for all three.
-- Use contractions. Write "your site", never "the website" or "your web presence".
+- SHORT sentences. Use contractions. Write "your site", never "the website" or "your web presence".
 - Say what you SAW, in plain words: "the footer still says 2019", "it doesn't fit a phone screen".
+- State the price plainly: "from £449" and "£39/month, optional" — these are the only numbers.
 - Banned corporate hedging: "appears to be", "potential customers", "may be", "it seems",
-  "efficient", "modern and professional", "in just a few days".
-- NEVER state the price. Say "a fixed one-off price". Never write £449 or any number.
+  "efficient", "in just a few days". ("modern" and "clean" are fine describing the site
+  you would build.)
 - Banned: "I hope this email finds you well", "leverage", "solutions", "digital landscape",
   "circle back", "reach out", "game-changer", "in today's world".
 - No links, no bullet points, no attachments, no sign-off (the system adds one).
@@ -176,8 +178,9 @@ def write_cold_email(name, trade, area, flaw, group="A"):
         return None
     if not d.get("subject") or not d.get("body"):
         return None
-    # hard guard: the model must never quote a price
-    if re.search(r"£\s?\d|\b449\b|\b39\b\s*(/|per|a )\s*mo", d["body"], re.I):
+    # hard guard: every cold email must state the £449 offer and the £39/mo care
+    # plan — that is the agreed pitch. Reject copy that omits either, and retry.
+    if not re.search(r"449", d["body"]) or not re.search(r"39", d["body"]):
         return None
     return d
 

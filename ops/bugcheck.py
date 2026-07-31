@@ -314,11 +314,21 @@ def _():
     return not bad, f"{len(d)} emails, no baked-in sign-offs" if not bad else f"sign-off in body: {bad[:3]}"
 
 
-@t("no price leaked into cold emails", critical=False)
+@t("cold emails state the £449 offer", critical=False)
 def _():
     d = json.loads((HERE / "emails.json").read_text(encoding="utf-8"))
-    bad = [k for k, v in d.items() if re.search(r"£\s?\d|449|39/mo", v.get("body", ""))]
-    return not bad, "none quote a price" if not bad else f"price in: {bad[:3]}"
+    sent = set()
+    if (HERE / "sent_log.csv").exists():
+        with (HERE / "sent_log.csv").open(newline="", encoding="utf-8") as f:
+            for r in csv.DictReader(f):
+                e = (r.get("Email") or "").strip().lower()
+                if e and (r.get("Status") or "").startswith("Sent"):
+                    sent.add(e)
+    missing = [k for k, v in d.items()
+               if (v.get("email") or "").strip().lower() not in sent
+               and not re.search(r"449", v.get("body", ""))]
+    return not missing, "unsent copy quotes the £449 offer" if not missing else \
+        f"no £449 in: {missing[:3]}"
 
 
 @t("sent_log emails are well-formed")

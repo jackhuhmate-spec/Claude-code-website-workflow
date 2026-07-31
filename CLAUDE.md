@@ -54,7 +54,19 @@ answered — prevents double-replies) · `payments.csv` (cash records) · `run_h
 - **`outreach.yml` (daily 09:00 UTC / 10am London):** `run_cycle.py outreach --auto` →
   `lead_hunter.py` (OSM + live audit) → `write_emails.py` → `followups.py --send` (day 3/7/14)
   → `gmail_send_batch.py --send` → commit + push. Follow-ups run **first** and share the cap.
+  Cold emails greet the business by name, name their specific flaw, and state the offer
+  plainly ("from £449 one-off, optional £39/month care plan").
 - **`healthcheck.yml` (Mon 08:00):** runs `bugcheck.py`; a failure is the only routine alert.
+
+## Site delivery (Agent 4)
+
+When a deal is confirmed, build + deploy the client's site and email them the preview link:
+
+    python3 deploy_preview.py --business "Business Name"   # preview, emailed to the lead
+    python3 deploy_preview.py --business "Business Name" --final   # paid site
+
+`deploy_preview.py` emails the customer their preview link automatically after a successful
+deploy (customer is a known recipient, so the reply guard allows it).
 
 **Daily cap: 30 sends, shared.** `ops/quota.py` is the single budget — cold batch and
 follow-ups both count against it, because both use the one Gmail account.

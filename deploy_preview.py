@@ -13,7 +13,7 @@ Usage:
     NETLIFY_TOKEN=nfp_... python3 deploy_preview.py --name "KFM Roofing" \
         --trade Roofer --area Stratford --phone "07708 570709" --email info@kfmroofing.co.uk
 """
-import argparse, csv, io, json, os, re, shutil, ssl, sys, tempfile, time
+import argparse, csv, io, json, os, re, shutil, ssl, subprocess, sys, tempfile, time
 import urllib.error, urllib.request, zipfile
 from pathlib import Path
 
@@ -22,6 +22,7 @@ import build_site  # reuse the site generator
 API = "https://api.netlify.com/api/v1"
 CA = os.environ.get("SSL_CERT_FILE") or "/root/.ccr/ca-bundle.crt"
 HERE = Path(__file__).resolve().parent
+SIGN = os.environ.get("SIGN_NAME", "Jake")
 
 
 def _opener():
@@ -100,6 +101,34 @@ def deploy(cfg, token, final=False):
     return url, dep.get("state")
 
 
+def notify_preview(business_name, customer_email, url, final=False):
+    """Agent 4's delivery step: email the customer their preview link.
+
+    Sends through ops/gmail.py so the reply guard applies — the customer is already
+    a known recipient (we cold-emailed them first), so the send is allowed. If Gmail
+    creds are missing the site still deploys; only the notification is skipped.
+    """
+    if not customer_email:
+        return False
+    word = "new site" if final else "preview"
+    body = (f"Hi {business_name},\n\n"
+            f"Your {word} is live — take a look here:\n\n{url}\n\n"
+            f"Have a browse and let me know if you'd like any changes. "
+            f"Once you're happy with it, we can get the finishing touches sorted.\n\n"
+            f"Best,\n{SIGN}")
+    cmd = [sys.executable, str(HERE / "ops" / "gmail.py"), "send",
+           "--to", customer_email,
+           "--subject", f"Your {word} is ready, {business_name}",
+           "--body", body]
+    r = subprocess.run(cmd, capture_output=True, text=True, timeout=120)
+    if r.returncode != 0:
+        err = r.stderr.strip().splitlines()
+        print(f"  [!] preview email to {customer_email} not sent: {err[-1][:160] if err else 'unknown error'}")
+        return False
+    print(f"  [ok] preview link emailed to {customer_email}")
+    return True
+
+
 def lead_cfg(business):
     with open(HERE / "leads.csv", newline="", encoding="utf-8") as f:
         for r in csv.DictReader(f):
@@ -135,6 +164,10 @@ def main():
     url, state = deploy(cfg, a.token, a.final)
     print(f"{'SITE' if a.final else 'PREVIEW'} LIVE: {url}  (deploy state: {state})")
     print(url)
+    if state == "ready" and cfg.get("email"):
+        notify_preview(cfg["business_name"], cfg["email"], url, a.final)
+    elif state != "ready":
+        print("  [!] deploy not ready — preview link not emailed")
 
 
 if __name__ == "__main__":
