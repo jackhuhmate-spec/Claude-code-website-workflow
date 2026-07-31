@@ -5,10 +5,10 @@ followups.py — multi-touch follow-up sequence.
 For every lead we emailed who has NOT replied and is NOT opted out, sends the next
 due follow-up: touch 1 at day 3, touch 2 at day 7, touch 3 (breakup) at day 14,
 measured from the original send date. At most one touch per lead per run. Idempotent
-via followups_log.csv. Sends via Brevo (From Jake, Reply-To Jake). Dry-run by default.
+via followups_log.csv. Sends via Brevo (From Jack, Reply-To Jack). Dry-run by default.
 
 Usage:
-    BREVO_API_KEY=... python3 followups.py --send --sign "Jake" --from-email jake@...
+    BREVO_API_KEY=... python3 followups.py --send --sign "Jack" --from-email jack@...
 """
 import argparse, csv, json, os, ssl, sys, time, urllib.request
 from datetime import date, datetime
@@ -58,7 +58,7 @@ def send_brevo(api_key, sign, frm, to, subject, body):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--send", action="store_true")
-    ap.add_argument("--sign", default=os.environ.get("SIGN_NAME", "Jake"))
+    ap.add_argument("--sign", default=os.environ.get("SIGN_NAME", "Jack"))
     ap.add_argument("--from-email", default=os.environ.get("FROM_EMAIL", ""))
     ap.add_argument("--api-key", default=os.environ.get("BREVO_API_KEY", ""))
     ap.add_argument("--delay", type=int, default=5)

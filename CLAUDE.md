@@ -1,9 +1,9 @@
 # CLAUDE.md — operating guide for this project
 
-Autonomous web-design sales machine for **Jake** (a freelance web designer). It finds
+Autonomous web-design sales machine for **Jack** (a freelance web designer). It finds
 London local businesses with weak/no websites, cold-emails them, reads + answers replies,
 follows up, and builds + deploys their sites when they buy. Owner's real email:
-**jackhuhmate@gmail.com**. Sign all outreach/replies as **"Jake"**.
+**jackhuhmate@gmail.com**. Sign all outreach/replies as **"Jack"**.
 
 ## Scripts (all pure Python stdlib)
 
@@ -41,16 +41,16 @@ answered — prevents double-replies) · `payments.csv` (cash records) · `run_h
 
 - `GMAIL_USER` — the sending account (`jackhuhmate@gmail.com`)
 - `GMAIL_APP_PASSWORD` — Google app password for SMTP 587 + IMAP 993 (not the account password)
-- `SIGN_NAME` — name every email signs off as ("Jake")
+- `SIGN_NAME` — name every email signs off as ("Jack")
 - `GROQ_API_KEY` — LLM layer; absent, everything falls back to keywords and still runs
 - `NETLIFY_TOKEN` — preview/site deploys
 
 ## Autonomous routines (GitHub Actions — the live runtime)
 
 - **`replies.yml` (hourly):** `run_cycle.py replies` → read new mail over IMAP → classify
-  (Groq, keyword fallback; confidence <70 → REVIEW) → auto-reply in-thread as Jake → mark
+  (Groq, keyword fallback; confidence <70 → REVIEW) → auto-reply in-thread as Jack → mark
   handled → append to `replies_log.csv` → commit + push. DEAL moments and anything off-script
-  escalate to Jake rather than auto-closing.
+  escalate to Jack rather than auto-closing.
 - **`outreach.yml` (daily 09:00 UTC / 10am London):** `run_cycle.py outreach --auto` →
   `lead_hunter.py` (OSM + live audit) → `write_emails.py` → `followups.py --send` (day 3/7/14)
   → `gmail_send_batch.py --send` → commit + push. Follow-ups run **first** and share the cap.

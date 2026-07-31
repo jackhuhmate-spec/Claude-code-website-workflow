@@ -18,7 +18,7 @@ Click **New repository secret** and add these five, one at a time:
 |---|---|
 | `GMAIL_USER` | `jackhuhmate@gmail.com` |
 | `GMAIL_APP_PASSWORD` | your 16-char Gmail app password |
-| `SIGN_NAME` | `Jake` |
+| `SIGN_NAME` | `Jack` |
 | `GROQ_API_KEY` | your Groq API key (free at console.groq.com) |
 | `NETLIFY_TOKEN` | your `nfp_…` Netlify token |
 
@@ -68,7 +68,7 @@ Then, before trusting it unattended, do one manual run:
 
 | When | What |
 |---|---|
-| **Every hour** | Reads inbox, categorises replies, answers as Jake, logs opt-outs, commits state |
+| **Every hour** | Reads inbox, categorises replies, answers as Jack, logs opt-outs, commits state |
 | **Every hour, if a deal appears** | Emails you "HOT LEAD - action needed" with the message |
 | **09:00 UTC daily** | Sends up to 30 cold emails, archives the run |
 | **Monday 08:00 UTC** | Full bug check, emails you the result |

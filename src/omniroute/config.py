@@ -65,7 +65,7 @@ class Settings:
     # --- Email (Gmail) ---
     gmail_user: str = ""
     gmail_app_password: str = ""
-    sign_name: str = "Jake"
+    sign_name: str = "Jack"
 
     # --- LLM ---
     groq_api_key: str = ""
@@ -137,7 +137,7 @@ class Settings:
             sqlite_path=_env("SQLITE_PATH", str(PROJECT_ROOT / "data" / "omniroute.db")),
             gmail_user=_env("GMAIL_USER"),
             gmail_app_password=_env("GMAIL_APP_PASSWORD"),
-            sign_name=_env("SIGN_NAME", "Jake"),
+            sign_name=_env("SIGN_NAME", "Jack"),
             groq_api_key=_env("GROQ_API_KEY"),
             groq_model=_env("GROQ_MODEL", "llama-3.3-70b-versatile"),
             netlify_token=_env("NETLIFY_TOKEN"),
@@ -180,7 +180,7 @@ try:
         sqlite_path: str = str(PROJECT_ROOT / "data" / "omniroute.db")
         gmail_user: str = Field(default="")
         gmail_app_password: str = Field(default="")
-        sign_name: str = Field(default="Jake")
+        sign_name: str = Field(default="Jack")
         groq_api_key: str = Field(default="")
         groq_model: str = Field(default="llama-3.3-70b-versatile")
         netlify_token: str = Field(default="")

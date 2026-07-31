@@ -22,7 +22,7 @@ import build_site  # reuse the site generator
 API = "https://api.netlify.com/api/v1"
 CA = os.environ.get("SSL_CERT_FILE") or "/root/.ccr/ca-bundle.crt"
 HERE = Path(__file__).resolve().parent
-SIGN = os.environ.get("SIGN_NAME", "Jake")
+SIGN = os.environ.get("SIGN_NAME", "Jack")
 
 
 def _opener():

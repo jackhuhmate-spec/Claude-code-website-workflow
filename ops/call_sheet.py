@@ -101,7 +101,7 @@ def collect():
 
 
 def opener_no_site(r):
-    return (f"Hi, is that {r['name']}? I'm Jake, I build websites for {r['area']} "
+    return (f"Hi, is that {r['name']}? I'm Jack, I build websites for {r['area']} "
             f"businesses. I noticed you haven't got a site — when someone searches "
             f"'{r['trade'].lower()} {r['area']}' you don't come up at all, and that "
             f"job goes to whoever does. I can put one together for a fixed one-off "
@@ -112,7 +112,7 @@ def opener_no_email(r):
     flaw = r["flaw"].rstrip(".")
     if len(flaw) > 180:
         flaw = flaw[:180].rsplit(" ", 1)[0] + "…"
-    return (f"Hi, is that {r['name']}? I'm Jake, I build websites for {r['area']} "
+    return (f"Hi, is that {r['name']}? I'm Jack, I build websites for {r['area']} "
             f"businesses. I had a look at your site — {flaw[0].lower() + flaw[1:]}. "
             f"I can rebuild it for a fixed one-off price. Want me to send a free "
             f"mockup so you can see it first?")

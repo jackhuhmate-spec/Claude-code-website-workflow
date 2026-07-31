@@ -36,7 +36,7 @@ PAUSED = HERE / "PAUSED"
 
 USER = os.environ.get("GMAIL_USER", "")
 PW = (os.environ.get("GMAIL_APP_PASSWORD", "") or "").replace(" ", "")
-SIGN = os.environ.get("SIGN_NAME", "Jake")
+SIGN = os.environ.get("SIGN_NAME", "Jack")
 
 # (min_days_since_original, touch_number, body)  — {b}=business, {a}=London area.
 # No price is quoted at any touch: £449 stays a reply-stage conversation.

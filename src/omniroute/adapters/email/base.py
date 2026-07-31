@@ -19,7 +19,7 @@ class EmailMessage:
     to: str
     subject: str
     body: str
-    from_name: str = "Jake"
+    from_name: str = "Jack"
     from_email: str = ""
     in_reply_to: str | None = None
     thread_id: str | None = None

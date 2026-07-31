@@ -27,7 +27,7 @@ jobs:
           NETLIFY_TOKEN: ${{ secrets.NETLIFY_TOKEN }}
         run: python3 ops/bugcheck.py | tee health.log
 
-      - name: Email Jake the result
+      - name: Email Jack the result
         if: always()
         env:
           GMAIL_USER: ${{ secrets.GMAIL_USER }}

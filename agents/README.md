@@ -35,12 +35,12 @@ leads.csv ──> emails.json ──> sent_log.csv ──> inbox ──> replies
 - Pricing fixed: **£449** build, optional **£39/mo** care plan. No agent discounts on its own.
 - Opt-outs are permanent, honoured everywhere via `do_not_contact.csv`.
 - Every state change ends with `git add -A && git commit && git push`.
-- Escalate to Jake for: a deal, a complaint, a legal issue, a dry well, or a breakage.
+- Escalate to Jack for: a deal, a complaint, a legal issue, a dry well, or a breakage.
 
 ## Transport
 
 Brevo and the Apps Script bridge are no longer needed — SMTP 587 and IMAP 993 are
-reachable, so everything runs through Jake's own Gmail with an app password:
+reachable, so everything runs through Jack's own Gmail with an app password:
 
 - `ops/gmail.py` — send / read / mark / test (replaces `reply_bridge.py`)
 - `ops/gmail_send_batch.py` — idempotent cold-email batch (replaces `brevo_send.py`)

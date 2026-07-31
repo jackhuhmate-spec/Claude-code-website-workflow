@@ -26,7 +26,7 @@ PAUSED = HERE / "PAUSED"
 
 USER = os.environ.get("GMAIL_USER", "")
 PW = (os.environ.get("GMAIL_APP_PASSWORD", "") or "").replace(" ", "")
-SIGN = os.environ.get("SIGN_NAME", "Jake")
+SIGN = os.environ.get("SIGN_NAME", "Jack")
 # The cap lives in quota.py because the follow-up sequence draws on the same Gmail
 # account. Two senders each counting only their own log would put the account at 60/day.
 DAILY_CAP = quota.DAILY_CAP

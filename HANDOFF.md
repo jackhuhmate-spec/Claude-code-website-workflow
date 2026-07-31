@@ -1,6 +1,6 @@
 # Handoff brief — read this first
 
-You are taking over an **autonomous cold-email sales machine** for Jake, a freelance
+You are taking over an **autonomous cold-email sales machine** for Jack, a freelance
 web designer in London. It finds small businesses with bad or missing websites,
 emails them, answers their replies, and builds the site when one buys.
 
@@ -13,7 +13,7 @@ not rebuild it. Read this whole file before changing anything.
 
 - Repo: `jackhuhmate-spec/Claude-code-website-workflow` (**private**)
 - Branch: **`claude/tradesman-web-sales-machine-4wozz5`** ← this is the default, not `main`
-- Owner's email: **jackhuhmate@gmail.com**. Sign all outreach as **"Jake"**.
+- Owner's email: **jackhuhmate@gmail.com**. Sign all outreach as **"Jack"**.
 - Pricing, fixed: **£449 one-off build**, optional **£39/month** care plan.
 - Everything is **pure Python standard library**. No pip installs, no frameworks.
 
@@ -70,9 +70,9 @@ SMTP and IMAP are reachable directly.
 
 | Workflow | Schedule | Does |
 |---|---|---|
-| `replies.yml` | hourly | Read inbox → triage → reply as Jake → commit state → email Jake if hot |
+| `replies.yml` | hourly | Read inbox → triage → reply as Jack → commit state → email Jack if hot |
 | `outreach.yml` | 09:00 UTC | Hunt leads → write copy → send ≤30 → archive |
-| `healthcheck.yml` | Mon 08:00 | Full bugcheck, emailed to Jake |
+| `healthcheck.yml` | Mon 08:00 | Full bugcheck, emailed to Jack |
 
 Secrets already set in the repo: `GMAIL_USER`, `GMAIL_APP_PASSWORD`, `SIGN_NAME`,
 `NETLIFY_TOKEN`, `GROQ_API_KEY`.
@@ -98,7 +98,7 @@ These exist because each one was a real bug or a real risk. Do not relax them.
 6. **Opt-outs are permanent**, honoured everywhere via `do_not_contact.csv`.
 7. **Never quote the price in a cold email.** Say "a fixed one-off price". £449 is a
    reply-stage conversation.
-8. **Never discount below £449** without Jake. Never send bank details.
+8. **Never discount below £449** without Jack. Never send bank details.
 9. **Never deploy a `--final` site for an unpaid lead.**
 10. **Commit and push after every state change**, or the next run repeats work.
 11. **No chains or franchises.** Checked by name *and* by URL (`/franchise`, `/stores/`).
@@ -115,8 +115,8 @@ Each has a regression test in `bugcheck.py`.
 | Daily cap was per-run | Repeated runs = unlimited sending = Gmail suspension |
 | `mark --id` read-modify-write | Two concurrent runners silently lose handled IDs |
 | SUSPICIOUS/REVIEW never marked | Re-flagged every hour forever |
-| Only DEAL/INTERESTED escalated | Injection attempts and complaints never reached Jake |
-| LLM refusals could be sent | Customer receives *"I can't assist with that"* signed Jake |
+| Only DEAL/INTERESTED escalated | Injection attempts and complaints never reached Jack |
+| LLM refusals could be sent | Customer receives *"I can't assist with that"* signed Jack |
 | Dead `tel:` links | Paid client site shipped with a broken call button |
 | Franchise page taken as a lead | Scraped a **private individual's Hotmail** off a chain's page (GDPR risk) |
 | AI invented site faults | Claimed a fault the owner could disprove in one click |
@@ -154,7 +154,7 @@ Never run a live send until the dry run looks right.
 
 ---
 
-## 8. Style Jake's emails must keep
+## 8. Style Jack's emails must keep
 
 Three sentences. British English. Plain, direct, like a tradesman texting.
 

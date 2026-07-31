@@ -2,7 +2,7 @@
 Reply Handler agent — wraps ``ops/run_cycle.py replies``.
 
 Reads the inbox, classifies replies, auto-answers, and escalates
-deals/concerns to Jake.
+deals/concerns to Jack.
 """
 
 from __future__ import annotations
@@ -74,7 +74,7 @@ class ReplyHandlerAgent(BaseAgent):
                     except (ValueError, IndexError):
                         pass
 
-        has_escalations = "ESCALATE TO JAKE" in output
+        has_escalations = "ESCALATE TO JACK" in output
         has_deal = "DEAL" in output
 
         return AgentResult(

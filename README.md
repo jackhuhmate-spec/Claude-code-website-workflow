@@ -2,7 +2,7 @@
 
 A fully autonomous pipeline for a freelance web designer: every day it finds London
 businesses with weak or missing websites, emails them a personalised pitch, replies to
-their responses automatically, and alerts the owner (Jake) only when a deal is on the table.
+their responses automatically, and alerts the owner (Jack) only when a deal is on the table.
 When a deal closes it builds and deploys the client's website.
 
 ## How it runs — GitHub Actions, zero manual work
@@ -10,13 +10,13 @@ When a deal closes it builds and deploys the client's website.
 | Workflow | Schedule | What it does |
 |----------|----------|--------------|
 | `outreach.yml` | daily 10am London | Finds + audits London businesses, writes copy, sends day 3/7/14 follow-ups then new cold emails, commits the state |
-| `replies.yml` | hourly | Reads the inbox, classifies, auto-answers in-thread as Jake, escalates real deals |
+| `replies.yml` | hourly | Reads the inbox, classifies, auto-answers in-thread as Jack, escalates real deals |
 | `healthcheck.yml` | Mon 08:00 | Runs the full test suite; a failure is the only routine alert |
 
 **30 sends a day, shared** between the follow-up and cold senders — one Gmail account,
 one budget (`ops/quota.py`).
 
-Jake is contacted only for: a **deal**, a **dry well**, or a **breakage**.
+Jack is contacted only for: a **deal**, a **dry well**, or a **breakage**.
 
 ## Scope
 
@@ -52,7 +52,7 @@ gyms, groomers, cleaners, florists, clinics, …). No national chains or franchi
 ## Transport
 
 Gmail directly: **SMTP 587** to send, **IMAP 993** to read and to scan Sent Mail for the
-double-reply guard. Replies go out from Jake's real address, in-thread. The earlier Brevo
+double-reply guard. Replies go out from Jack's real address, in-thread. The earlier Brevo
 API + Google Apps Script bridge was a workaround for an environment that blocked raw SMTP;
 it is dead and those scripts are kept only as an unused fallback.
 
@@ -62,7 +62,7 @@ it is dead and those scripts are kept only as an unused fallback.
 - Idempotent sending (nobody emailed twice); 30/day shared cap for deliverability.
 - Opt-outs honoured everywhere via `do_not_contact.csv`; a soft opt-out line on every email.
 - Replies treat inbound email as untrusted (no instruction-following from email bodies).
-- Deals, prices, complaints, and anything off-script are escalated to Jake, never auto-closed.
+- Deals, prices, complaints, and anything off-script are escalated to Jack, never auto-closed.
 
 ## Pricing model (fixed — not a range)
 One-off build **£449**, optional care plan **£39/month**. Never quoted in a cold

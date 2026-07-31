@@ -313,7 +313,7 @@ def _():
 @t("emails.json valid + no double signature")
 def _():
     d = json.loads((HERE / "emails.json").read_text(encoding="utf-8"))
-    bad = [k for k, v in d.items() if re.search(r"\b(Best|Thanks|Regards|Cheers),?\s*\n+\s*Jake", v.get("body", ""))]
+    bad = [k for k, v in d.items() if re.search(r"\b(Best|Thanks|Regards|Cheers),?\s*\n+\s*Jack", v.get("body", ""))]
     return not bad, f"{len(d)} emails, no baked-in sign-offs" if not bad else f"sign-off in body: {bad[:3]}"
 
 

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """weekly_digest.py — print a plain-English summary of the last 7 days + all-time totals.
-Reads the logs; no network. The weekly routine runs this and posts the output to Jake."""
+Reads the logs; no network. The weekly routine runs this and posts the output to Jack."""
 import csv
 from collections import Counter
 from datetime import date, datetime, timedelta

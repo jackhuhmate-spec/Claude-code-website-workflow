@@ -1,4 +1,4 @@
-# Setup — what Jake needs to give the agent
+# Setup — what Jack needs to give the agent
 
 Paste these into chat when you want a run. **Nothing is committed to the repo.**
 
@@ -14,7 +14,7 @@ Give me:
 ```
 GMAIL_USER=jackhuhmate@gmail.com
 GMAIL_APP_PASSWORD=xxxxxxxxxxxxxxxx
-SIGN_NAME=Jake
+SIGN_NAME=Jack
 ```
 
 An app password only grants mail send/read. It does **not** give access to Drive, Photos,

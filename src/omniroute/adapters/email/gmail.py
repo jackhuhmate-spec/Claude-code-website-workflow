@@ -70,7 +70,7 @@ class GmailAdapter(EmailService):
     def __init__(self) -> None:
         self._user = settings.gmail_user
         self._pw = settings.gmail_app_password.replace(" ", "")
-        self._sign = settings.sign_name or "Jake"
+        self._sign = settings.sign_name or "Jack"
         self._ssl_ctx = ssl.create_default_context()
 
     # ── Helpers ─────────────────────────────────────────────────────────

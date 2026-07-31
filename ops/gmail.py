@@ -7,7 +7,7 @@ Replaces the Brevo API + Apps Script bridge. Pure stdlib.
 Credentials (env, never committed):
     GMAIL_USER            jackhuhmate@gmail.com
     GMAIL_APP_PASSWORD    16-char app password
-    SIGN_NAME             Jake
+    SIGN_NAME             Jack
 
 Commands:
     python3 ops/gmail.py send --to X --subject S --body B [--thread <Message-ID>] [--force]
@@ -29,7 +29,7 @@ DNC = HERE / "do_not_contact.csv"
 
 USER = os.environ.get("GMAIL_USER", "")
 PW = (os.environ.get("GMAIL_APP_PASSWORD", "") or "").replace(" ", "")
-SIGN = os.environ.get("SIGN_NAME", "Jake")
+SIGN = os.environ.get("SIGN_NAME", "Jack")
 
 SIGNOFF = "\n\nBest,\n{name}\n\n(If you'd rather not hear from me, just reply \"no thanks\" and I won't email again.)"
 

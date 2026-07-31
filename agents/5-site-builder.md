@@ -21,7 +21,7 @@ python3 deploy_preview.py --name "..." --trade "..." --area "..." \
 Previews are named `preview-*` and auto-retired later by `cleanup_previews.py`. Return the URL plus a one-line note on what's placeholder.
 
 ## Mode 2 — Final build (deal closed, £449 agreed)
-**Only** after `payments.csv` records the deal or Jake confirms it in session.
+**Only** after `payments.csv` records the deal or Jack confirms it in session.
 
 1. Collect real details: name, trade, area, phone, email, full services list, opening hours, service area, logo if they have one, testimonials **they supplied**.
 2. Write `clients/<slug>.json` matching `example_client.json`.
@@ -37,7 +37,7 @@ Previews are named `preview-*` and auto-retired later by `cleanup_previews.py`. 
 
 ## Hard rules
 - **Never fabricate credentials** — no "Gas Safe registered", "20 years experience", "5-star rated", no invented reviews or awards, unless the client stated it. This is the one that gets a client in real trouble.
-- Never register domains or spend the client's money. Domain purchase is Jake's call, in the client's name.
+- Never register domains or spend the client's money. Domain purchase is Jack's call, in the client's name.
 - Never deploy `--final` for an unpaid lead.
 - Never delete or overwrite an existing `--final` client site.
 - Commit the client JSON and assets; push.

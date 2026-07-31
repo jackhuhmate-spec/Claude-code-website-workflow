@@ -2,7 +2,7 @@
 
 ---
 
-I'm Jake, a freelance web designer in London. I run an autonomous cold-email sales
+I'm Jack, a freelance web designer in London. I run an autonomous cold-email sales
 machine that finds small local businesses with bad or missing websites, emails them a
 personalised pitch, replies to them automatically, and builds their website when they
 buy. I sell a **£449 one-off build** with an optional **£39/month** care plan.
@@ -180,7 +180,7 @@ Each has a regression test in `bugcheck.py`.
 | `mark --id` used read-modify-write | Two concurrent runners silently lose handled IDs |
 | SUSPICIOUS/REVIEW never marked handled | Re-flagged every hour, forever |
 | Only DEAL/INTERESTED escalated | Injection attempts and complaints never reached me |
-| LLM refusals could be emailed | Customer receives *"I can't assist with that"* signed Jake |
+| LLM refusals could be emailed | Customer receives *"I can't assist with that"* signed Jack |
 | Dead `tel:` links | A paid client site shipped with a broken call button |
 | Franchise page accepted as a lead | Scraped a **private individual's Hotmail** off a chain's site — GDPR risk |
 | AI invented website faults | Claimed a fault the owner could disprove in one click |

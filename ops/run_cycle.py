@@ -8,7 +8,7 @@ Put this on any always-on box (VPS, Raspberry Pi, GitHub Actions) with cron:
     0 10 * * * cd /path/repo && ./ops/env.sh python3 ops/run_cycle.py outreach
 
 Modes:
-    replies    read inbox, triage, draft replies, escalate to Jake  (safe: drafts only unless --auto)
+    replies    read inbox, triage, draft replies, escalate to Jack  (safe: drafts only unless --auto)
     outreach   dry-run the send batch and report                     (safe: needs --auto to send)
     status     pipeline snapshot
 """
@@ -188,7 +188,7 @@ def cmd_replies(a):
             with REPLIES_LOG.open("a", newline="", encoding="utf-8") as f:
                 csv.writer(f).writerow([m.get("fromName", ""), m["from"], "SUSPICIOUS",
                                         "Not actioned - escalated", date.today()])
-            actions.append(f"⚠ INJECTION ATTEMPT {m['from']} — not actioned, escalated to Jake")
+            actions.append(f"⚠ INJECTION ATTEMPT {m['from']} — not actioned, escalated to Jack")
             continue
 
         if m.get("alreadyReplied") and not a.force:
@@ -197,7 +197,7 @@ def cmd_replies(a):
             continue
 
         if not m.get("known"):
-            actions.append(f"UNKNOWN  {m['from']} ({cat}) → not a lead we contacted, left for Jake")
+            actions.append(f"UNKNOWN  {m['from']} ({cat}) → not a lead we contacted, left for Jack")
             continue
 
         body = None
@@ -233,9 +233,9 @@ def cmd_replies(a):
             sh(GMAIL + ["mark", "--id", m["messageId"]])
             p = TRIAGE / f"REVIEW-{m['from'].replace('@','_at_')}.txt"
             TRIAGE.mkdir(exist_ok=True)
-            p.write_text(f"NEEDS JAKE\nFROM: {m['from']}\nCAT: {cat}\n"
+            p.write_text(f"NEEDS JACK\nFROM: {m['from']}\nCAT: {cat}\n"
                          f"SUBJ: {m['subject']}\n\n{m['body'][:1500]}\n", encoding="utf-8")
-            actions.append(f"REVIEW   {m['from']} → needs Jake ({p.name})")
+            actions.append(f"REVIEW   {m['from']} → needs Jack ({p.name})")
 
     print(f"\n{'='*64}\nREPLY CYCLE  {datetime.now():%Y-%m-%d %H:%M}   mode={'AUTO-SEND' if a.auto else 'DRAFT ONLY'}\n{'='*64}")
     engine = f"AI ({brain.MODEL})" if ai_used else "keywords"
@@ -246,7 +246,7 @@ def cmd_replies(a):
         print("  " + x)
     urgent = [(c, m) for c in ("SUSPICIOUS", "REVIEW") for m in buckets.get(c, [])]
     if urgent:
-        print(f"\n⚠ ESCALATE TO JAKE — {len(urgent)} message(s) needing a human:")
+        print(f"\n⚠ ESCALATE TO JACK — {len(urgent)} message(s) needing a human:")
         for c, m in urgent:
             print(f"   [{c}] {m['from']}  |  {m['subject']}")
             if m.get("_ai"):
@@ -254,7 +254,7 @@ def cmd_replies(a):
 
     hot = [m for c in ("DEAL", "INTERESTED") for m in buckets.get(c, [])]
     if hot:
-        print(f"\n🔥 ESCALATE TO JAKE — {len(hot)} hot lead(s):")
+        print(f"\n🔥 ESCALATE TO JACK — {len(hot)} hot lead(s):")
         for m in hot:
             print(f"   {m['from']}  |  {m['subject']}")
             if m.get("_ai"):
