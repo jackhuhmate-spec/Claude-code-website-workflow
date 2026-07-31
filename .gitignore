@@ -18,6 +18,12 @@ ops/.env
 *.sqlite
 *.sqlite3
 
+# TypeScript platform (`packages/`). `dist/` is already ignored above.
+node_modules/
+.next/
+*.tsbuildinfo
+.pglite/
+
 # Project specific
 drafts/
 Demo*/

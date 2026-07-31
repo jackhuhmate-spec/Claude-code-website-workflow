@@ -1,0 +1,38 @@
+{
+  "name": "@agency/root",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22.11"
+  },
+  "packageManager": "pnpm@10.34.5",
+  "scripts": {
+    "build": "tsc --build",
+    "clean": "tsc --build --clean",
+    "typecheck": "pnpm -r --if-present typecheck",
+    "lint": "eslint .",
+    "format": "prettier --check \"{apps,packages}/**/*.{ts,tsx,json}\" package.json tsconfig*.json eslint.config.js vitest.config.ts",
+    "format:write": "prettier --write \"{apps,packages}/**/*.{ts,tsx,json}\" package.json tsconfig*.json eslint.config.js vitest.config.ts",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "db:generate": "pnpm --filter @agency/db generate",
+    "db:migrate": "pnpm --filter @agency/db migrate",
+    "import:csv": "pnpm --filter @agency/importer start",
+    "verify": "pnpm build && pnpm lint && pnpm format && pnpm test"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "esbuild"
+    ]
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.1",
+    "@types/node": "^22.20.0",
+    "eslint": "^9.39.1",
+    "prettier": "^3.6.2",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.46.4",
+    "vitest": "^3.2.4"
+  }
+}

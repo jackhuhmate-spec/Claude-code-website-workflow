@@ -1,0 +1,11 @@
+{
+  // Editor and lint view: sees the tests too, so typed lint rules apply to them.
+  // `tsconfig.build.json` is what actually emits, and it excludes tests from dist.
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "composite": false,
+    "noEmit": true,
+    "types": ["node", "vitest/globals"]
+  },
+  "include": ["src/**/*.ts"]
+}

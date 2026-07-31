@@ -1,0 +1,15 @@
+dist/
+.next/
+node_modules/
+pnpm-lock.yaml
+drizzle/
+Demo*/
+runs/
+*.csv
+*.md
+
+# Live data owned by the Python machine. Reformatting these is a production change:
+# emails.json is what the sender reads to decide what goes out.
+emails.json
+example_client.json
+handled_messages.txt
