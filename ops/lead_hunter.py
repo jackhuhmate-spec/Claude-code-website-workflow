@@ -16,7 +16,7 @@ Two kinds of lead are kept:
 Everything else is discarded. A lead with no email is still kept if it has a phone,
 so the contact-form/phone list stays useful.
 """
-import argparse, csv, json, re, ssl, sys, time, urllib.error, urllib.parse, urllib.request
+import argparse, csv, json, os, re, ssl, sys, time, urllib.error, urllib.parse, urllib.request
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent.parent
@@ -27,6 +27,25 @@ DNC = HERE / "do_not_contact.csv"
 OVERPASS = ["https://overpass-api.de/api/interpreter",
             "https://overpass.kumi.systems/api/interpreter"]
 UA = "leadbot/1.0 (small business web audit)"
+
+# Second lead source: Google Places (the data behind Google Maps). Requires
+# GOOGLE_PLACES_API_KEY (free tier: $200/mo credit, plenty for ~60 calls/day).
+# Without the key the hunter silently runs OpenStreetMap-only.
+GOOGLE_KEY = os.environ.get("GOOGLE_PLACES_API_KEY", "")
+GOOGLE_TS = "https://maps.googleapis.com/maps/api/place/textsearch/json"
+GOOGLE_DETAILS = "https://maps.googleapis.com/maps/api/place/details/json"
+# Areas to search when running the Google source, rotated by day like TILES.
+GOOGLE_AREAS = ["Croydon", "Bromley", "Ilford", "Romford", "Ealing", "Wembley",
+                "Enfield", "Barnet", "Woolwich", "Lewisham", "Harrow", "Uxbridge",
+                "Kingston upon Thames", "Sutton", "Hounslow", "Walthamstow"]
+# (trade label in leads.csv, Google query term) — the trades we pitch, in Google language.
+GOOGLE_QUERIES = [
+    ("Plumber", "plumber"), ("Electrician", "electrician"), ("Roofer", "roofer"),
+    ("Heating Engineer", "heating engineer boiler repair"), ("Carpenter", "carpenter joiner"),
+    ("Painter & Decorator", "painter decorator"), ("Tiler", "tiler"),
+    ("Hair Salon", "hairdresser barber"), ("Landscape Gardener", "landscape gardener"),
+    ("Window Fitter", "window installer glazier"),
+]
 
 # Greater London carved into tiles — Overpass times out on the whole city at once.
 TILES = [
@@ -351,6 +370,103 @@ def existing():
     return names, domains, mails, phones
 
 
+def _gjson(url, timeout=20):
+    """GET a Google Places URL and return the JSON body, or None on any failure."""
+    req = urllib.request.Request(url, headers={"User-Agent": UA})
+    try:
+        with urllib.request.urlopen(req, timeout=timeout) as r:
+            return json.loads(r.read().decode())
+    except Exception:
+        return None
+
+
+def _garea(comp):
+    """Best London area name from a Place's address_components (postal_town > locality)."""
+    want = {"postal_town", "locality", "administrative_area_level_2"}
+    for typ in ("postal_town", "locality", "administrative_area_level_2"):
+        for c in comp or []:
+            if typ in c.get("types", []) and c.get("long_name"):
+                return c["long_name"].replace("London", "").strip() or c["long_name"]
+    return ""
+
+
+def google_places(area, kept, audited, seen, names, domains, mails, phones, max_leads, audit_limit):
+    """Second lead source: Google Places text search in one London area.
+
+    Google returns businesses WITH websites (unlike OSM, where the daily email
+    yield is structurally low) — each site is then audited and scraped for an
+    email exactly like the OSM path. Needs GOOGLE_PLACES_API_KEY; without it the
+    hunter just runs OpenStreetMap. Returns (kept, audited).
+    """
+    if not GOOGLE_KEY:
+        print("  (no GOOGLE_PLACES_API_KEY — Google source skipped)")
+        return kept, audited
+    print(f"[{area}] querying Google Places…")
+    for trade, q in GOOGLE_QUERIES:
+        if len(kept) >= max_leads or audited >= audit_limit:
+            break
+        url = (f"{GOOGLE_TS}?query={urllib.parse.quote(f'{q} in {area} London')}"
+               f"&key={GOOGLE_KEY}&maxprice=2")
+        d = _gjson(url)
+        if not d or d.get("status") not in ("OK", "ZERO_RESULTS"):
+            if d and d.get("status") == "OVER_QUERY_LIMIT":
+                print("  Google rate limit — stopping Google source for today.")
+                return kept, audited
+            time.sleep(0.3)
+            continue
+        for res in d.get("results", [])[:3]:  # top 3 per trade keeps API cost bounded
+            if len(kept) >= max_leads or audited >= audit_limit:
+                break
+            name = (res.get("name") or "").strip()
+            if not name or name.lower() in names or name.lower() in seen:
+                continue
+            if CHAINS.search(name):
+                continue
+            pid = res.get("place_id")
+            site = phone = ""
+            if pid:
+                dd = _gjson(f"{GOOGLE_DETAILS}?place_id={pid}"
+                            f"&fields=formatted_phone_number,website&key={GOOGLE_KEY}")
+                if dd and dd.get("status") == "OK":
+                    site = (dd.get("result", {}).get("website") or "").strip()
+                    phone = (dd.get("result", {}).get("formatted_phone_number") or "").strip()
+            site = re.sub(r"^www\.", "https://", site)
+            garea = _garea(res.get("address_components")) or area
+            if phone and re.sub(r"\D", "", phone)[-9:] in phones:
+                continue
+            email = ""
+            if not site:
+                kept.append([name, trade, garea, phone, email, "", "",
+                             "The business has no website at all, so when local customers search "
+                             "for this trade nothing of theirs comes up and the enquiry goes to a "
+                             "competitor who does have a page.", "B"])
+                seen.add(name.lower())
+                print(f"  + [B] {name} ({garea}) {email or phone}")
+                continue
+            dom = re.sub(r"^https?://(www\.)?|/.*$", "", site.lower())
+            if dom in domains or dom in seen:
+                continue
+            audited += 1
+            box = []
+            score, flaw = audit(site, want_html=box)
+            if score is None:
+                continue
+            if not email and score >= 2:  # dead sites have no page to scrape
+                email = find_email(site, box[0] if box else "", name)
+                if email:
+                    if email in mails:
+                        continue
+                    mails.add(email)
+            if not email and not phone:
+                continue  # Google gave a site but nothing reachable
+            kept.append([name, trade, garea, phone, email, site, str(score), flaw, "A"])
+            seen.add(name.lower())
+            domains.add(dom)
+            print(f"  + [A/{score}] {name} ({garea}) {email or phone}")
+            time.sleep(0.2)
+    return kept, audited
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--write", action="store_true")
@@ -429,6 +545,15 @@ def main():
             kept.append([name, trade, area, phone, email, site, str(score), flaw, "A"])
             seen.add(name.lower()); seen.add(dom)
             print(f"  + [A/{score}] {name} ({area}) {email or phone}")
+
+    # Second source: Google Places, one London area rotated by day. The daily hunt
+    # calls with a tile; pick the area that matches the tile rotation so all of
+    # London is covered over a week without hammering the API every day.
+    if a.tile is not None:
+        google_area = GOOGLE_AREAS[a.tile % len(GOOGLE_AREAS)]
+        kept, audited = google_places(google_area, kept, audited, seen,
+                                      names, domains, mails, phones,
+                                      a.max, a.audit_limit)
 
     print(f"\nAudited {audited} sites, kept {len(kept)} leads "
           f"({sum(1 for k in kept if k[4])} with an email).")

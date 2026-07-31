@@ -22,6 +22,10 @@ try:
     import brain
 except Exception:
     brain = None
+try:
+    import quota
+except Exception:
+    quota = None
 GMAIL = [sys.executable, str(HERE / "ops" / "gmail.py")]
 REPLIES_LOG = HERE / "replies_log.csv"
 DNC = HERE / "do_not_contact.csv"
@@ -260,7 +264,42 @@ def cmd_replies(a):
             if m.get("_ai"):
                 print(f"      summary: {m['_ai'].get('summary','')}")
             print(f"      \"{' '.join(m['body'].split())[:160]}\"")
+        # The money only counts when it's on the ledger — remind Jack how to log it.
+        print("\n   When payment lands, log it with:  python3 ops/record_payment.py "
+              "'Business Name' --amount 449 --status paid")
     print()
+
+
+def _cold_waiting():
+    """How many leads are actually queued for a FIRST email right now.
+
+    A cheap peek at the same queue gmail_send_batch builds: an email address, not
+    yet contacted, not opted out, with copy written. Used to reserve cap for cold
+    outreach so the follow-up backlog can't starve it.
+    """
+    sent, dnc = set(), set()
+    if (HERE / "sent_log.csv").exists():
+        with (HERE / "sent_log.csv").open(newline="", encoding="utf-8") as f:
+            for r in csv.DictReader(f):
+                if (r.get("Status") or "").startswith("Sent"):
+                    a = (r.get("Email") or "").strip().lower()
+                    if a:
+                        sent.add(a)
+    if (HERE / "do_not_contact.csv").exists():
+        for line in (HERE / "do_not_contact.csv").read_text(encoding="utf-8").splitlines():
+            a = line.split(",")[0].strip().lower()
+            if "@" in a:
+                dnc.add(a)
+    with_copy = set()
+    if (HERE / "emails.json").exists():
+        with_copy = set(json.loads((HERE / "emails.json").read_text(encoding="utf-8")))
+    n = 0
+    for r in csv.DictReader((HERE / "leads.csv").open(newline="", encoding="utf-8")):
+        a = (r.get("Email") or "").strip().lower()
+        if (a and a not in sent and a not in dnc
+                and r.get("Business Name", "").strip() in with_copy):
+            n += 1
+    return n
 
 
 def cmd_outreach(a):
@@ -286,10 +325,16 @@ def cmd_outreach(a):
     # Follow-ups run BEFORE the cold batch and share the same daily cap. A day-3 touch
     # is due on day 3 or it is late; a lead found this morning loses nothing by being
     # emailed tomorrow. Touch 2 and 3 also convert far better than a first contact.
-    print("\n--- follow-ups ---")
+    # But the follow-up backlog must not starve NEW cold outreach: reserve up to 15
+    # sends for leads actually waiting for a first email, and cap follow-ups at the rest.
+    waiting = _cold_waiting()
+    reserve = min(15, waiting)
+    fu_limit = max(0, quota.DAILY_CAP - reserve)
+    print(f"\n--- follow-ups (capped at {fu_limit}/{quota.DAILY_CAP}; "
+          f"{reserve} reserved for {waiting} waiting cold leads) ---")
     fu = [sys.executable, str(HERE / "ops" / "followups.py")]
     if a.auto:
-        fu += ["--send", "--delay", "45"]
+        fu += ["--send", "--limit", str(fu_limit), "--delay", "45"]
     fc, fo, fe = sh(fu, timeout=1800)
     print(fo.strip() or fe.strip()[:300])
 

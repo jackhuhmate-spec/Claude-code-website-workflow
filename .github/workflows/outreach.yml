@@ -43,6 +43,7 @@ jobs:
           GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
           SIGN_NAME: ${{ secrets.SIGN_NAME }}
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          GOOGLE_PLACES_API_KEY: ${{ secrets.GOOGLE_PLACES_API_KEY }}
         run: |
           python3 ops/run_cycle.py outreach \
             --limit "${{ github.event.inputs.limit || '30' }}" \

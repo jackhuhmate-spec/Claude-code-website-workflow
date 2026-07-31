@@ -12,7 +12,7 @@ off. It's free for private repos up to 2,000 minutes/month — this uses roughly
 Go to:
 **https://github.com/jackhuhmate-spec/Claude-code-website-workflow/settings/secrets/actions**
 
-Click **New repository secret** and add these five, one at a time:
+Click **New repository secret** and add these six, one at a time:
 
 | Name | Value |
 |---|---|
@@ -21,6 +21,26 @@ Click **New repository secret** and add these five, one at a time:
 | `SIGN_NAME` | `Jack` |
 | `GROQ_API_KEY` | your Groq API key (free at console.groq.com) |
 | `NETLIFY_TOKEN` | your `nfp_…` Netlify token |
+| `GOOGLE_PLACES_API_KEY` | your Google Places key (see Step 1b) |
+
+Secrets are encrypted. They never appear in logs, and nobody can read them back — not
+even you. GitHub masks them automatically if a script tries to print one.
+
+### Step 1b — the Google Places key (optional but recommended)
+
+This is the **second lead source** — it finds businesses with websites (which is where
+real emails live), unlike OpenStreetMap which rarely carries one.
+
+1. Go to **https://console.cloud.google.com** → create a project (free)
+2. **APIs & Services → Enable APIs** → enable **Places API (New)**
+3. **Credentials → Create credentials → API key** → copy it
+4. Restrict the key to the Places API only
+5. Add it as the `GOOGLE_PLACES_API_KEY` secret above, and to your local `.env`
+
+Free tier: Google gives $200/month credit (~5,000+ calls) — this uses ~60/day. Without
+the key the machine keeps running on OpenStreetMap alone.
+
+---
 
 Secrets are encrypted. They never appear in logs, and nobody can read them back — not
 even you. GitHub masks them automatically if a script tries to print one.

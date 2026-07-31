@@ -502,6 +502,32 @@ def _():
     return r.returncode == 0 and "REPLY CYCLE" in r.stdout, "one cycle completed cleanly"
 
 
+@t("second lead source wired")
+def _():
+    """Google Places is the second lead source; without its key the hunter still runs."""
+    src = (HERE / "ops" / "lead_hunter.py").read_text(encoding="utf-8")
+    return "GOOGLE_PLACES_API_KEY" in src and "maps.googleapis.com" in src, \
+        "lead_hunter.py queries Google Places behind a key, degrades to OSM without it"
+
+
+@t("payments ledger is writable")
+def _():
+    """record_payment.py exists and payments.csv keeps a clean header — revenue logging
+    is a first-class action, not something nothing writes."""
+    rec = (HERE / "ops" / "record_payment.py").exists()
+    hdr = "date,business,amount_gbp" in (HERE / "payments.csv").read_text(encoding="utf-8")
+    return rec and hdr, "ops/record_payment.py writes payments.csv with a proper header"
+
+
+@t("outreach reserves cap for cold leads")
+def _():
+    """The follow-up backlog must not starve first-contact outreach: run_cycle computes
+    a cold queue and caps follow-ups to leave room for it."""
+    src = (HERE / "ops" / "run_cycle.py").read_text(encoding="utf-8")
+    return "reserve" in src and "waiting" in src and "fu_limit" in src, \
+        "run_cycle.py reserves up to 15/day for leads waiting for a first email"
+
+
 print("\n" + "=" * 64)
 fails = [r for r in results if not r[1] and r[3]]
 warns = [r for r in results if not r[1] and not r[3]]
