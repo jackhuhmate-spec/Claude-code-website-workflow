@@ -506,8 +506,36 @@ def _():
 def _():
     """Google Places is the second lead source; without its key the hunter still runs."""
     src = (HERE / "ops" / "lead_hunter.py").read_text(encoding="utf-8")
-    return "GOOGLE_PLACES_API_KEY" in src and "maps.googleapis.com" in src, \
-        "lead_hunter.py queries Google Places behind a key, degrades to OSM without it"
+    return "GOOGLE_PLACES_API_KEY" in src and "places.googleapis.com" in src, \
+        "lead_hunter.py queries Google Places (New API) behind a key, degrades to OSM without it"
+
+
+@t("email validator rejects disposable + fixes typos", critical=False)
+def _():
+    """False emails bounce and get the Gmail account flagged — the hunter must reject
+    throwaway domains and fix provider typos. (Network check skipped: deterministic.)"""
+    import importlib.util
+    spec = importlib.util.spec_from_file_location("lh", HERE / "ops" / "lead_hunter.py")
+    lh = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(lh)
+    ok = (lh.verify_email("x@mailinator.com") is None
+          and lh.verify_email("x@this-domain-definitely-does-not-exist-7q9.co.uk") is None
+          and lh.verify_email("joe@gmial.com") == "joe@gmail.com")
+    return ok, "disposable -> None, NXDOMAIN -> None, typo -> corrected"
+
+
+@t("bounced addresses are suppressed everywhere")
+def _():
+    """A dead address must be skipped by cold batch, follow-ups and the hunter alike —
+    re-sending to a bounce is how the account gets flagged as spam."""
+    b = HERE / "bounced_emails.csv"
+    if not b.exists():
+        return False, "no bounced_emails.csv"
+    batch = (HERE / "ops" / "gmail_send_batch.py").read_text(encoding="utf-8")
+    fu = (HERE / "ops" / "followups.py").read_text(encoding="utf-8")
+    hun = (HERE / "ops" / "lead_hunter.py").read_text(encoding="utf-8")
+    ok = all("bounced" in s for s in (batch, fu, hun)) or all("bounce" in s for s in (batch, fu, hun))
+    return ok, "cold batch, follow-ups and hunter all skip bounced_emails.csv"
 
 
 @t("payments ledger is writable")

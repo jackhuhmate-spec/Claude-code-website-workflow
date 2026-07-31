@@ -62,6 +62,18 @@ def _log_row(row):
         w.writerow(row)
 
 
+def bounced():
+    """Addresses Gmail reported as undeliverable — skip them like an opt-out."""
+    out = set()
+    B = HERE / "bounced_emails.csv"
+    if B.exists():
+        for line in B.read_text(encoding="utf-8").splitlines():
+            a = line.split(",")[0].strip().lower()
+            if a and "@" in a:
+                out.add(a)
+    return out
+
+
 def opted_out():
     out = set()
     if DNC.exists():
@@ -103,7 +115,7 @@ def main():
 
     leads = list(csv.DictReader(LEADS.open(newline="", encoding="utf-8")))
     copy = json.loads(EMAILS.read_text(encoding="utf-8")) if EMAILS.exists() else {}
-    sent_before, dnc = already_sent(), opted_out()
+    sent_before, dnc, bounce = already_sent(), opted_out(), bounced()
 
     queue, skipped = [], []
     for lead in leads:
@@ -114,6 +126,8 @@ def main():
             skipped.append((lead, "Skipped - No Email Found")); continue
         if addr in dnc:
             skipped.append((lead, "Opted Out")); continue
+        if addr in bounce:
+            skipped.append((lead, "Bounced - Address Undeliverable")); continue
         if addr in sent_before:
             continue  # already contacted, silently skip
         if not meta.get("subject") or not meta.get("body"):

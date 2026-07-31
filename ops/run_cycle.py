@@ -29,7 +29,34 @@ except Exception:
 GMAIL = [sys.executable, str(HERE / "ops" / "gmail.py")]
 REPLIES_LOG = HERE / "replies_log.csv"
 DNC = HERE / "do_not_contact.csv"
+BOUNCED = HERE / "bounced_emails.csv"
 TRIAGE = HERE / "triage"
+
+# Patterns for the recipient of a Gmail delivery-failure notification.
+_BOUNCE_RECIP = re.compile(
+    r"(?:Final-Recipient|X-Failed-Recipients|Original-Recipient)[:\s]*rfc822;\s*(\S+@\S+)",
+    re.I,
+)
+_BOUNCE_BODY = re.compile(r"[<\[](\S+@\S+\.\S{2,})[>\]]")
+
+
+def _bounced() -> set[str]:
+    """Addresses Gmail told us are undeliverable — never send to them again."""
+    if not BOUNCED.exists():
+        return set()
+    return {line.split(",")[0].strip().lower() for line in
+            BOUNCED.read_text(encoding="utf-8").splitlines()
+            if line.strip() and line.strip() != "email"}
+
+
+def _log_bounced(addr: str) -> None:
+    addr = (addr or "").strip().lower()
+    if not addr or "@" not in addr:
+        return
+    if addr in _bounced():
+        return
+    with BOUNCED.open("a", newline="", encoding="utf-8") as f:
+        f.write(f"{addr},{date.today()},bounce\n")
 
 PRICE = "£449 one-off build, optional £39/mo care plan"
 
@@ -183,6 +210,16 @@ def cmd_replies(a):
             continue
 
         if cat == "AUTO":
+            # A delivery-failure notice means one of our emails bounced — record the
+            # address so no sender ever tries it again (cold batch, follow-ups, hunter).
+            subj = (m.get("subject") or "").lower()
+            body = (m.get("body") or "")
+            if ("delivery status" in subj or "undeliverable" in subj or "failed" in subj
+                    or "final-recipient" in body.lower()):
+                mo = _BOUNCE_RECIP.search(body) or _BOUNCE_BODY.search(body)
+                if mo:
+                    _log_bounced(mo.group(1))
+                    actions.append(f"BOUNCE   {mo.group(1)} → added to bounced_emails.csv, never resent")
             sh(GMAIL + ["mark", "--id", m["messageId"]])
             actions.append(f"AUTO     {m['from']} → ignored")
             continue

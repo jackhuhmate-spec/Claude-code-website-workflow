@@ -28,12 +28,15 @@ OVERPASS = ["https://overpass-api.de/api/interpreter",
             "https://overpass.kumi.systems/api/interpreter"]
 UA = "leadbot/1.0 (small business web audit)"
 
-# Second lead source: Google Places (the data behind Google Maps). Requires
-# GOOGLE_PLACES_API_KEY (free tier: $200/mo credit, plenty for ~60 calls/day).
+# Second lead source: Google Places (New) — the data behind Google Maps. Requires
+# GOOGLE_PLACES_API_KEY (free tier: $200/mo credit, plenty for ~30 calls/day).
+# Uses the NEW Places API endpoint (places.googleapis.com/v1/places:searchText),
+# which returns website + phone in the search response — no per-place details call.
 # Without the key the hunter silently runs OpenStreetMap-only.
 GOOGLE_KEY = os.environ.get("GOOGLE_PLACES_API_KEY", "")
-GOOGLE_TS = "https://maps.googleapis.com/maps/api/place/textsearch/json"
-GOOGLE_DETAILS = "https://maps.googleapis.com/maps/api/place/details/json"
+GOOGLE_NEW = "https://places.googleapis.com/v1/places:searchText"
+GOOGLE_FIELDS = ("places.displayName,places.formattedAddress,places.id,"
+                 "places.internationalPhoneNumber,places.websiteUri,places.addressComponents")
 # Areas to search when running the Google source, rotated by day like TILES.
 GOOGLE_AREAS = ["Croydon", "Bromley", "Ilford", "Romford", "Ealing", "Wembley",
                 "Enfield", "Barnet", "Woolwich", "Lewisham", "Harrow", "Uxbridge",
@@ -298,6 +301,72 @@ FREEMAIL = ("gmail.com", "googlemail.com", "yahoo.co.uk", "yahoo.com", "ymail.co
             "aol.com", "aol.co.uk", "btinternet.com", "sky.com", "virginmedia.com",
             "talktalk.net", "protonmail.com", "proton.me", "gmx.com", "mail.com")
 
+# Throwaway / temp-mail domains — an address on one of these is never a real business.
+DISPOSABLE = frozenset((
+    "mailinator.com", "yopmail.com", "guerrillamail.com", "temp-mail.org",
+    "10minutemail.com", "10minutemail.net", "sharklasers.com", "maildrop.cc",
+    "throwaway.com", "throwawaymail.com", "fakeinbox.com", "getnada.com",
+    "mailnesia.com", "dispostable.com", "mytemp.email", "tempmail.com",
+    "tempmail.net", "trashmail.com", "trashmail.me", "spamgourmet.com",
+    "33mail.com", "jetable.org", "mailcatch.com", "mintemail.com", "inboxkitten.com",
+))
+
+# Common provider typos that would otherwise bounce — auto-correct before keeping.
+TYPO_FIX = {
+    "gmial.com": "gmail.com", "gmai.com": "gmail.com", "gmal.com": "gmail.com",
+    "gmail.co.uk": "gmail.com", "gamil.com": "gmail.com",
+    "hotmal.com": "hotmail.com", "hotmai.com": "hotmail.com", "hotmail.co": "hotmail.com",
+    "outlok.com": "outlook.com", "outllook.com": "outlook.com", "outlook.co": "outlook.com",
+    "yahoo.co": "yahoo.com", "yhoo.com": "yahoo.com",
+    "btinternet.co.uk": "btinternet.com", "bttinternet.com": "btinternet.com",
+    "aol.con": "aol.com", "iclod.com": "icloud.com",
+}
+
+
+def _dns_status(domain, qtype):
+    """DNS-over-HTTPS lookup (dns.google — no key needed). Returns (st, answers):
+    ('ok', [answers]) or ('nx', []) for NXDOMAIN, or (None, None) on lookup failure."""
+    url = f"https://dns.google/resolve?name={urllib.parse.quote(domain)}&type={qtype}"
+    try:
+        req = urllib.request.Request(url, headers={"User-Agent": UA})
+        d = json.loads(urllib.request.urlopen(req, timeout=15).read().decode())
+    except Exception:
+        return None, None
+    if d.get("Status") == 3:  # NXDOMAIN — the domain does not exist
+        return "nx", []
+    return "ok", d.get("Answer") or []
+
+
+def verify_email(addr):
+    """A scraped address must actually be deliverable, else it's a false email:
+    - fixes common provider typos (gmial.com -> gmail.com)
+    - rejects throwaway domains
+    - rejects domains that don't exist (NXDOMAIN — nothing to deliver to)
+    - requires an MX record, or at least an A record (implicit MX)
+
+    Returns the (possibly corrected) address, or None if it fails. A DNS lookup
+    failure is treated leniently (don't drop a real lead because the resolver hiccuped).
+    """
+    addr = (addr or "").strip().lower()
+    if "@" not in addr or len(addr) > 254:
+        return None
+    local, _, dom = addr.rpartition("@")
+    dom = dom.lower().rstrip(".")
+    dom = TYPO_FIX.get(dom, dom)
+    if dom in DISPOSABLE:
+        return None
+    st, mx = _dns_status(dom, "MX")
+    if st is None:
+        return f"{local}@{dom}"   # resolver failure — lenient
+    if st == "nx":
+        return None               # domain doesn't exist → definitely false
+    if mx:
+        return f"{local}@{dom}"   # accepts mail
+    _, a = _dns_status(dom, "A")
+    if a:
+        return f"{local}@{dom}"   # no MX but resolves → implicit MX, deliverable
+    return None                   # neither MX nor A → can't deliver
+
 
 def _plausible(addr, base_url, name):
     """A scraped address must plausibly belong to THIS business - not a webmaster,
@@ -367,26 +436,41 @@ def existing():
             a = line.split(",")[0].strip().lower()
             if "@" in a:
                 mails.add(a)
+    # Bounced addresses are dead — never re-hunt or re-add them.
+    b = HERE / "bounced_emails.csv"
+    if b.exists():
+        for line in b.read_text(encoding="utf-8").splitlines():
+            a = line.split(",")[0].strip().lower()
+            if "@" in a:
+                mails.add(a)
     return names, domains, mails, phones
 
 
-def _gjson(url, timeout=20):
-    """GET a Google Places URL and return the JSON body, or None on any failure."""
-    req = urllib.request.Request(url, headers={"User-Agent": UA})
+def _gtext(query, timeout=20):
+    """POST a text-search to the Places API (New). Returns places[] or None."""
+    body = json.dumps({"textQuery": query, "maxResultCount": 3}).encode()
+    req = urllib.request.Request(GOOGLE_NEW, data=body, method="POST",
+                                 headers={"Content-Type": "application/json",
+                                          "X-Goog-Api-Key": GOOGLE_KEY,
+                                          "X-Goog-FieldMask": GOOGLE_FIELDS,
+                                          "User-Agent": UA})
     try:
         with urllib.request.urlopen(req, timeout=timeout) as r:
-            return json.loads(r.read().decode())
+            return json.loads(r.read().decode()).get("places", [])
+    except urllib.error.HTTPError as e:
+        if e.code == 403 or e.code == 429:
+            return "QUOTA"  # billing/rate limit — stop the Google source for the day
+        return None
     except Exception:
         return None
 
 
 def _garea(comp):
-    """Best London area name from a Place's address_components (postal_town > locality)."""
-    want = {"postal_town", "locality", "administrative_area_level_2"}
-    for typ in ("postal_town", "locality", "administrative_area_level_2"):
+    """Best London area name from a Place's addressComponents (locality > postal town)."""
+    for typ in ("locality", "postal_town", "administrative_area_level_2"):
         for c in comp or []:
-            if typ in c.get("types", []) and c.get("long_name"):
-                return c["long_name"].replace("London", "").strip() or c["long_name"]
+            if typ in c.get("types", []) and c.get("longText"):
+                return c["longText"].replace("London", "").strip() or c["longText"]
     return ""
 
 
@@ -405,33 +489,25 @@ def google_places(area, kept, audited, seen, names, domains, mails, phones, max_
     for trade, q in GOOGLE_QUERIES:
         if len(kept) >= max_leads or audited >= audit_limit:
             break
-        url = (f"{GOOGLE_TS}?query={urllib.parse.quote(f'{q} in {area} London')}"
-               f"&key={GOOGLE_KEY}&maxprice=2")
-        d = _gjson(url)
-        if not d or d.get("status") not in ("OK", "ZERO_RESULTS"):
-            if d and d.get("status") == "OVER_QUERY_LIMIT":
-                print("  Google rate limit — stopping Google source for today.")
-                return kept, audited
+        places = _gtext(f"{q} in {area} London")
+        if places == "QUOTA":
+            print("  Google quota/billing limit — stopping Google source for today.")
+            return kept, audited
+        if not places:
             time.sleep(0.3)
             continue
-        for res in d.get("results", [])[:3]:  # top 3 per trade keeps API cost bounded
+        for p in places:
             if len(kept) >= max_leads or audited >= audit_limit:
                 break
-            name = (res.get("name") or "").strip()
+            name = (p.get("displayName") or {}).get("text", "").strip()
             if not name or name.lower() in names or name.lower() in seen:
                 continue
             if CHAINS.search(name):
                 continue
-            pid = res.get("place_id")
-            site = phone = ""
-            if pid:
-                dd = _gjson(f"{GOOGLE_DETAILS}?place_id={pid}"
-                            f"&fields=formatted_phone_number,website&key={GOOGLE_KEY}")
-                if dd and dd.get("status") == "OK":
-                    site = (dd.get("result", {}).get("website") or "").strip()
-                    phone = (dd.get("result", {}).get("formatted_phone_number") or "").strip()
+            site = (p.get("websiteUri") or "").strip()
             site = re.sub(r"^www\.", "https://", site)
-            garea = _garea(res.get("address_components")) or area
+            phone = (p.get("internationalPhoneNumber") or "").strip()
+            garea = _garea(p.get("addressComponents")) or area
             if phone and re.sub(r"\D", "", phone)[-9:] in phones:
                 continue
             email = ""
@@ -451,12 +527,11 @@ def google_places(area, kept, audited, seen, names, domains, mails, phones, max_
             score, flaw = audit(site, want_html=box)
             if score is None:
                 continue
-            if not email and score >= 2:  # dead sites have no page to scrape
-                email = find_email(site, box[0] if box else "", name)
-                if email:
-                    if email in mails:
-                        continue
-                    mails.add(email)
+            email = verify_email(find_email(site, box[0] if box else "", name)) or ""
+            if email:
+                if email in mails:
+                    continue
+                mails.add(email)
             if not email and not phone:
                 continue  # Google gave a site but nothing reachable
             kept.append([name, trade, garea, phone, email, site, str(score), flaw, "A"])
@@ -500,10 +575,10 @@ def main():
             if not trade:
                 continue
 
-            email = (t.get("email") or t.get("contact:email") or "").strip().lower()
+            email = verify_email(t.get("email") or t.get("contact:email") or "") or ""
             phone = (t.get("phone") or t.get("contact:phone") or "").strip()
             site = (t.get("website") or t.get("contact:website") or "").strip()
-            if email and ("@" not in email or email in mails):
+            if email and email in mails:
                 continue
             if phone and re.sub(r"\D", "", phone)[-9:] in phones:
                 continue
@@ -539,7 +614,7 @@ def main():
             if score is None:
                 continue
             if not email and score >= 2:  # dead sites have no page to scrape
-                email = find_email(site, box[0] if box else "", name)
+                email = verify_email(find_email(site, box[0] if box else "", name)) or ""
                 if email and email in mails:
                     continue
             kept.append([name, trade, area, phone, email, site, str(score), flaw, "A"])

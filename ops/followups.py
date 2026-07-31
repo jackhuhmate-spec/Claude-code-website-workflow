@@ -74,6 +74,18 @@ def opted_out():
     return out
 
 
+def bounced():
+    """Addresses Gmail reported as undeliverable — never touch them again."""
+    out = set()
+    B = HERE / "bounced_emails.csv"
+    if B.exists():
+        for line in B.read_text(encoding="utf-8").splitlines():
+            a = line.split(",")[0].strip().lower()
+            if a and "@" in a:
+                out.add(a)
+    return out
+
+
 def replied():
     """Anyone who has answered us, by any route, must drop out of the sequence.
 
@@ -132,7 +144,7 @@ def due(today=None):
     today = today or date.today()
     areas = {(r.get("Business Name") or "").strip(): (r.get("London Area") or "").strip()
              for r in load(LEADS)}
-    skip = opted_out() | replied()
+    skip = opted_out() | replied() | bounced()
     done = touches_done()
 
     out = []
