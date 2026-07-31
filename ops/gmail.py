@@ -61,13 +61,26 @@ def opted_out():
     return out
 
 
+def _imap_login():
+    """Connect and return IMAP4_SSL object, or None on failure."""
+    try:
+        M = imaplib.IMAP4_SSL("imap.gmail.com", 993, ssl_context=ssl.create_default_context())
+        M.login(USER, PW)
+        return M
+    except Exception as e:
+        print(f"WARN: IMAP login failed ({type(e).__name__})", file=sys.stderr)
+        return None
+
+
 def recently_replied(days=45):
     """Addresses we have already replied to from Sent Mail — prevents double-replies
     even if the reply was sent by hand, by Claude Code, or on another machine."""
     out = {}
+    M = _imap_login()
+    if not M:
+        print("WARN: sent-mail check failed — falling back to handled_messages.txt only", file=sys.stderr)
+        return out
     try:
-        M = imaplib.IMAP4_SSL("imap.gmail.com", 993, ssl_context=ssl.create_default_context())
-        M.login(USER, PW)
         for box in ('"[Gmail]/Sent Mail"', '"[Google Mail]/Sent Mail"', "Sent"):
             try:
                 typ, _ = M.select(box, readonly=True)
@@ -93,16 +106,29 @@ def recently_replied(days=45):
                     if addr:
                         out[addr] = hdr.get("Date", "")
             break
-        M.logout()
     except Exception as e:
         print(f"WARN: sent-mail check failed ({type(e).__name__}) — falling back to handled_messages.txt only", file=sys.stderr)
+    finally:
+        try:
+            M.logout()
+        except Exception:
+            pass
     return out
 
 
 def handled_ids():
-    if HANDLED.exists():
-        return {l.strip() for l in HANDLED.read_text(encoding="utf-8").splitlines() if l.strip()}
-    return set()
+    if not HANDLED.exists():
+        return set()
+    lines = [l.strip() for l in HANDLED.read_text(encoding="utf-8").splitlines() if l.strip()]
+    # Rotate when file exceeds 1000 entries: archive, then start fresh via append
+    if len(lines) > 1000:
+        archive = HANDLED.with_suffix(".txt.bak")
+        HANDLED.rename(archive)
+        keep = lines[-500:]
+        with HANDLED.open("a", encoding="utf-8") as f:
+            f.write("\n".join(keep) + "\n")
+        return set(keep)
+    return set(lines)
 
 
 def cmd_send(a):
@@ -186,46 +212,57 @@ def _body_of(m):
 
 def cmd_read(a):
     _need_creds()
-    ctx = ssl.create_default_context()
-    M = imaplib.IMAP4_SSL("imap.gmail.com", 993, ssl_context=ctx)
-    M.login(USER, PW)
-    M.select("INBOX")
-    since = (datetime.now(timezone.utc) - timedelta(days=a.days)).strftime("%d-%b-%Y")
-    crit = "ALL" if a.all else f'(SINCE "{since}")'
-    typ, data = M.search(None, crit)
-    ids = data[0].split()
-    done = handled_ids()
-    replied = {} if a.no_sent_check else recently_replied()
-    out = []
-    for i in reversed(ids[-200:]):
-        typ, d = M.fetch(i, "(RFC822)")
-        if typ != "OK" or not d or not d[0]:
-            continue
-        m = email.message_from_bytes(d[0][1])
-        mid = (m.get("Message-ID") or "").strip()
-        if a.new and mid in done:
-            continue
-        frm = parseaddr(m.get("From", ""))[1].lower()
-        if frm == USER.lower():
-            continue
-        known = frm in known_recipients()
-        already = frm in replied
-        machine = bool(NOISE_PAT.search(frm))
-        if machine and not known and not a.noise:
-            continue
-        out.append({
-            "messageId": mid,
-            "from": frm,
-            "fromName": _decode(m.get("From", "")),
-            "subject": _decode(m.get("Subject", "")),
-            "date": m.get("Date", ""),
-            "known": known,
-            "machine": machine,
-            "alreadyReplied": already,
-            "lastReplyDate": replied.get(frm, ""),
-            "body": _body_of(m).strip()[:4000],
-        })
-    M.logout()
+    M = _imap_login()
+    if not M:
+        sys.exit("ERROR: Could not connect to Gmail IMAP.")
+    try:
+        M.select("INBOX")
+        since = (datetime.now(timezone.utc) - timedelta(days=a.days)).strftime("%d-%b-%Y")
+        crit = "ALL" if a.all else f'(SINCE "{since}")'
+        typ, data = M.search(None, crit)
+        ids = data[0].split()
+        done = handled_ids()
+        replied = {} if a.no_sent_check else recently_replied()
+        out = []
+
+        # Batched FETCH: single round-trip for up to 200 messages
+        chunk = ids[-200:]
+        if chunk:
+            typ, raw = M.fetch(b",".join(chunk).decode(), "(RFC822)")
+            if typ == "OK":
+                for i in range(0, len(raw), 2):
+                    if not isinstance(raw[i], tuple) or len(raw[i]) < 2:
+                        continue
+                    msg_bytes = raw[i][1]
+                    m = email.message_from_bytes(msg_bytes)
+                    mid = (m.get("Message-ID") or "").strip()
+                    if a.new and mid in done:
+                        continue
+                    frm = parseaddr(m.get("From", ""))[1].lower()
+                    if frm == USER.lower():
+                        continue
+                    known = frm in known_recipients()
+                    already = frm in replied
+                    machine = bool(NOISE_PAT.search(frm))
+                    if machine and not known and not a.noise:
+                        continue
+                    out.append({
+                        "messageId": mid,
+                        "from": frm,
+                        "fromName": _decode(m.get("From", "")),
+                        "subject": _decode(m.get("Subject", "")),
+                        "date": m.get("Date", ""),
+                        "known": known,
+                        "machine": machine,
+                        "alreadyReplied": already,
+                        "lastReplyDate": replied.get(frm, ""),
+                        "body": _body_of(m).strip()[:4000],
+                    })
+    finally:
+        try:
+            M.logout()
+        except Exception:
+            pass
     print(json.dumps(out, indent=1))
 
 
@@ -251,9 +288,12 @@ def cmd_test(a):
     except Exception as e:
         ok["smtp"] = f"FAIL {type(e).__name__}: {e}"
     try:
-        M = imaplib.IMAP4_SSL("imap.gmail.com", 993, ssl_context=ctx)
-        M.login(USER, PW); M.select("INBOX"); M.logout()
-        ok["imap"] = "OK"
+        M = _imap_login()
+        if M:
+            M.select("INBOX"); M.logout()
+            ok["imap"] = "OK"
+        else:
+            ok["imap"] = "FAIL login"
     except Exception as e:
         ok["imap"] = f"FAIL {type(e).__name__}: {e}"
     ok["user"] = USER

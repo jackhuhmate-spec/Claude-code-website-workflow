@@ -58,21 +58,69 @@ SHOPS = {
 }
 # Outward postcode district -> a borough name a local would recognise.
 POSTCODE_AREA = {
+    # East London (E)
     "E1": "Whitechapel", "E2": "Bethnal Green", "E3": "Bow", "E4": "Chingford",
     "E5": "Clapton", "E6": "East Ham", "E7": "Forest Gate", "E8": "Hackney",
     "E9": "Homerton", "E10": "Leyton", "E11": "Leytonstone", "E12": "Manor Park",
     "E13": "Plaistow", "E14": "Poplar", "E15": "Stratford", "E16": "Canning Town",
-    "E17": "Walthamstow", "E18": "South Woodford",
-    "N1": "Islington", "N4": "Finsbury Park", "N7": "Holloway", "N8": "Crouch End",
-    "N15": "Seven Sisters", "N16": "Stoke Newington", "N17": "Tottenham", "N22": "Wood Green",
-    "SE1": "Southwark", "SE5": "Camberwell", "SE8": "Deptford", "SE13": "Lewisham",
-    "SE14": "New Cross", "SE15": "Peckham", "SE22": "East Dulwich", "SE23": "Forest Hill",
-    "SW2": "Brixton", "SW4": "Clapham", "SW9": "Stockwell", "SW11": "Battersea",
-    "SW17": "Tooting", "SW18": "Wandsworth", "SW19": "Wimbledon",
-    "W3": "Acton", "W5": "Ealing", "W6": "Hammersmith", "W10": "North Kensington",
-    "W12": "Shepherds Bush", "NW1": "Camden", "NW5": "Kentish Town", "NW6": "Kilburn",
-    "NW10": "Willesden", "CR0": "Croydon", "BR1": "Bromley", "IG1": "Ilford",
-    "RM1": "Romford", "HA1": "Harrow", "UB1": "Southall", "TW3": "Hounslow",
+    "E17": "Walthamstow", "E18": "South Woodford", "E20": "Olympic Park",
+    # North London (N)
+    "N1": "Islington", "N2": "East Finchley", "N3": "Finchley", "N4": "Finsbury Park",
+    "N5": "Highbury", "N6": "Highgate", "N7": "Holloway", "N8": "Crouch End",
+    "N9": "Lower Edmonton", "N10": "Muswell Hill", "N11": "New Southgate",
+    "N12": "North Finchley", "N13": "Palmers Green", "N14": "Southgate",
+    "N15": "Seven Sisters", "N16": "Stoke Newington", "N17": "Tottenham",
+    "N18": "Upper Edmonton", "N19": "Archway", "N20": "Totteridge",
+    "N21": "Winchmore Hill", "N22": "Wood Green",
+    # South East London (SE)
+    "SE1": "Southwark", "SE2": "Abbey Wood", "SE3": "Blackheath",
+    "SE4": "Brockley", "SE5": "Camberwell", "SE6": "Catford", "SE7": "Charlton",
+    "SE8": "Deptford", "SE9": "Eltham", "SE10": "Greenwich", "SE11": "Lambeth",
+    "SE12": "Lee", "SE13": "Lewisham", "SE14": "New Cross", "SE15": "Peckham",
+    "SE16": "Rotherhithe", "SE17": "Walworth", "SE18": "Woolwich",
+    "SE19": "Upper Norwood", "SE20": "Penge", "SE21": "Dulwich",
+    "SE22": "East Dulwich", "SE23": "Forest Hill", "SE24": "Herne Hill",
+    "SE25": "South Norwood", "SE26": "Sydenham", "SE27": "West Norwood",
+    "SE28": "Thamesmead",
+    # South West London (SW)
+    "SW1": "Westminster", "SW2": "Brixton", "SW3": "Chelsea", "SW4": "Clapham",
+    "SW5": "Earls Court", "SW6": "Fulham", "SW7": "South Kensington",
+    "SW8": "Nine Elms", "SW9": "Stockwell", "SW10": "West Brompton",
+    "SW11": "Battersea", "SW12": "Balham", "SW13": "Barnes", "SW14": "Mortlake",
+    "SW15": "Putney", "SW16": "Streatham", "SW17": "Tooting",
+    "SW18": "Wandsworth", "SW19": "Wimbledon", "SW20": "Raynes Park",
+    # West London (W)
+    "W1": "Mayfair", "W2": "Paddington", "W3": "Acton", "W4": "Chiswick",
+    "W5": "Ealing", "W6": "Hammersmith", "W7": "Hanwell", "W8": "Kensington",
+    "W9": "Maida Vale", "W10": "North Kensington", "W11": "Notting Hill",
+    "W12": "Shepherds Bush", "W13": "West Ealing", "W14": "West Kensington",
+    # North West London (NW)
+    "NW1": "Camden", "NW2": "Cricklewood", "NW3": "Hampstead",
+    "NW4": "Hendon", "NW5": "Kentish Town", "NW6": "Kilburn",
+    "NW7": "Mill Hill", "NW8": "St Johns Wood", "NW9": "Colindale",
+    "NW10": "Willesden", "NW11": "Golders Green",
+    # Outer London boroughs
+    "BR1": "Bromley", "BR2": "Bromley", "CR0": "Croydon", "CR2": "Croydon",
+    "DA1": "Dartford", "DA5": "Bexley", "DA6": "Bexleyheath", "DA7": "Erith",
+    "EN1": "Enfield", "EN2": "Enfield", "EN3": "Enfield", "EN4": "Barnet",
+    "EN5": "Barnet", "HA0": "Wembley", "HA1": "Harrow", "HA2": "Harrow",
+    "HA3": "Harrow", "HA4": "Ruislip", "HA5": "Harrow", "HA7": "Stanmore",
+    "HA8": "Edgware", "IG1": "Ilford", "IG2": "Ilford", "IG3": "Ilford",
+    "IG6": "Ilford", "KT1": "Kingston", "KT2": "Kingston", "KT3": "New Malden",
+    "KT4": "Worcester Park", "KT5": "Surbiton", "KT6": "Surbiton",
+    "RM1": "Romford", "RM2": "Romford", "RM3": "Romford", "RM6": "Chadwell Heath",
+    "RM7": "Romford", "SM1": "Sutton", "SM2": "Sutton", "SM3": "Sutton",
+    "SM4": "Morden", "SM5": "Carshalton", "SM6": "Wallington",
+    "TW1": "Twickenham", "TW2": "Twickenham", "TW3": "Hounslow",
+    "TW4": "Hounslow", "TW5": "Hounslow", "TW6": "Heathrow",
+    "TW7": "Isleworth", "TW8": "Brentford", "TW9": "Richmond",
+    "TW10": "Richmond", "TW11": "Teddington", "TW12": "Hampton",
+    "TW13": "Feltham", "TW14": "Feltham",
+    "UB1": "Southall", "UB2": "Southall", "UB3": "Hayes",
+    "UB4": "Hayes", "UB5": "Northolt", "UB6": "Greenford",
+    "UB7": "West Drayton", "UB8": "Uxbridge", "UB9": "Uxbridge",
+    "WD1": "Watford", "WD3": "Rickmansworth", "WD6": "Borehamwood",
+    "WD17": "Watford",
 }
 
 # Chains and franchises we never contact.
@@ -84,28 +132,42 @@ CHAINS = re.compile(r"\b(tesco|sainsbury|asda|morrison|aldi|lidl|co-?op|greggs|c
 
 
 def _query(q, timeout=120):
+    """Send an Overpass query with retry and exponential backoff on 429."""
     last = None
-    for host in OVERPASS:
+    for attempt, host in enumerate(OVERPASS):
         try:
-            r = urllib.request.urlopen(urllib.request.Request(
+            delay = 2 ** attempt  # exponential backoff: 1s, 2s, 4s
+            if attempt > 0:
+                time.sleep(delay)
+            req = urllib.request.Request(
                 host, data=urllib.parse.urlencode({"data": q}).encode(),
-                headers={"User-Agent": UA, "Accept": "application/json"}), timeout=timeout)
+                headers={"User-Agent": UA, "Accept": "application/json"})
+            r = urllib.request.urlopen(req, timeout=timeout)
             return json.loads(r.read()).get("elements", [])
+        except urllib.error.HTTPError as e:
+            if e.code == 429:
+                # Respect Retry-After header, fall back to exponential backoff
+                retry_after = e.headers.get("Retry-After")
+                wait = int(retry_after) if retry_after and retry_after.isdigit() else delay
+                print(f"  Overpass 429 — retrying in {wait}s", file=sys.stderr)
+                time.sleep(wait)
+                continue
+            last = f"HTTP {e.code}"
         except Exception as e:
             last = f"{type(e).__name__}: {e}"
-            time.sleep(3)
+        time.sleep(3)
     print(f"  Overpass unavailable ({last})", file=sys.stderr)
     return []
 
 
 def overpass(bbox, timeout=120):
-    """Two small queries beat one big one — Overpass 504s on long regexes."""
+    """Two small queries beat one big one — with 6s gaps for rate limits."""
     out = []
     out += _query(f'[out:json][timeout:60];node["craft"]({bbox});out tags 400;', timeout)
-    time.sleep(2)
+    time.sleep(6)
     shops = "|".join(list(SHOPS)[:8])
     out += _query(f'[out:json][timeout:60];node["shop"~"^({shops})$"]({bbox});out tags 400;', timeout)
-    time.sleep(2)
+    time.sleep(6)
     shops2 = "|".join(list(SHOPS)[8:])
     if shops2:
         out += _query(f'[out:json][timeout:60];node["shop"~"^({shops2})$"]({bbox});out tags 400;', timeout)

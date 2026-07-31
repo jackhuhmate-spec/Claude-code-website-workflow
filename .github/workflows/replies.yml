@@ -16,8 +16,10 @@ on:
         description: "How many days of inbox to scan"
         default: "3"
 
+# Unified concurrency group prevents race conditions with the outreach workflow
+# on shared state files (do_not_contact.csv, sent_log.csv, etc.)
 concurrency:
-  group: reply-agent
+  group: pipeline-agent
   cancel-in-progress: false
 
 permissions:
@@ -57,7 +59,7 @@ jobs:
             echo "No state change."
           else
             git commit -m "reply agent: $(date -u '+%Y-%m-%d %H:%M') UTC"
-            git pull --rebase --autostash || true
+            git pull --rebase --autostash
             git push
           fi
 

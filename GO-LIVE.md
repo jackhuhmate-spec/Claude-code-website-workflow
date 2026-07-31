@@ -12,13 +12,14 @@ off. It's free for private repos up to 2,000 minutes/month — this uses roughly
 Go to:
 **https://github.com/jackhuhmate-spec/Claude-code-website-workflow/settings/secrets/actions**
 
-Click **New repository secret** and add these four, one at a time:
+Click **New repository secret** and add these five, one at a time:
 
 | Name | Value |
 |---|---|
 | `GMAIL_USER` | `jackhuhmate@gmail.com` |
 | `GMAIL_APP_PASSWORD` | your 16-char Gmail app password |
 | `SIGN_NAME` | `Jake` |
+| `GROQ_API_KEY` | your Groq API key (free at console.groq.com) |
 | `NETLIFY_TOKEN` | your `nfp_…` Netlify token |
 
 Secrets are encrypted. They never appear in logs, and nobody can read them back — not

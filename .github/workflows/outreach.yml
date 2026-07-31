@@ -14,8 +14,10 @@ on:
         description: "Max emails to send"
         default: "30"
 
+# Unified concurrency group prevents race conditions with the reply handler
+# on shared state files (sent_log.csv, do_not_contact.csv, etc.)
 concurrency:
-  group: outreach-agent
+  group: pipeline-agent
   cancel-in-progress: false
 
 permissions:
@@ -59,6 +61,6 @@ jobs:
             echo "No state change."
           else
             git commit -m "outreach: $(date -u '+%Y-%m-%d') UTC"
-            git pull --rebase --autostash || true
+            git pull --rebase --autostash
             git push
           fi

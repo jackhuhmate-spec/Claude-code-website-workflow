@@ -38,14 +38,28 @@ FIELDS = ["Business Name", "Trade", "London Area", "Phone", "Email", "Website",
 
 
 def already_sent():
-    out = set()
+    """Set of email addresses already sent to (or pending from a crashed run)."""
+    out = {}
     if SENT_LOG.exists():
         with SENT_LOG.open(newline="", encoding="utf-8") as f:
             for row in csv.DictReader(f):
                 a = (row.get("Email") or "").strip().lower()
-                if a and "@" in a and (row.get("Status") or "").startswith("Sent"):
-                    out.add(a)
-    return out
+                st = (row.get("Status") or "")
+                if a and "@" in a:
+                    # Track latest status per email
+                    out[a] = st
+    # Return only those with a "sent" or pending status
+    return {a for a, st in out.items() if st.startswith("Sent") or st == "sending..."}
+
+
+def _log_row(row):
+    """Append a single row to sent_log.csv. Thread-safe via append-mode writes."""
+    new = not SENT_LOG.exists() or SENT_LOG.stat().st_size == 0
+    with SENT_LOG.open("a", newline="", encoding="utf-8") as f:
+        w = csv.DictWriter(f, fieldnames=FIELDS, extrasaction="ignore")
+        if new:
+            w.writeheader()
+        w.writerow(row)
 
 
 def opted_out():
@@ -124,7 +138,7 @@ def main():
     if not USER or not PW:
         sys.exit("ERROR: set GMAIL_USER and GMAIL_APP_PASSWORD.")
 
-    rows, ok, fail = [], 0, 0
+    ok, fail = 0, 0
     ctx = ssl.create_default_context()
     with smtplib.SMTP("smtp.gmail.com", 587, timeout=30) as s:
         s.starttls(context=ctx)
@@ -137,13 +151,17 @@ def main():
             msg["Message-ID"] = make_msgid(domain="gmail.com")
             msg.set_content(meta["body"] + SIGNOFF.format(name=SIGN))
             try:
-                s.send_message(msg); status = "Sent"; ok += 1
+                s.send_message(msg)
+                status = "Sent"
+                ok += 1
             except Exception as e:
-                status = f"Failed - {type(e).__name__}"; fail += 1
+                status = f"Failed - {type(e).__name__}"
+                fail += 1
                 print(f"  !! {addr}: {e}")
-            rows.append({**{k: lead.get(k, "") for k in FIELDS if k in lead},
-                         "Email": addr, "Email Subject": meta["subject"],
-                         "Date Sent": date.today().isoformat(), "Status": status})
+            # Write ONE row per email immediately — crash-safe: never lose a whole batch
+            _log_row({**{k: lead.get(k, "") for k in FIELDS if k in lead},
+                      "Email": addr, "Email Subject": meta["subject"],
+                      "Date Sent": date.today().isoformat(), "Status": status})
             if i < len(queue) - 1:
                 time.sleep(a.delay)
 
@@ -152,19 +170,12 @@ def main():
         if lead["Business Name"].strip().lower() in logged_before:
             resuppressed += 1
             continue  # already on record — don't re-log the same skip every day
-        rows.append({**{k: lead.get(k, "") for k in FIELDS if k in lead},
-                     "Email Subject": copy.get(lead["Business Name"], {}).get("subject", ""),
-                     "Date Sent": date.today().isoformat(), "Status": status})
+        _log_row({**{k: lead.get(k, "") for k in FIELDS if k in lead},
+                  "Email Subject": copy.get(lead["Business Name"], {}).get("subject", ""),
+                  "Date Sent": date.today().isoformat(), "Status": status})
     if resuppressed:
         print(f"({resuppressed} previously-logged skips not re-recorded)")
 
-    new = not SENT_LOG.exists() or SENT_LOG.stat().st_size == 0
-    with SENT_LOG.open("a", newline="", encoding="utf-8") as f:
-        w = csv.DictWriter(f, fieldnames=FIELDS, extrasaction="ignore")
-        if new:
-            w.writeheader()
-        for r in rows:
-            w.writerow(r)
     print(f"\nSent {ok}, failed {fail}, skipped {len(skipped)}. Logged to sent_log.csv")
 
 

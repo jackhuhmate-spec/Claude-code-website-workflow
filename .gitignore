@@ -1,21 +1,42 @@
-# Reply drafts (may contain real correspondence)
-drafts/
-# Generated client sites are built on demand
-Demo*/
-# Netlify preview build temp dirs
-.preview_*/
-# Local settings may hold secrets — never commit
-.claude/settings.local.json
+# Python
 __pycache__/
-*.pyc
+*.py[cod]
+*.pyo
+*.egg-info/
+dist/
+build/
+*.egg
 
-# Runtime secrets
+# Environment & secrets
 .env
+.env.local
 ops/.env
+.claude/settings.local.json
 
+# Database
+*.db
+*.sqlite
+*.sqlite3
+
+# Project specific
+drafts/
+Demo*/
+.preview_*/
 triage/
+src/omniroute/.env
 
 # Regenerate with `python3 ops/call_sheet.py --write`. Derived entirely from leads.csv,
 # so committing it duplicates the same names and phone numbers into a second file — and
 # while this repo is public that means publishing them twice over.
 call_sheet.md
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db

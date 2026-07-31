@@ -43,6 +43,12 @@ AUTO = ["out of office", "automatic reply", "auto-reply", "on annual leave",
 INJECTION = ["ignore previous", "ignore all previous", "disregard your instructions",
              "system prompt", "you are now", "new instructions", "send an email to",
              "forward this to", "run the following"]
+OBJECTION = ["too expensive", "too much", "out of my budget", "don't have the budget",
+             "can't afford", "overpriced", "a bit steep",
+             "already have someone", "already have a guy",
+             "happy with my current", "not right now", "not at this time",
+             "maybe later", "some other time", "not interested at this time",
+             "bit busy", "not a priority"]
 
 
 def sh(args, timeout=900):
@@ -81,6 +87,8 @@ def categorise(m):
         return "DEAL"
     if any(k in t for k in INTERESTED):
         return "INTERESTED"
+    if any(k in t for k in OBJECTION):
+        return "OBJECTION"
     if any(k in t for k in QUESTION):
         return "QUESTION"
     return "REVIEW"
@@ -133,8 +141,15 @@ def cmd_replies(a):
         buckets.setdefault(cat, []).append(m)
 
         if cat == "OPTOUT":
-            with DNC.open("a", encoding="utf-8") as f:
-                f.write(f"{m['from']},opted out {date.today()}\n")
+            # Dedup: only append if not already in DNC
+            if DNC.exists():
+                existing = {line.split(",")[0].strip().lower() for line in
+                            DNC.read_text(encoding="utf-8").splitlines() if line.strip() and line.strip() != "email"}
+            else:
+                existing = set()
+            if m["from"].strip().lower() not in existing:
+                with DNC.open("a", encoding="utf-8") as f:
+                    f.write(f"{m['from']},opted out {date.today()}\n")
             sh(GMAIL + ["mark", "--id", m["messageId"]])
             actions.append(f"OPT-OUT  {m['from']} → added to do_not_contact.csv, no reply")
             continue

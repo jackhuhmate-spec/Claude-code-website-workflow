@@ -1,11 +1,12 @@
 {
-  "permissions": {
-    "allow": ["Bash(python3 deploy_preview.py:*)"]
-  },
-  "autoMode": {
-    "allow": [
-      "$defaults",
-      "Running python3 deploy_preview.py (optionally prefixed with a NETLIFY_TOKEN env var) to build and deploy the repo owner's own website previews and client sites to Netlify. The owner has explicitly authorized automatic Netlify deploys."
-    ]
+  "env": {
+    "ANTHROPIC_BASE_URL": "http://localhost:20128",
+    "ANTHROPIC_AUTH_TOKEN": "omniroute",
+    "ANTHROPIC_MODEL": "auto/best-free",
+    "ANTHROPIC_SMALL_FAST_MODEL": "auto/best-free",
+    "ANTHROPIC_DEFAULT_OPUS_MODEL": "auto/best-free",
+    "ANTHROPIC_DEFAULT_SONNET_MODEL": "auto/best-free",
+    "ANTHROPIC_DEFAULT_HAIKU_MODEL": "auto/best-free",
+    "CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC": "1"
   }
 }
