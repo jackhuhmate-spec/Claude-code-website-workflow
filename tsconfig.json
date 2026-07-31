@@ -3,5 +3,8 @@
   // Build graph only. Each entry is a package's emitting config; tests are excluded
   // there and covered by the per-package tsconfig.json that editors and eslint use.
   "files": [],
-  "references": [{ "path": "./packages/shared/tsconfig.build.json" }]
+  "references": [
+    { "path": "./packages/shared/tsconfig.build.json" },
+    { "path": "./packages/db/tsconfig.build.json" }
+  ]
 }

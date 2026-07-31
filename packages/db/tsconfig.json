@@ -1,0 +1,11 @@
+{
+  // Editor and lint view: covers the integration tests and `drizzle.config.ts`, which are
+  // excluded from the emitted build but still need typed lint rules applied.
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "composite": false,
+    "noEmit": true,
+    "types": ["node", "vitest/globals"]
+  },
+  "include": ["src/**/*.ts", "test/**/*.ts", "drizzle.config.ts"]
+}
