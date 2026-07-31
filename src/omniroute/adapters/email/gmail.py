@@ -185,6 +185,17 @@ class GmailAdapter(EmailService):
                 subject=message.subject,
                 error="Recipient is on do-not-contact list",
             )
+        # Reply guard: never mail a stranger. Only addresses we've already emailed
+        # (sent_log.csv) may be mailed, unless force is set for a deliberately
+        # verified new recipient. Without this, a prompt-injected inbound email
+        # could make the adapter mail an arbitrary address.
+        if not message.force and to not in self._known_recipients():
+            return SendResult(
+                success=False,
+                to=to,
+                subject=message.subject,
+                error=f"Blocked by reply guard: {to} not in sent_log.csv (use force for a verified new recipient)",
+            )
 
         msg = EmailMsg()
         msg["From"] = f"{message.from_name} <{self._user}>"
@@ -196,7 +207,11 @@ class GmailAdapter(EmailService):
             msg["References"] = message.in_reply_to
 
         body = message.body
-        body += SIGNOFF.format(name=message.from_name)
+        # Cold emails get the sign-off; in-thread replies already carry one (the
+        # drafter writes it), so appending again would double-sign and double the
+        # unsubscribe boilerplate.
+        if not message.in_reply_to:
+            body += SIGNOFF.format(name=message.from_name)
         msg.set_content(body)
 
         try:

@@ -15,7 +15,17 @@ from typing import Any
 
 
 def _find_project_root() -> Path:
-    """Find the project root by looking for .git or pyproject.toml."""
+    """Find the project root by looking for .git or pyproject.toml.
+
+    Anchor to this file's location (src/omniroute/config.py -> repo root) FIRST so the
+    package resolves .env and data paths identically from any working directory —
+    a CWD-only walk broke every command when run from a sibling dir (cron, VPS).
+    Fall back to the CWD walk only if the package lives outside a repo (pip install).
+    """
+    here = Path(__file__).resolve()
+    for parent in (here.parents[2], here.parents[1], here.parents[0]):
+        if (parent / ".git").exists() or (parent / "pyproject.toml").exists():
+            return parent
     cwd = Path.cwd()
     for parent in [cwd, *cwd.parents]:
         if (parent / ".git").exists() or (parent / "pyproject.toml").exists():

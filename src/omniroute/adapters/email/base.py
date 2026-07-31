@@ -24,6 +24,7 @@ class EmailMessage:
     in_reply_to: str | None = None
     thread_id: str | None = None
     message_id: str | None = None
+    force: bool = False
 
 
 @dataclass

@@ -160,6 +160,12 @@ class NetlifyAdapter(DeployProvider):
             )
 
     def _make_cfg(self, config: DeployConfig) -> dict[str, Any]:
+        # Guard the accent colour: it is interpolated into :root{--accent:...;} on
+        # every page, so a non-hex value (e.g. `red;}body{display:none}{`) would be
+        # injected into the stylesheet verbatim. Same rule build_site.main() applies.
+        accent = (config.accent_colour or "#1a6fb5").strip()
+        if not re.match(r"^#[0-9a-fA-F]{3,8}$", accent):
+            accent = "#1a6fb5"
         return {
             "business_name": config.business_name,
             "trade": config.trade,
@@ -167,7 +173,7 @@ class NetlifyAdapter(DeployProvider):
             "phone": config.phone,
             "email": config.email,
             "services": config.services or _default_services(config.trade),
-            "accent": config.accent_colour,
+            "accent": accent,
         }
 
     def deploy(self, config: DeployConfig) -> DeployResult:
