@@ -174,6 +174,7 @@ Hi Kings of London, as a hair salon in Greenwich, your site's missing a clickabl
 
 ---
 
+<<<<<<< Updated upstream
 ## Nouvelle hair and beauty — Hair Salon, Penge ✅ hello@nouvellese20.co.uk
 **Subject:** Nouvelle hair and beauty site
 
@@ -185,3 +186,16 @@ Hi Nouvelle hair and beauty, as a hair salon in Penge, your site's missing a cli
 **Subject:** Penge bakery phone issue
 
 Hi Blackbird Bakery, as a Penge bakery, your site's missing a clickable phone number on the homepage, which costs you calls when someone's ready to order but can't quickly get in touch. We can build you a modern, clean site from £449 one-off, with an optional £39/month care plan to keep it updated and working. Want me to send a quick mockup?
+=======
+## Richard Ward — Hair Salon, Chelsea ✅ info@richardward.com
+**Subject:** Richard Ward site
+
+Hi Richard Ward, as a hair salon in Chelsea, your site's missing a clickable phone number on the homepage, which means customers have to search for a way to get in touch. This costs you bookings as someone will pick the next result in seconds. We can build you a modern, clean site from £449 one-off, with an optional £39/month care plan, want me to send a quick mockup?
+
+---
+
+## Hammersmith Tattoo London — Tattoo Studio, West Kensington ✅ info@hammersmithtattoo.co.uk
+**Subject:** Hammersmith Tattoo phone issue
+
+Hi Hammersmith Tattoo London, as a West Kensington tattoo studio, your site's missing a clickable phone number on the homepage, which means customers have to search for a way to get in touch. This costs you work as someone will pick the next result in seconds. We can build you a modern, clean site from £449 one-off, with an optional £39/month care plan, want me to send a quick mockup?
+>>>>>>> Stashed changes

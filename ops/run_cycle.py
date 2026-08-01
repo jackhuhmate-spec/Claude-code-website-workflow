@@ -327,14 +327,17 @@ def _cold_waiting():
             a = line.split(",")[0].strip().lower()
             if "@" in a:
                 dnc.add(a)
-    with_copy = set()
+    with_copy = {}
     if (HERE / "emails.json").exists():
-        with_copy = set(json.loads((HERE / "emails.json").read_text(encoding="utf-8")))
+        with_copy = json.loads((HERE / "emails.json").read_text(encoding="utf-8"))
     n = 0
     for r in csv.DictReader((HERE / "leads.csv").open(newline="", encoding="utf-8")):
-        a = (r.get("Email") or "").strip().lower()
+        name = r.get("Business Name", "").strip()
+        meta = with_copy.get(name, {})
+        # Same resolution as gmail_send_batch: lead Email column, else copy email.
+        a = (r.get("Email") or meta.get("email") or "").strip().lower()
         if (a and a not in sent and a not in dnc
-                and r.get("Business Name", "").strip() in with_copy):
+                and meta.get("subject") and meta.get("body")):
             n += 1
     return n
 

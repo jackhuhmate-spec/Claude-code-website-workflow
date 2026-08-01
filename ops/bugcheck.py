@@ -547,6 +547,16 @@ def _():
     return rec and hdr, "ops/record_payment.py writes payments.csv with a proper header"
 
 
+@t("cold queue count matches sender's email resolution")
+def _():
+    """_cold_waiting must resolve email the same way gmail_send_batch does: the lead's
+    Email column OR the copy's email (meta.email) when the column is blank. If it only
+    reads the column, leads with copy but no column get starved by follow-ups."""
+    src = (HERE / "ops" / "run_cycle.py").read_text(encoding="utf-8")
+    return "meta.get(\"email\")" in src or "meta.get('email')" in src, \
+        "_cold_waiting falls back to copy email, matching the sender"
+
+
 @t("outreach reserves cap for cold leads")
 def _():
     """The follow-up backlog must not starve first-contact outreach: run_cycle computes
