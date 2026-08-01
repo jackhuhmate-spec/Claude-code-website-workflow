@@ -1,5 +1,5 @@
 {
-  "name": "@agency/db",
+  "name": "@agency/importer",
   "version": "0.1.0",
   "private": true,
   "type": "module",
@@ -7,26 +7,19 @@
     ".": {
       "types": "./dist/index.d.ts",
       "default": "./dist/index.js"
-    },
-    "./testing": {
-      "types": "./dist/testing/harness.d.ts",
-      "default": "./dist/testing/harness.js"
     }
   },
   "scripts": {
     "build": "tsc --build tsconfig.build.json",
     "typecheck": "tsc --noEmit -p tsconfig.json",
-    "generate": "drizzle-kit generate",
-    "migrate": "node dist/bin/migrate.js"
+    "import": "node dist/bin/import.js"
   },
   "dependencies": {
+    "@agency/db": "workspace:*",
     "@agency/shared": "workspace:*",
-    "drizzle-orm": "^0.44.7",
-    "pg": "^8.16.3"
+    "drizzle-orm": "^0.44.7"
   },
   "devDependencies": {
-    "@electric-sql/pglite": "^0.3.14",
-    "@types/pg": "^8.15.5",
-    "drizzle-kit": "^0.31.6"
+    "@electric-sql/pglite": "^0.3.14"
   }
 }

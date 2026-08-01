@@ -15,8 +15,8 @@ import {
   workflowRuns,
   workflowSteps,
 } from "../src/schema/index.js";
-import { createTestDatabase } from "./harness.js";
-import type { TestDatabase, TestDatabaseHandle } from "./harness.js";
+import { createTestDatabase } from "../src/testing/harness.js";
+import type { TestDatabase, TestDatabaseHandle } from "../src/testing/harness.js";
 
 /**
  * These tests exist because the invariants they cover are enforced by the database, not by

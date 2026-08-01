@@ -52,6 +52,22 @@ importers:
         specifier: ^0.31.6
         version: 0.31.10
 
+  packages/importer:
+    dependencies:
+      '@agency/db':
+        specifier: workspace:*
+        version: link:../db
+      '@agency/shared':
+        specifier: workspace:*
+        version: link:../shared
+      drizzle-orm:
+        specifier: ^0.44.7
+        version: 0.44.7(@electric-sql/pglite@0.3.16)(@types/pg@8.20.0)(pg@8.22.0)
+    devDependencies:
+      '@electric-sql/pglite':
+        specifier: ^0.3.14
+        version: 0.3.16
+
   packages/shared:
     dependencies:
       pino:

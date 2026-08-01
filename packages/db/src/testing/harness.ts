@@ -3,7 +3,8 @@ import { PGlite } from "@electric-sql/pglite";
 import { drizzle } from "drizzle-orm/pglite";
 import type { PgliteDatabase } from "drizzle-orm/pglite";
 import { migrate } from "drizzle-orm/pglite/migrator";
-import * as schema from "../src/schema/index.js";
+import type { Database } from "../client.js";
+import * as schema from "../schema/index.js";
 
 /**
  * A real Postgres for tests, in-process.
@@ -15,19 +16,37 @@ import * as schema from "../src/schema/index.js";
  *
  * It also means CI needs no Docker service and no credentials, so the migration suite runs
  * on every push rather than only when someone remembers to start a container.
+ *
+ * Published as `@agency/db/testing` rather than kept in this package's `test/` folder,
+ * because every package above it needs the same database to test against and reaching into
+ * another package's test directory breaks the moment either one is restructured.
+ * `@electric-sql/pglite` stays a devDependency: only test code ever imports this module.
  */
 export type TestDatabase = PgliteDatabase<typeof schema>;
+
+/**
+ * Compile-time proof that the PGlite handle satisfies the driver-agnostic `Database` the
+ * application is written against. If this ever stops holding, every integration test is
+ * testing something the production code could not accept.
+ */
+export type TestDatabaseIsADatabase = TestDatabase extends Database ? true : never;
 
 export interface TestDatabaseHandle {
   readonly db: TestDatabase;
   close(): Promise<void>;
 }
 
-const MIGRATIONS_FOLDER = fileURLToPath(new URL("../drizzle", import.meta.url));
+/**
+ * Resolved from this module rather than the working directory, so the harness works the same
+ * whether it is loaded from `src` by vitest or from `dist` by a consuming package.
+ */
+export const TEST_MIGRATIONS_FOLDER = fileURLToPath(
+  new URL("../../drizzle", import.meta.url),
+);
 
 /** Apply every committed migration. Safe to call again: already-applied files are skipped. */
 export async function applyMigrations(db: TestDatabase): Promise<void> {
-  await migrate(db, { migrationsFolder: MIGRATIONS_FOLDER });
+  await migrate(db, { migrationsFolder: TEST_MIGRATIONS_FOLDER });
 }
 
 /**
@@ -47,3 +66,7 @@ export async function createTestDatabase(): Promise<TestDatabaseHandle> {
     close: () => client.close(),
   };
 }
+
+// Instantiate the proof so the compiler actually checks it.
+const _assertDatabaseCompatible: TestDatabaseIsADatabase = true;
+void _assertDatabaseCompatible;

@@ -1,7 +1,7 @@
 import { fileURLToPath } from "node:url";
 import { UpstreamError } from "@agency/shared";
 import { migrate as drizzleMigrate } from "drizzle-orm/node-postgres/migrator";
-import { createDatabase } from "./client.js";
+import { createNodePgDatabase } from "./client.js";
 import type { DatabaseOptions } from "./client.js";
 
 /**
@@ -19,7 +19,7 @@ export const MIGRATIONS_FOLDER = fileURLToPath(new URL("../drizzle", import.meta
  * migration rather than in a half-applied state. Re-running after a fix is safe.
  */
 export async function runMigrations(options: DatabaseOptions): Promise<void> {
-  const handle = createDatabase(options);
+  const handle = createNodePgDatabase(options);
   try {
     options.logger?.info({ folder: MIGRATIONS_FOLDER }, "applying migrations");
     await drizzleMigrate(handle.db, { migrationsFolder: MIGRATIONS_FOLDER });

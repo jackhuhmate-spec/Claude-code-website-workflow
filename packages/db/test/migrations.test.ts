@@ -1,7 +1,7 @@
 import { sql } from "drizzle-orm";
 import { afterAll, beforeAll, describe, expect, it } from "vitest";
-import { applyMigrations, createTestDatabase } from "./harness.js";
-import type { TestDatabaseHandle } from "./harness.js";
+import { applyMigrations, createTestDatabase } from "../src/testing/harness.js";
+import type { TestDatabaseHandle } from "../src/testing/harness.js";
 
 /**
  * The committed migrations are the only thing that will ever touch production, so they —
