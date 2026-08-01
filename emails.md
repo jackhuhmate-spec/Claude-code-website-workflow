@@ -199,3 +199,38 @@ Hi Richard Ward, as a hair salon in Chelsea, your site's missing a clickable pho
 
 Hi Hammersmith Tattoo London, as a West Kensington tattoo studio, your site's missing a clickable phone number on the homepage, which means customers have to search for a way to get in touch. This costs you work as someone will pick the next result in seconds. We can build you a modern, clean site from £449 one-off, with an optional £39/month care plan, want me to send a quick mockup?
 >>>>>>> Stashed changes
+
+---
+
+## TC&D Construction — Builder, Sidcup ✅ enquiries@tcdconstruction.co.uk
+**Subject:** TC&D Construction website
+
+Hi TC&D Construction, as a builder in Sidcup, your site's got filler text that was never replaced, which makes it look unfinished. This costs you work as people will pick the next result in seconds. We can build you a modern, clean site from £449 one-off, with an optional £39/month care plan, want me to send a quick mockup?
+
+---
+
+## Tula Rose — Beauty Salon, Camberwell ✅ info@tularose.com
+**Subject:** Tula Rose website
+
+Hi Tula Rose, as a beauty salon in Camberwell, your site's nearly empty homepage doesn't give customers much to go on. Someone searching for a salon will pick the next result in seconds if they can't find what they're looking for. We can build you a modern, clean site from £449 one-off, with an optional £39/month care plan, want me to send a quick mockup?
+
+---
+
+## Meat Jon — Butcher, Ladywell ✅ order@meatjon.com
+**Subject:** Meat Jon website review
+
+Hi Meat Jon, as a Ladywell butcher, your site's homepage is nearly empty, which means customers have nothing to read and Google's got nothing to index. This costs you work as people will pick the next result in seconds. We can build you a modern, clean site from £449 one-off, with an optional £39/month care plan, want me to send a quick mockup?
+
+---
+
+## Elite Hair Lounge — Hair Salon, Lewisham ✅ lewisham@elitehairlounge.co.uk
+**Subject:** Empty Homepage
+
+Hi Elite Hair Lounge, as a hair salon in Lewisham, your site's homepage is almost blank, which costs you work as people will pick the next result in seconds. We can build you a modern, clean site from £449 one-off, with an optional £39/month care plan to keep it updated. Want me to send a quick mockup?
+
+---
+
+## Billings — Butcher, Sydenham ✅ sales@shopbillings.co.uk
+**Subject:** Billings Butcher site security
+
+Hi Billings, as a Sydenham butcher, your site's http connection shows a 'Not secure' warning in Chrome, which likely loses you work as people quickly pick the next result. This costs you customers as they don't want to risk their info on an insecure site. We can build you a modern, clean site from £449 one-off and offer an optional £39/month care plan, want me to send a quick mockup?

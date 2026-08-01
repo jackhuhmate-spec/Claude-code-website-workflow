@@ -1,492 +1,517 @@
 {
-  "Enfield Roofing (Practical Roofing)": {
-    "email": "info@rooferenfield.co.uk",
-    "subject": "A quick note about your Enfield roofing site",
-    "body": "Your Enfield roofing site is still running on old .asp pages with a mid-2000s layout, and on a phone - where most people now search for a roofer - it looks about ten years out of date. That first impression matters far more than it should, and a dated site makes a solid local firm look less trustworthy than it actually is. I rebuild sites like yours to load fast and work perfectly on mobile, done within 48 hours for a fixed fee - want me to show you what it could look like?"
-  },
-  "Roof Singh": {
-    "email": "roofsingh.uk@gmail.com",
-    "subject": "Roof Singh - a small thing costing you Ilford calls",
-    "body": "I came across Roof Singh while looking at roofers in Ilford, and the work itself looks genuinely good - but the site has no company details, no footer and only a personal Gmail as contact, which makes cautious homeowners hesitate before letting anyone up on their roof. A few trust signals and a proper contact setup would likely turn more of your visitors into actual calls. I can tidy the whole thing up, or rebuild it cleanly, for a fixed price with a quick turnaround - happy to send a couple of ideas over?"
-  },
-  "K C Roofing & Scaffolding": {
-    "email": "info@kccs.co.uk",
-    "subject": "Spotted something on your Tottenham roofing site",
-    "body": "Your Tottenham roofing site is running on an old IONOS builder - there are even 'Login' and 'Edit page' bits showing publicly, and instead of adjusting to phones it makes people flip to a clunky separate mobile view. Little things like that make a well-accredited firm look far less professional than it really is. I build fast, properly responsive sites for a fixed one-off fee, live within a few days - want me to mock one up for you?"
-  },
-  "Thomas Roofing": {
-    "email": "thomasroofing@live.com",
-    "subject": "Your Barnet roofing website",
-    "body": "I found Thomas Roofing while looking at roofers covering Barnet, and honestly the website looks like it's from the early 2000s - a table-based layout, blank placeholder images and nothing that works on a phone, where nearly all your potential customers are now searching. A site that dated actively costs you jobs, because people assume the business has either gone or fallen behind. I'd love to build you a modern, mobile-first replacement for a fixed fee, live inside 48 hours - can I send a design over?"
-  },
-  "Harris Electrical": {
-    "email": "sales@harriselectricalltd.co.uk",
-    "subject": "Harris Electrical - your site on mobile",
-    "body": "Looking at electricians around Walthamstow your site came up, but it's a dated, text-heavy old template with no mobile version and no sign of a recent update, so on a phone it's genuinely hard to use. For an established name like Harris that's a real shame, because the site is underselling you badly. I can rebuild it into something clean, quick and mobile-friendly for a fixed one-off price, live in a few days - want to see what that would look like?"
-  },
-  "Ebden Electrical Services": {
-    "email": "enquiries@ebden-electrical.co.uk",
-    "subject": "Your Woolwich electrician site on a phone",
-    "body": "I found Ebden Electrical while looking at electricians around Woolwich, and while your work clearly speaks for itself, the website is an early-2000s build with no mobile version - so on a phone, where most people search now, it's a real struggle to use. That first impression quietly turns customers away before they've even seen how good you are. I can rebuild it into something clean, fast and mobile-friendly for a fixed one-off price, live within a few days - want me to put a quick mockup together?"
-  },
-  "Collier Roofing": {
-    "email": "collierroofing@hotmail.co.uk",
-    "subject": "A quick note on your Croydon roofing site",
-    "body": "I came across Collier Roofing while looking at roofers in Croydon, and the reviews are great - but the site's footer still says 2018 and the whole look is stuck in the early 2010s, which makes an established firm seem behind the times to anyone comparing options. A fresh, modern site would match the quality of the work far better and win you more of the jobs you're currently losing on first impression. I can rebuild it for a fixed one-off price with a quick turnaround - want to see a design first?"
-  },
-  "1st Plumbers": {
-    "email": "info@1st-plumbers.co.uk",
-    "subject": "Your Lewisham plumbing site - small fixes, big difference",
-    "body": "Looking at plumbers around Lewisham I had a look at your site, and while the booking and WhatsApp options are handy, the design feels unpolished and the footer even shows a glitched 2026 copyright, which chips away at trust for anyone deciding who to call. A cleaner, more professional look would make the good stuff you already offer actually land. For a fixed fee I can tidy or rebuild it, live within a couple of days - happy to send a couple of ideas over?"
-  },
-  "East Peckham Plumbers": {
-    "email": "epplumbers@btinternet.com",
-    "subject": "Peckham customers are searching - but can't find you",
-    "body": "Right now people across Peckham are searching Google for a plumber and, because you've only got a Facebook page and no website, they simply aren't finding you. Every day without a proper site is another day those calls go to a competitor who does show up in the results. I can build and launch a professional, mobile-friendly website for you within 48 hours for a fixed one-off price - want me to show you what it would look like?"
-  },
-  "Smart Roofing Building Contractors Ltd": {
-    "email": "smartroofingbuildingcontractors@outlook.com",
-    "subject": "Penge customers are searching for a roofer \u00e2\u20ac\u201d not finding you",
-    "body": "Homeowners around Penge and Bromley are on Google right now looking for a roofer, but with only an auto-generated UENI page and no real website, your business simply doesn't come up. Every one of those searches is a job handed to a competitor who does show up. I can build and launch a proper, mobile-friendly site for you within 48 hours at a fixed one-off price \u00e2\u20ac\u201d want me to show you what it'd look like?"
-  },
-  "Super Dry Roofing & Building Specialists": {
-    "email": "superdryconstruction@gmail.com",
-    "subject": "You're invisible on Google in Hammersmith",
-    "body": "Right now people in Hammersmith searching for a roofer or builder can't find you, because a UENI microsite doesn't rank and doesn't look like a real business. That's daily work quietly going to whoever turns up first in the results. For a fixed price I'll build you a fast, professional website that's live within 48 hours \u00e2\u20ac\u201d shall I put a design together?"
-  },
-  "Argyle Electrical Services": {
-    "email": "argyleelectricalservices@yahoo.co.uk",
-    "subject": "Ealing customers can't find Argyle Electrical online",
-    "body": "When someone in Ealing googles for an electrician your business doesn't appear \u00e2\u20ac\u201d a UENI listing and a couple of directory entries are all that's out there, and none of them win the click. Every day without a real website is another day those calls go elsewhere. I can have a clean, mobile-friendly site live for you inside 48 hours at a fixed one-off price \u00e2\u20ac\u201d want to see an example first?"
-  },
-  "LJ Plumbing Services": {
-    "email": "lewisgeneralplumbing@gmail.com",
-    "subject": "Uxbridge searches for a plumber aren't reaching you",
-    "body": "People across Uxbridge are searching Google for a plumber and, with only a UENI page and a Gumtree ad, you're nowhere in the results they actually click. That's a steady stream of jobs going to competitors who have a proper website. I'll build and launch one for you within 48 hours for a fixed fee \u00e2\u20ac\u201d happy to send a couple of design ideas over?"
-  },
-  "Plumb And Heat Care Ltd": {
-    "email": "info@plumbandheatcare.co.uk",
-    "subject": "Your Islington plumbing website is down",
-    "body": "Your domain plumbandheatcare.co.uk doesn't load at all, so anyone in Islington who searches for you or taps your link hits nothing \u00e2\u20ac\u201d which reads as 'business closed.' Meanwhile the calls go to the next plumber down the list. I can get a proper, working, mobile-friendly site live for you within 48 hours at a fixed price \u00e2\u20ac\u201d want me to show you?"
-  },
-  "Highgate Plumbing And Electrical": {
-    "email": "aubv76@gmail.com",
-    "subject": "Highgate customers are finding your competitors, not you",
-    "body": "When Highgate homeowners search for a plumber a completely different company comes up, because you've only got a UENI microsite and your own business stays invisible. Every one of those searches is a lost call. For a fixed one-off price I'll build you a fast, professional website live within 48 hours \u00e2\u20ac\u201d shall I send a mockup?"
-  },
-  "Plumbing Heating Services": {
-    "email": "iulianhoga@ymail.com",
-    "subject": "Enfield's searching for a plumber \u00e2\u20ac\u201d you're not showing up",
-    "body": "Right now people in Enfield are on Google looking for a plumber, and with only an auto-generated UENI page your business doesn't appear where it counts. That's daily work going straight to a competitor with a real site. I can build and launch a proper mobile-friendly website for you within 48 hours at a fixed fee \u00e2\u20ac\u201d want to see what it'd look like?"
-  },
-  "JBS Roofing Services": {
-    "email": "jbsroofing1234@gmail.com",
-    "subject": "Your Ilford roofing site is dated to the year 2000",
-    "body": "I found JBS Roofing while looking at roofers in Ilford, and the footer literally still says copyright 2000 \u00e2\u20ac\u201d it's a table-based page with no mobile version, so on a phone it's almost unusable. Homeowners take that as a sign the business is long gone. I can rebuild it into something clean, fast and mobile-first for a fixed one-off price, live in a few days \u00e2\u20ac\u201d want me to send a quick mockup?"
-  },
-  "Best Gas London Ltd": {
-    "email": "bestgas@yahoo.co.uk",
-    "subject": "Your Dagenham plumbing site \u00e2\u20ac\u201d those aren't your photos",
-    "body": "Looking at plumbers around Dagenham I came across your site, and it openly says the images are stock photos while the gallery files are just image-1 through image-8, so it reads as generic and unfinished. Real photos of your own work on a modern site would build far more trust and win more calls. I can rebuild it for a fixed fee with a quick turnaround \u00e2\u20ac\u201d happy to show you a sample?"
-  },
-  "KFM Roofing": {
-    "email": "info@kfmsolutions.co.uk",
-    "subject": "A quick note on your Stratford roofing site",
-    "body": "I had a look at KFM Roofing while checking roofers in Stratford, and the site's an early-2010s layout with a 2021 copyright and headings crammed with repeated roofing keywords, which makes it feel dated and a bit spammy. A cleaner, modern site would present your work far better to anyone comparing quotes. I can rebuild it for a fixed one-off price, live within days \u00e2\u20ac\u201d want to see a design first?"
-  },
-  "Eastend Plumbers": {
-    "email": "info@eastendplumbers.co.uk",
-    "subject": "Broken images on your Stratford plumbing site",
-    "body": "On your Eastend Plumbers homepage several images are broken empty placeholders, so a visitor in Stratford sees blank boxes instead of your work \u00e2\u20ac\u201d an instant trust-killer. Combined with the repeated 'Stratford plumber' text, the page feels unfinished. I can fix or rebuild it for a fixed price with a fast turnaround \u00e2\u20ac\u201d shall I send a quick preview?"
-  },
-  "HouseProud Roofing": {
-    "email": "enquiries@houseproudroofing.co.uk",
-    "subject": "Your Plumstead roofing site doesn't work on a phone",
-    "body": "I found HouseProud Roofing while looking at roofers in Plumstead, and it's built as old static pages with no mobile setup, so on a phone \u00e2\u20ac\u201d where most people now search \u00e2\u20ac\u201d it's a struggle to read. That first impression quietly loses you calls. I can rebuild it clean and mobile-first for a fixed one-off price, live in a few days \u00e2\u20ac\u201d want a mockup?"
-  },
-  "SW6 Fulham Ltd": {
-    "email": "info@sw6fulham.co.uk",
-    "subject": "Your Fulham roofing site has blank images",
-    "body": "Looking at roofers in Fulham I came across SW6 Fulham, and the homepage serves empty placeholder image boxes on a dated layout, so it looks half-loaded and neglected. A modern site with real photos would match the quality of your work far better. I can rebuild it for a fixed fee with a quick turnaround \u00e2\u20ac\u201d happy to send a design over?"
-  },
-  "MPE Plumbing Heating Gas": {
-    "email": "kevin@mpeservices.com",
-    "subject": "Your Hounslow plumbing site is looking dated",
-    "body": "I had a look at MPE while checking plumbers around Hounslow, and it's a mid-2010s template with a copyright now stuck three years back, which makes an active business look like it's drifted. A fresh, modern site would win you more of the homeowners comparing options. I can rebuild it for a fixed one-off price, live within days \u00e2\u20ac\u201d want to see what it'd look like?"
-  },
-  "JP Building Services": {
-    "email": "jp.buildingservices@mail.com",
-    "subject": "A few things hurting your Wandsworth site",
-    "body": "Looking at roofers in Wandsworth I found JP Building Services, and the site's a dated WordPress build with several images that don't load and a free @mail.com contact address, which together undercut trust for a homeowner. Small fixes there would make a real difference to how many visitors call. I can tidy or rebuild it for a fixed fee with a fast turnaround \u00e2\u20ac\u201d shall I send a couple of ideas?"
-  },
-  "System Electrics (Contracts) Ltd": {
-    "email": "info@systemelectrics.co.uk",
-    "subject": "Your Hounslow electrical site looks abandoned",
-    "body": "I came across System Electrics while looking at electricians in Hounslow, and the site's an early-2010s .php build with a 2020 copyright and a latest news post from 2021, so it reads as if the business has wound down. That's a false impression that's costing you enquiries. I can rebuild it clean and modern for a fixed one-off price, live in days \u00e2\u20ac\u201d want a mockup?"
-  },
-  "ETS Roofing Services Ltd": {
-    "email": "info@etsroofingltd.co.uk",
-    "subject": "Your Hammersmith roofing site on mobile",
-    "body": "I had a look at ETS Roofing while checking roofers in Hammersmith, and it's a mid-2010s .php site built around image-based nav tabs and an old banner carousel that don't sit well on a phone. Most of your customers are searching on mobile, and the dated feel loses some of them. I can rebuild it fast and modern for a fixed fee \u00e2\u20ac\u201d want to see a design first?"
-  },
-  "L Jeffery Roofing": {
-    "email": "info@ljefferyroofing.com",
-    "subject": "Placeholder images left on your Haringey site",
-    "body": "Looking at roofers in Haringey I found L Jeffery Roofing, and the homepage slider still shows the template's 'dummy' placeholder images with a 2018 copyright underneath, so it looks unfinished and dated. Swapping to your real work on a modern site would build much more trust. I can rebuild it for a fixed one-off price with a quick turnaround \u00e2\u20ac\u201d happy to send a mockup?"
-  },
-  "Advanced Professional Plumbing & Heating Services London": {
-    "email": "office@advancedheatinglondon.co.uk",
-    "subject": "Your Southwark plumbing site is frozen in 2011",
-    "body": "I came across Advanced Heating while looking at plumbers in Southwark, and the copyright says 2011 with awards that stop at 2012 and no mobile version at all, so it looks abandoned even though you're clearly still trading. Every phone visitor is meeting a decade-old page. I can rebuild it clean and mobile-first for a fixed fee, live within days \u00e2\u20ac\u201d want to see what it'd look like?"
-  },
-  "R&P Roofing Brixton": {
-    "email": "info@rproofingbrixton.co.uk",
-    "subject": "Your whole portfolio gallery is broken",
-    "body": "Your R&P Roofing site is otherwise tidy, but every single photo in the Brixton portfolio gallery is a broken missing-image placeholder \u00e2\u20ac\u201d so the one section meant to prove your work shows nothing but empty boxes. That's an easy fix that would noticeably lift enquiries. I can sort the gallery and sharpen the rest for a fixed price, fast \u00e2\u20ac\u201d shall I send you a quick preview?"
-  },
-  "Flowline Heating & Plumbing Ltd": {
-    "email": "info@flowline247.co.uk",
-    "subject": "Your Hackney plumbing site looks off-the-shelf",
-    "body": "I came across Flowline while looking at plumbers in Hackney, and the site's a dated template leaning on generic stock photos with a 2022 copyright, so it reads as off-the-shelf rather than a real local firm. Homeowners trust a site that clearly shows your own work and looks current. I can rebuild it modern and mobile-first for a fixed one-off price, live in a few days \u00e2\u20ac\u201d want me to send a quick mockup?"
-  },
-  "Greenstone Electrical Ltd": {
-    "email": "info@greenstoneelectrical.co.uk",
-    "subject": "A quick note on your Hackney electrical site",
-    "body": "Looking at electricians in Hackney I found Greenstone, and the site's a dated, basic layout padded with stock images and repeated copy, which really undersells an established electrician. A cleaner, modern site would build far more trust with homeowners comparing options. I can rebuild it for a fixed one-off price with a quick turnaround \u00e2\u20ac\u201d happy to send a design over?"
-  },
-  "Bromley Roofer Ltd": {
-    "email": "bromleyrooferltd@gmail.com",
-    "subject": "Your Bromley roofing site still has the demo content",
-    "body": "I had a look at Bromley Roofer, and the website still has the WordPress theme's demo content left in \u00e2\u20ac\u201d placeholder filler text and 'project' links that point back to the theme author's demo site rather than your work. It looks half-built, which costs you trust the moment someone in Bromley lands on it. I can finish it properly or rebuild it clean for a fixed fee, fast \u00e2\u20ac\u201d shall I send you a preview?"
-  },
-  "K2 Gas Plumbing & Heating": {
-    "email": "info@k2gas.co.uk",
-    "subject": "Placeholder images on your Croydon plumbing site",
-    "body": "Checking plumbers around Croydon I came across K2 Gas, and the homepage still shows the slider plugin's 'dummy' placeholder images with no copyright year, so it looks unfinished and dated. Swapping in your real work on a modern site would win more of the homeowners comparing quotes. I can rebuild it for a fixed one-off price with a quick turnaround \u00e2\u20ac\u201d want to see a design first?"
-  },
-  "Ohmatic Electrical Ltd": {
-    "email": "info@ohmaticelectrical.co.uk",
-    "subject": "Your Peckham electrical site says '\u00c2\u00a9 [year]'",
-    "body": "I found Ohmatic while looking at electricians in Peckham, and the footer literally still reads '\u00c2\u00a9 [year]' \u00e2\u20ac\u201d the template placeholder was never filled in \u00e2\u20ac\u201d with fairly generic service copy throughout. Little unfinished details like that quietly make people doubt a business. I can rebuild it into something clean, modern and properly finished for a fixed fee, fast \u00e2\u20ac\u201d want me to mock one up?"
-  },
-  "Mr Banah Gas & Electrical": {
-    "email": "Mrbanahgas@hotmail.com",
-    "subject": "Lewisham customers can't find you online",
-    "body": "When people in Lewisham search Google for a gas or heating engineer you don't come up \u00e2\u20ac\u201d your own domain is dead and all that's left is a free Wix page and a Facebook profile, so you're effectively invisible. Every one of those searches is a job going to a competitor with a proper site. I can build and launch a professional, mobile-friendly website for you within 48 hours at a fixed one-off price \u00e2\u20ac\u201d want to see what it'd look like?"
-  },
-  "Hai Cafe": {
-    "email": "haicafelondon@gmail.com",
-    "subject": "Your Hackney website",
-    "body": "I came across Hai Cafe while looking at caf\u00c3\u00a9s around Hackney, and the work looks solid \u00e2\u20ac\u201d but the website is quietly letting you down. The site is a dated Squarespace build with a 2018 copyright and no online ordering, an out-of-date first impression for a popular caf\u00c3\u00a9. I build clean, modern, mobile-first sites for a fixed 449 pounds, live within 48 hours \u00e2\u20ac\u201d want me to send a quick preview?"
-  },
-  "Petitou Cafe": {
-    "email": "petitoucafe@gmail.com",
-    "subject": "A quick note on Petitou Cafe's site",
-    "body": "You're clearly a busy caf\u00c3\u00a9 in Peckham, so it's a shame the website isn't doing you justice. It is a tired stock Squarespace template with no refresh signals and no online ordering, looking plain next to modern caf\u00c3\u00a9 sites. I could rebuild it properly for a fixed 449 pounds, live in a couple of days \u00e2\u20ac\u201d shall I put together a free preview so you can see it?"
-  },
-  "Maggie's Cafe and Restaurant": {
-    "email": "info@maggiesrestaurant.co.uk",
-    "subject": "Maggie's Cafe and Restaurant \u00e2\u20ac\u201d your website on mobile",
-    "body": "I had a look at Maggie's Cafe and Restaurant's site while checking caf\u00c3\u00a9s in Lewisham, and one thing really stood out. It is an aging site with several broken images and duplicated contact and hours blocks. For a fixed 449 pounds I'd have a fresh, fast, mobile-friendly site live for you within 48 hours \u00e2\u20ac\u201d want to see a mockup first?"
-  },
-  "West London Gardeners": {
-    "email": "kieranleonardcontact@gmail.com",
-    "subject": "Your Ealing website",
-    "body": "Looking at West London Gardeners in Ealing, the website is the weak link. The footer copyright is frozen at 2012 and it is a non-responsive early-2010s banner design, making the business look defunct. I build clean, modern, mobile-first sites for a fixed 449 pounds, live within 48 hours \u00e2\u20ac\u201d want me to send a quick preview?"
-  },
-  "MC Paving & Landscaping Ltd": {
-    "email": "info@mcpavingandlandscaping.co.uk",
-    "subject": "A quick note on MC Paving & Landscaping Ltd's site",
-    "body": "I came across MC Paving & Landscaping Ltd while looking at driveway specialists around Barnet, and the work looks solid \u00e2\u20ac\u201d but the website is quietly letting you down. It runs on an early-2010s jQuery carousel with generic placeholder banners and almost no real portfolio photography. I could rebuild it properly for a fixed 449 pounds, live in a couple of days \u00e2\u20ac\u201d shall I put together a free preview so you can see it?"
-  },
-  "Masonside Ltd": {
-    "email": "info@masonsidedrivesandpatios.co.uk",
-    "subject": "Masonside Ltd \u00e2\u20ac\u201d your website on mobile",
-    "body": "You're clearly a busy driveway specialist in Croydon, so it's a shame the website isn't doing you justice. The testimonials page linked in the nav just says 'COMING SOON', and the rest is a dated 2000s-style banner layout. For a fixed 449 pounds I'd have a fresh, fast, mobile-friendly site live for you within 48 hours \u00e2\u20ac\u201d want to see a mockup first?"
-  },
-  "Cornerstone Paving Ltd": {
-    "email": "info@cornerstonepavingltd.co.uk",
-    "subject": "Your Harrow driveway specialist site",
-    "body": "Quick, honest note about your Harrow website. It relies on basic carousel sliders and simplistic graphics rather than any modern design, so it reads as an old template. I can sort all of this with a modern rebuild for a fixed 449 pounds, live in 48 hours \u00e2\u20ac\u201d want to see what it'd look like?"
-  },
-  "TW Contractors": {
-    "email": "twcontractorsuk@gmail.com",
-    "subject": "Your Bexleyheath website",
-    "body": "I was comparing driveway specialists in Bexleyheath and landed on TW Contractors \u00e2\u20ac\u201d and the site is holding you back. The footer copyright is stuck at 2022 and it uses 2010s-era sliders, signalling neglect for an award-winning firm. I build clean, modern, mobile-first sites for a fixed 449 pounds, live within 48 hours \u00e2\u20ac\u201d want me to send a quick preview?"
-  },
-  "K&J Surfacing Ltd": {
-    "email": "info@kandjsurfacing.co.uk",
-    "subject": "A quick note on K&J Surfacing Ltd's site",
-    "body": "Looking at K&J Surfacing Ltd in Croydon, the website is the weak link. A mid-2010s jQuery slider design leaning on generic placeholder banners rather than real project work. I could rebuild it properly for a fixed 449 pounds, live in a couple of days \u00e2\u20ac\u201d shall I put together a free preview so you can see it?"
-  },
-  "London Tree Specialist": {
-    "email": "info@londontreesandlandscapes.co.uk",
-    "subject": "London Tree Specialist \u00e2\u20ac\u201d your website on mobile",
-    "body": "I came across London Tree Specialist while looking at gardeners around Barnet, and the work looks solid \u00e2\u20ac\u201d but the website is quietly letting you down. An early-2010s design with cluttered, redundant navigation and generic stock landscaping photos. For a fixed 449 pounds I'd have a fresh, fast, mobile-friendly site live for you within 48 hours \u00e2\u20ac\u201d want to see a mockup first?"
-  },
-  "LC Driveways Limited": {
-    "email": "info@lcdriveways.co.uk",
-    "subject": "Your Romford driveway specialist site",
-    "body": "I had a look at LC Driveways Limited's site while checking driveway specialists in Romford, and one thing really stood out. The footer copyright is frozen at 2023 with dated styling and generic illustration images in the service sections. I can sort all of this with a modern rebuild for a fixed 449 pounds, live in 48 hours \u00e2\u20ac\u201d want to see what it'd look like?"
-  },
-  "Majestic Drives & Patios Ltd": {
-    "email": "info@majesticdrivesandpatiosltd.co.uk",
-    "subject": "Your Ilford website",
-    "body": "Quick, honest note about your Ilford website. A banner-heavy layout with dated gradient effects and weak visual hierarchy that reads as an old carousel template. I build clean, modern, mobile-first sites for a fixed 449 pounds, live within 48 hours \u00e2\u20ac\u201d want me to send a quick preview?"
-  },
-  "A. Locksmith": {
-    "email": "info@alocksmithilford.co.uk",
-    "subject": "A quick note on A. Locksmith's site",
-    "body": "I was comparing locksmiths in Ilford and landed on A. Locksmith \u00e2\u20ac\u201d and the site is holding you back. Multiple broken image files render as blank placeholders across key service sections, undermining the whole page. I could rebuild it properly for a fixed 449 pounds, live in a couple of days \u00e2\u20ac\u201d shall I put together a free preview so you can see it?"
-  },
-  "Marwan Motors": {
-    "email": "info@marwanmotors.co.uk",
-    "subject": "Marwan Motors \u00e2\u20ac\u201d your website on mobile",
-    "body": "Looking at Marwan Motors in Woolwich, the website is the weak link. The footer copyright reads 2020-2021 and the page is keyword-stuffed with broken placeholder images and empty testimonials. For a fixed 449 pounds I'd have a fresh, fast, mobile-friendly site live for you within 48 hours \u00e2\u20ac\u201d want to see a mockup first?"
-  },
-  "PD Motors Ltd": {
-    "email": "pdmot1@aol.com",
-    "subject": "Spotted something on your Croydon site",
-    "body": "I came across PD Motors Ltd while looking at garages around Croydon, and the work looks solid \u00e2\u20ac\u201d but the website is quietly letting you down. A dated template layout with pixelated low-resolution banner graphics and no copyright year anywhere. A modern rebuild is a one-off 449 pounds, live within 48 hours \u00e2\u20ac\u201d happy to send a preview if useful?"
-  },
-  "Croydon MOT Tyre and Service Centre": {
-    "email": "info@croydonmotcentre.co.uk",
-    "subject": "Your Croydon garage site",
-    "body": "You're clearly a busy garage in Croydon, so it's a shame the website isn't doing you justice. It uses irrelevant low-res placeholder photos on an automotive site, with contact details cluttered across the header. I can sort all of this with a modern rebuild for a fixed 449 pounds, live in 48 hours \u00e2\u20ac\u201d want to see what it'd look like?"
-  },
-  "Blackhorse Service Station": {
-    "email": "blackhorseservicestation@hotmail.co.uk",
-    "subject": "Your South Norwood website",
-    "body": "I had a look at Blackhorse Service Station's site while checking garages in South Norwood, and one thing really stood out. The footer reads 2017 and it is an untouched 2017 build with dated imagery and a broken contact form. I build clean, modern, mobile-first sites for a fixed 449 pounds, live within 48 hours \u00e2\u20ac\u201d want me to send a quick preview?"
-  },
-  "Armer Fit Personal Training": {
-    "email": "tom@armerfit.com",
-    "subject": "Armer Fit Personal Training \u00e2\u20ac\u201d your website on mobile",
-    "body": "I was comparing personal trainers in Enfield and landed on Armer Fit Personal Training \u00e2\u20ac\u201d and the site is holding you back. The footer reads 2020 and it is a sparse layout with a broken social widget and stock banner images. For a fixed 449 pounds I'd have a fresh, fast, mobile-friendly site live for you within 48 hours \u00e2\u20ac\u201d want to see a mockup first?"
-  },
-  "U-Shape": {
-    "email": "nadya@u-shape.co.uk",
-    "subject": "Spotted something on your Wandsworth site",
-    "body": "Looking at U-Shape in Wandsworth, the website is the weak link. The footer reads copyright 2018 on a dated framework with basic typography and minimal image optimisation. A modern rebuild is a one-off 449 pounds, live within 48 hours \u00e2\u20ac\u201d happy to send a preview if useful?"
-  },
-  "Amelia Fitness": {
-    "email": "info@ameliafitness.co.uk",
-    "subject": "Your Barnet personal trainer site",
-    "body": "I came across Amelia Fitness while looking at personal trainers around Barnet, and the work looks solid \u00e2\u20ac\u201d but the website is quietly letting you down. The footer reads 2018 and several main-nav links resolve to the same page, so it is stale and partly non-functional. I can sort all of this with a modern rebuild for a fixed 449 pounds, live in 48 hours \u00e2\u20ac\u201d want to see what it'd look like?"
-  },
-  "Cut & Bubble": {
-    "email": "kevin@cutandbubble.co.uk",
-    "subject": "A quick note on Cut & Bubble's site",
-    "body": "I had a look at Cut & Bubble's site while checking dog groomers in Romford, and one thing really stood out. A low-polish Wix template with generic stock imagery and multiple duplicated opening-hours sections. I could rebuild it properly for a fixed 449 pounds, live in a couple of days \u00e2\u20ac\u201d shall I put together a free preview so you can see it?"
-  },
-  "Groom for Improvement": {
-    "email": "info@groomforimprovement.uk",
-    "subject": "Groom for Improvement \u00e2\u20ac\u201d your website on mobile",
-    "body": "Quick, honest note about your Sutton website. The footer reads 2018 and the live site leaks internal staging URLs with placeholder Instagram images instead of real content. For a fixed 449 pounds I'd have a fresh, fast, mobile-friendly site live for you within 48 hours \u00e2\u20ac\u201d want to see a mockup first?"
-  },
-  "Walthamstow Removals": {
-    "email": "info@walthamstowremovals.co.uk",
-    "subject": "Spotted something on your Walthamstow site",
-    "body": "I was comparing removals firms in Walthamstow and landed on Walthamstow Removals \u00e2\u20ac\u201d and the site is holding you back. A dated single-page brochure with a 2019 copyright and a duplicated footer, showing no updates in years. A modern rebuild is a one-off 449 pounds, live within 48 hours \u00e2\u20ac\u201d happy to send a preview if useful?"
-  },
-  "Barnet Removals": {
-    "email": "contact@barnetremovals.co.uk",
-    "subject": "Your Barnet removals firm site",
-    "body": "Looking at Barnet Removals in Barnet, the website is the weak link. The main 'request a quote' buttons are broken due to malformed links, so your key conversion buttons do not work. I can sort all of this with a modern rebuild for a fixed 449 pounds, live in 48 hours \u00e2\u20ac\u201d want to see what it'd look like?"
-  },
-  "Enfield Removal Services": {
-    "email": "bpcollisers@gmail.com",
-    "subject": "Your Enfield website",
-    "body": "I came across Enfield Removal Services while looking at removals firms around Enfield, and the work looks solid \u00e2\u20ac\u201d but the website is quietly letting you down. The homepage carousel still shows default placeholder text like 'Slide title' and stock images, looking abandoned mid-build. I build clean, modern, mobile-first sites for a fixed 449 pounds, live within 48 hours \u00e2\u20ac\u201d want me to send a quick preview?"
-  },
-  "The Groom Lounge": {
-    "email": "info@thegroomlounge.co.uk",
-    "subject": "The Groom Lounge \u00e2\u20ac\u201d your website on mobile",
-    "body": "I had a look at The Groom Lounge's site while checking barbershops in Peckham, and one thing really stood out. The homepage footer has been compromised with injected spam links and the copyright is stuck at 2020, signalling a neglected site. For a fixed 449 pounds I'd have a fresh, fast, mobile-friendly site live for you within 48 hours \u00e2\u20ac\u201d want to see a mockup first?"
-  },
-  "Dak'Sheens Hair & Beauty": {
-    "email": "enquiries@daksheen.co.uk",
-    "subject": "Spotted something on your Lewisham site",
-    "body": "Quick, honest note about your Lewisham website. A dated early-2010s website-builder template with leftover placeholder text and generic carousel slides. A modern rebuild is a one-off 449 pounds, live within 48 hours \u00e2\u20ac\u201d happy to send a preview if useful?"
-  },
-  "CC Creations Hair & Beauty": {
-    "email": "caroncousinscc2@gmail.com",
-    "subject": "Your Lewisham salon site",
-    "body": "I was comparing salons in Lewisham and landed on CC Creations Hair & Beauty \u00e2\u20ac\u201d and the site is holding you back. There is no online booking (only a callback form), low-resolution gallery images and a basic template layout. I can sort all of this with a modern rebuild for a fixed 449 pounds, live in 48 hours \u00e2\u20ac\u201d want to see what it'd look like?"
-  },
-  "Mode Hair & Beauty": {
-    "email": "naikarado@hotmail.com",
-    "subject": "Your Croydon website",
-    "body": "Looking at Mode Hair & Beauty in Croydon, the website is the weak link. The footer copyright is stuck at 2022, there is no online booking, and the galleries are basic mid-2010s design. I build clean, modern, mobile-first sites for a fixed 449 pounds, live within 48 hours \u00e2\u20ac\u201d want me to send a quick preview?"
-  },
-  "Vintage 62": {
-    "email": "info@salonvintage62.co.uk",
-    "subject": "A quick note on Vintage 62's site",
-    "body": "I came across Vintage 62 while looking at salons around Croydon, and the work looks solid \u00e2\u20ac\u201d but the website is quietly letting you down. The homepage renders blank placeholder images instead of real photos and has minimal responsive styling. I could rebuild it properly for a fixed 449 pounds, live in a couple of days \u00e2\u20ac\u201d shall I put together a free preview so you can see it?"
-  },
-  "Hair Salon Image": {
-    "email": "info@hairsalonimage.co.uk",
-    "subject": "Hair Salon Image \u00e2\u20ac\u201d your website on mobile",
-    "body": "You're clearly a busy salon in Brockley, so it's a shame the website isn't doing you justice. A dated design relying on blank placeholder graphics with no online booking, just a contact form. For a fixed 449 pounds I'd have a fresh, fast, mobile-friendly site live for you within 48 hours \u00e2\u20ac\u201d want to see a mockup first?"
-  },
-  "Slims Barbers": {
-    "email": "info@slimsbarbers.co.uk",
-    "subject": "Spotted something on your Tottenham site",
-    "body": "I had a look at Slims Barbers's site while checking barbershops in Tottenham, and one thing really stood out. A basic, dated layout with no mobile design and no online booking \u00e2\u20ac\u201d just static hours and a price list. A modern rebuild is a one-off 449 pounds, live within 48 hours \u00e2\u20ac\u201d happy to send a preview if useful?"
-  },
-  "Broadway Beauty Salon": {
-    "email": "info@broadwaybeauty.salon",
-    "subject": "Your Ilford nail salon site",
-    "body": "Quick, honest note about your Ilford website. Built on a dated free WordPress.com template, and its booking system says it is 'currently under development'. I can sort all of this with a modern rebuild for a fixed 449 pounds, live in 48 hours \u00e2\u20ac\u201d want to see what it'd look like?"
-  },
-  "Hair Club Camden": {
-    "email": "camdenhairclub@gmail.com",
-    "subject": "Your Camden website",
-    "body": "I was comparing salons in Camden and landed on Hair Club Camden \u00e2\u20ac\u201d and the site is holding you back. The homepage still shows unedited template placeholder text and broken opening hours ('Sunday: 10:00 PM - 7:00 PM'). I build clean, modern, mobile-first sites for a fixed 449 pounds, live within 48 hours \u00e2\u20ac\u201d want me to send a quick preview?"
-  },
-  "Rose Hair and Beauty": {
-    "email": "rose@rosehairandbeauty.co.uk",
-    "subject": "A quick note on Rose Hair and Beauty's site",
-    "body": "Looking at Rose Hair and Beauty in Ealing, the website is the weak link. The copyright reads 2021, the hero is a credited stock photo, and there is no online booking. I could rebuild it properly for a fixed 449 pounds, live in a couple of days \u00e2\u20ac\u201d shall I put together a free preview so you can see it?"
-  },
-  "Hanan Beauty Salon": {
-    "email": "info@hananbeautysalon.co.uk",
-    "subject": "Hanan Beauty Salon \u00e2\u20ac\u201d your website on mobile",
-    "body": "I came across Hanan Beauty Salon while looking at salons around Shepherds Bush, and the work looks solid \u00e2\u20ac\u201d but the website is quietly letting you down. A dated mid-2010s static site with keyword-stuffed copy and no online booking. For a fixed 449 pounds I'd have a fresh, fast, mobile-friendly site live for you within 48 hours \u00e2\u20ac\u201d want to see a mockup first?"
-  },
-  "Jackie & Co": {
-    "email": "jackieandco@hotmail.com",
-    "subject": "Spotted something on your Hammersmith site",
-    "body": "You're clearly a busy salon in Hammersmith, so it's a shame the website isn't doing you justice. A dated Weebly site with no copyright year and a static, image-heavy early-web layout. A modern rebuild is a one-off 449 pounds, live within 48 hours \u00e2\u20ac\u201d happy to send a preview if useful?"
-  },
-  "RAM Barbers": {
-    "email": "info@rambarbers.com",
-    "subject": "Your Walthamstow barbershop site",
-    "body": "I had a look at RAM Barbers's site while checking barbershops in Walthamstow, and one thing really stood out. A generic Wix template on stock photos with a 2023 footer and no phone number listed anywhere on the site. I can sort all of this with a modern rebuild for a fixed 449 pounds, live in 48 hours \u00e2\u20ac\u201d want to see what it'd look like?"
-  },
-  "Iva Cleaning Services": {
-    "email": "office@iva-cleaninglondon.co.uk",
-    "subject": "Iva Cleaning Services \u00e2\u20ac\u201d your website on mobile",
-    "body": "Looking at Iva Cleaning Services in Enfield, the website is the weak link. The logo renders as raw placeholder code and the payment icons are broken, on a generic template with a boilerplate 2026 copyright. For a fixed 449 pounds I'd have a fresh, fast, mobile-friendly site live for you within 48 hours \u00e2\u20ac\u201d want to see a mockup first?"
-  },
-  "Busy Hands Cleaners": {
-    "email": "info@busyhandscleaners.co.uk",
-    "subject": "Spotted something on your Croydon site",
-    "body": "I came across Busy Hands Cleaners while looking at cleaning companys around Croydon, and the work looks solid \u00e2\u20ac\u201d but the website is quietly letting you down. A dated early-2010s design with placeholder 'dummy.png' images in the slideshow and heavy postcode keyword-stuffing. A modern rebuild is a one-off 449 pounds, live within 48 hours \u00e2\u20ac\u201d happy to send a preview if useful?"
-  },
-  "Carpets 4 Life": {
-    "email": "sales@carpets4life.co.uk",
-    "subject": "A quick note on Carpets 4 Life's site",
-    "body": "Quick, honest note about your Woolwich website. The site still shows Lorem Ipsum placeholder text and broken images, with service links misrouting and keyword-stuffed page titles. I could rebuild it properly for a fixed 449 pounds, live in a couple of days \u00e2\u20ac\u201d shall I put together a free preview so you can see it?"
-  },
-  "Farrants Flooring & Carpet Fitter": {
-    "email": "info@farrantsflooring.co.uk",
-    "subject": "Your Sutton flooring company site",
-    "body": "I came across Farrants Flooring & Carpet Fitter while looking at flooring companys around Sutton, and the work looks solid \u00e2\u20ac\u201d but the website is quietly letting you down. A basic mid-2010s layout with a template copyright bug showing 2026 and stock imagery \u00e2\u20ac\u201d functional but visually dated. I can sort all of this with a modern rebuild for a fixed 449 pounds, live in 48 hours \u00e2\u20ac\u201d want to see what it'd look like?"
-  },
-  "Oakhill Fencing": {
-    "email": "info@oakhillfencing.co.uk",
-    "subject": "Spotted something on your Kingston site",
-    "body": "I was comparing fencing contractors in Kingston and landed on Oakhill Fencing \u00e2\u20ac\u201d and the site is holding you back. A dated aesthetic with a broken homepage banner, cluttered nested menus and a copyright frozen at 2019. A modern rebuild is a one-off 449 pounds, live within 48 hours \u00e2\u20ac\u201d happy to send a preview if useful?"
-  },
-  "Bromley Tiler": {
-    "email": "info@bromleytiler.co.uk",
-    "subject": "Your Bexleyheath website",
-    "body": "I came across Bromley Tiler while looking at tilers around Bexleyheath, and the work looks solid \u00e2\u20ac\u201d but the website is quietly letting you down. An otherwise-modern site undermined by a broken stats counter reading '0 Years' experience and long keyword-heavy area lists. I build clean, modern, mobile-first sites for a fixed 449 pounds, live within 48 hours \u00e2\u20ac\u201d want me to send a quick preview?"
-  },
-  "PR Henry Builder": {
-    "email": "info@prhenrybuilder.co.uk",
-    "subject": "Spotted something on your Walthamstow site",
-    "body": "Quick, honest note about your Walthamstow website. The footer copyright is stuck at 2024 and nearly every heading repeats 'Plasterer Walthamstow' / 'plastering company in Walthamstow', giving a keyword-stuffed feel. A modern rebuild is a one-off 449 pounds, live within 48 hours \u00e2\u20ac\u201d happy to send a preview if useful?"
-  },
-  "Rob The Builder": {
-    "email": "info@robthebuilder.co.uk",
-    "subject": "Your Ilford painter & decorator site",
-    "body": "I was comparing painter & decorators in Ilford and landed on Rob The Builder \u00e2\u20ac\u201d and the site is holding you back. The footer copyright reads 2024 and the decorating page repeatedly stuffs 'Painting & decorating Ilford, IG1' into headings and body copy. I can sort all of this with a modern rebuild for a fixed 449 pounds, live in 48 hours \u00e2\u20ac\u201d want to see what it'd look like?"
-  },
-  "S&J Webster Decorators": {
-    "email": "sj.webster2017@yahoo.com",
-    "subject": "Your Bexleyheath website",
-    "body": "Looking at S&J Webster Decorators in Bexleyheath, the website is the weak link. The 'General Small Building Works' section shows empty placeholder images instead of real photos, and the footer carries a long list of ~15 area-name links that reads as location keyword stuffing. I build clean, modern, mobile-first sites for a fixed 449 pounds, live within 48 hours \u00e2\u20ac\u201d want me to send a quick preview?"
-  },
-  "Imperial Plasterers & Builders": {
-    "email": "imperialplasterers@hotmail.co.uk",
-    "subject": "Catford customers can't find Imperial Plasterers & Builders online",
-    "body": "Has no standalone website at all, only a Facebook page plus directory listings, despite 16+ years trading and a published mobile, landline and email address. Right now Catford customers are searching for a plasterer and landing on competitors instead. I can build and launch a professional, mobile-friendly website for you within 48 hours for a fixed 449 pounds \u00e2\u20ac\u201d want to see what it'd look like?"
-  },
-  "Edmonton Green Painters & Decorators": {
-    "email": "infolondonpainters@gmail.com",
-    "subject": "Edmonton customers can't find Edmonton Green Painters & Decorators online",
-    "body": "No real website, only a free Google Sites page on a sites.google.com/view subdomain, despite a published mobile, email and a 5-star Google review. Right now Edmonton customers are searching for a painter & decorator and landing on competitors instead. I can build and launch a professional, mobile-friendly website for you within 48 hours for a fixed 449 pounds \u00e2\u20ac\u201d want to see what it'd look like?"
-  },
-  "The Flower Shop Enfield": {
-    "email": "caroline4flowers@yahoo.co.uk",
-    "subject": "Spotted something on your Enfield site",
-    "body": "I had a look at The Flower Shop Enfield's site while checking florists in Enfield, and one thing really stood out. It is a visibly dated brochure site still carrying IE8/IE9-specific stylesheets and a shelved '2020 redesign', with basic product pages and no modern mobile-first layout. A modern rebuild is a one-off 449 pounds, live within 48 hours \u00e2\u20ac\u201d happy to send a preview if useful?"
-  },
-  "PML Handyman": {
-    "email": "info@pmlhandyman.co.uk",
-    "subject": "Something on your Wandsworth homepage",
-    "body": "Your Wandsworth site pulls in a live Google review feed, and right now one of the first ones a visitor sees is a bad one sitting just above your phone number \u00e2\u20ac\u201d you probably can't control which it shows. That's the first thing a customer reads before they decide to call, and the service photos alongside it are from 2018. I can rebuild it so your best work leads instead, for a fixed one-off price \u00e2\u20ac\u201d want me to send a quick mockup?"
-  },
-  "Building & Handyman": {
-    "email": "info@buildinghandyman.com",
-    "subject": "Battersea Handyman Site",
-    "body": "Your site's a Battersea handyman service with 2018 stock photos and a long block of text on the homepage, making prices hard to find on a phone. This costs you work as people pick the next result quickly. I can fix this for a fixed one-off price, want me to send a quick mockup?"
-  },
-  "The Local Handyman London": {
-    "email": "info@localhm.co.uk",
-    "subject": "Slow Greenford Site",
-    "body": "The Local Handyman London's homepage has large uncompressed images, making it slow on mobile and hiding services. This costs you work as users pick the next result quickly. I can fix it for a fixed one-off price, want me to send a quick mockup?"
-  },
-  "Top Dog Joinery Limited": {
-    "email": "john@topdogjoinery.co.uk",
-    "subject": "Leytonstone carpentry online",
-    "body": "Top Dog Joinery Limited in Leytonstone has no website. Locals searching for a carpenter pick the next result in seconds. I can build your site for a fixed one-off price, want me to send a quick mockup?"
-  },
-  "John Lawler": {
-    "email": "info@johnlawlerupholstery.co.uk",
-    "subject": "Crouch End Upholsterer",
-    "body": "John Lawler's site lacks SSL, showing 'Not secure' in Chrome. This costs work as people pick the next result. I can fix it for a fixed one-off price, want me to send a quick mockup?"
-  },
-  "Muswell Hill Joinery": {
-    "email": "muswellhilljoinery@gmail.com",
-    "subject": "Crouch End carpentry online",
-    "body": "Muswell Hill Joinery in Crouch End has no site. Locals search and pick the next result. Want me to send a quick mockup?"
-  },
-  "Tablemaker": {
-    "email": "hello@tablemaker.co.uk",
-    "subject": "Crouch End Carpenter",
-    "body": "Tablemaker in Crouch End has no clickable phone number on its homepage. This costs work as customers pick the next result. I can fix it for a fixed one-off price, want me to send a quick mockup?"
-  },
-  "Meta Scaffolding": {
-    "email": "info@metascaffolding.co.uk",
-    "subject": "Barnet scaffolder site",
-    "body": "Meta Scaffolding in Barnet has a nearly empty homepage with barely any content. This costs you work as people pick the next result in seconds. I can fix it for a fixed one-off price, want me to send a quick mockup?"
-  },
-  "Kings of London": {
-    "email": "book@drakesoflondon.com",
-    "subject": "Kings of London website",
-    "body": "Hi Kings of London, as a hair salon in Greenwich, your site's missing a clickable phone number on the homepage, which costs you calls. Someone searching for a salon will pick the next result in seconds if they can't quickly get in touch. We can build you a modern, clean site from \u00c2\u00a3449 one-off, with a \u00c2\u00a339/month care plan optional, want me to send a quick mockup?"
-  },
-  "Nouvelle hair and beauty": {
-    "email": "hello@nouvellese20.co.uk",
-    "subject": "Nouvelle hair and beauty site",
-    "body": "Hi Nouvelle hair and beauty, as a hair salon in Penge, your site's missing a clickable phone number on the homepage, meaning customers have to search to get in touch. This costs you work as someone will pick the next result in seconds. We can build you a modern, clean site from \u00c2\u00a3449 one-off, with an optional \u00c2\u00a339/month care plan, want me to send a quick mockup?"
-  },
-  "Blackbird Bakery": {
-    "email": "blackbirdbakerylondon@gmail.com",
-    "subject": "Penge bakery phone issue",
-    "body": "Hi Blackbird Bakery, as a Penge bakery, your site's missing a clickable phone number on the homepage, which costs you calls when someone's ready to order but can't quickly get in touch. We can build you a modern, clean site from \u00c2\u00a3449 one-off, with an optional \u00c2\u00a339/month care plan to keep it updated and working. Want me to send a quick mockup?"
-  },
-  "Richard Ward": {
-    "email": "info@richardward.com",
-    "subject": "Richard Ward site",
-    "body": "Hi Richard Ward, as a hair salon in Chelsea, your site's missing a clickable phone number on the homepage, which means customers have to search for a way to get in touch. This costs you bookings as someone will pick the next result in seconds. We can build you a modern, clean site from \u00a3449 one-off, with an optional \u00a339/month care plan, want me to send a quick mockup?"
-  },
-  "Hammersmith Tattoo London": {
-    "email": "info@hammersmithtattoo.co.uk",
-    "subject": "Hammersmith Tattoo phone issue",
-    "body": "Hi Hammersmith Tattoo London, as a West Kensington tattoo studio, your site's missing a clickable phone number on the homepage, which means customers have to search for a way to get in touch. This costs you work as someone will pick the next result in seconds. We can build you a modern, clean site from \u00a3449 one-off, with an optional \u00a339/month care plan, want me to send a quick mockup?"
-  }
+ "Enfield Roofing (Practical Roofing)": {
+  "email": "info@rooferenfield.co.uk",
+  "subject": "A quick note about your Enfield roofing site",
+  "body": "Your Enfield roofing site is still running on old .asp pages with a mid-2000s layout, and on a phone - where most people now search for a roofer - it looks about ten years out of date. That first impression matters far more than it should, and a dated site makes a solid local firm look less trustworthy than it actually is. I rebuild sites like yours to load fast and work perfectly on mobile, done within 48 hours for a fixed fee - want me to show you what it could look like?"
+ },
+ "Roof Singh": {
+  "email": "roofsingh.uk@gmail.com",
+  "subject": "Roof Singh - a small thing costing you Ilford calls",
+  "body": "I came across Roof Singh while looking at roofers in Ilford, and the work itself looks genuinely good - but the site has no company details, no footer and only a personal Gmail as contact, which makes cautious homeowners hesitate before letting anyone up on their roof. A few trust signals and a proper contact setup would likely turn more of your visitors into actual calls. I can tidy the whole thing up, or rebuild it cleanly, for a fixed price with a quick turnaround - happy to send a couple of ideas over?"
+ },
+ "K C Roofing & Scaffolding": {
+  "email": "info@kccs.co.uk",
+  "subject": "Spotted something on your Tottenham roofing site",
+  "body": "Your Tottenham roofing site is running on an old IONOS builder - there are even 'Login' and 'Edit page' bits showing publicly, and instead of adjusting to phones it makes people flip to a clunky separate mobile view. Little things like that make a well-accredited firm look far less professional than it really is. I build fast, properly responsive sites for a fixed one-off fee, live within a few days - want me to mock one up for you?"
+ },
+ "Thomas Roofing": {
+  "email": "thomasroofing@live.com",
+  "subject": "Your Barnet roofing website",
+  "body": "I found Thomas Roofing while looking at roofers covering Barnet, and honestly the website looks like it's from the early 2000s - a table-based layout, blank placeholder images and nothing that works on a phone, where nearly all your potential customers are now searching. A site that dated actively costs you jobs, because people assume the business has either gone or fallen behind. I'd love to build you a modern, mobile-first replacement for a fixed fee, live inside 48 hours - can I send a design over?"
+ },
+ "Harris Electrical": {
+  "email": "sales@harriselectricalltd.co.uk",
+  "subject": "Harris Electrical - your site on mobile",
+  "body": "Looking at electricians around Walthamstow your site came up, but it's a dated, text-heavy old template with no mobile version and no sign of a recent update, so on a phone it's genuinely hard to use. For an established name like Harris that's a real shame, because the site is underselling you badly. I can rebuild it into something clean, quick and mobile-friendly for a fixed one-off price, live in a few days - want to see what that would look like?"
+ },
+ "Ebden Electrical Services": {
+  "email": "enquiries@ebden-electrical.co.uk",
+  "subject": "Your Woolwich electrician site on a phone",
+  "body": "I found Ebden Electrical while looking at electricians around Woolwich, and while your work clearly speaks for itself, the website is an early-2000s build with no mobile version - so on a phone, where most people search now, it's a real struggle to use. That first impression quietly turns customers away before they've even seen how good you are. I can rebuild it into something clean, fast and mobile-friendly for a fixed one-off price, live within a few days - want me to put a quick mockup together?"
+ },
+ "Collier Roofing": {
+  "email": "collierroofing@hotmail.co.uk",
+  "subject": "A quick note on your Croydon roofing site",
+  "body": "I came across Collier Roofing while looking at roofers in Croydon, and the reviews are great - but the site's footer still says 2018 and the whole look is stuck in the early 2010s, which makes an established firm seem behind the times to anyone comparing options. A fresh, modern site would match the quality of the work far better and win you more of the jobs you're currently losing on first impression. I can rebuild it for a fixed one-off price with a quick turnaround - want to see a design first?"
+ },
+ "1st Plumbers": {
+  "email": "info@1st-plumbers.co.uk",
+  "subject": "Your Lewisham plumbing site - small fixes, big difference",
+  "body": "Looking at plumbers around Lewisham I had a look at your site, and while the booking and WhatsApp options are handy, the design feels unpolished and the footer even shows a glitched 2026 copyright, which chips away at trust for anyone deciding who to call. A cleaner, more professional look would make the good stuff you already offer actually land. For a fixed fee I can tidy or rebuild it, live within a couple of days - happy to send a couple of ideas over?"
+ },
+ "East Peckham Plumbers": {
+  "email": "epplumbers@btinternet.com",
+  "subject": "Peckham customers are searching - but can't find you",
+  "body": "Right now people across Peckham are searching Google for a plumber and, because you've only got a Facebook page and no website, they simply aren't finding you. Every day without a proper site is another day those calls go to a competitor who does show up in the results. I can build and launch a professional, mobile-friendly website for you within 48 hours for a fixed one-off price - want me to show you what it would look like?"
+ },
+ "Smart Roofing Building Contractors Ltd": {
+  "email": "smartroofingbuildingcontractors@outlook.com",
+  "subject": "Penge customers are searching for a roofer â€” not finding you",
+  "body": "Homeowners around Penge and Bromley are on Google right now looking for a roofer, but with only an auto-generated UENI page and no real website, your business simply doesn't come up. Every one of those searches is a job handed to a competitor who does show up. I can build and launch a proper, mobile-friendly site for you within 48 hours at a fixed one-off price â€” want me to show you what it'd look like?"
+ },
+ "Super Dry Roofing & Building Specialists": {
+  "email": "superdryconstruction@gmail.com",
+  "subject": "You're invisible on Google in Hammersmith",
+  "body": "Right now people in Hammersmith searching for a roofer or builder can't find you, because a UENI microsite doesn't rank and doesn't look like a real business. That's daily work quietly going to whoever turns up first in the results. For a fixed price I'll build you a fast, professional website that's live within 48 hours â€” shall I put a design together?"
+ },
+ "Argyle Electrical Services": {
+  "email": "argyleelectricalservices@yahoo.co.uk",
+  "subject": "Ealing customers can't find Argyle Electrical online",
+  "body": "When someone in Ealing googles for an electrician your business doesn't appear â€” a UENI listing and a couple of directory entries are all that's out there, and none of them win the click. Every day without a real website is another day those calls go elsewhere. I can have a clean, mobile-friendly site live for you inside 48 hours at a fixed one-off price â€” want to see an example first?"
+ },
+ "LJ Plumbing Services": {
+  "email": "lewisgeneralplumbing@gmail.com",
+  "subject": "Uxbridge searches for a plumber aren't reaching you",
+  "body": "People across Uxbridge are searching Google for a plumber and, with only a UENI page and a Gumtree ad, you're nowhere in the results they actually click. That's a steady stream of jobs going to competitors who have a proper website. I'll build and launch one for you within 48 hours for a fixed fee â€” happy to send a couple of design ideas over?"
+ },
+ "Plumb And Heat Care Ltd": {
+  "email": "info@plumbandheatcare.co.uk",
+  "subject": "Your Islington plumbing website is down",
+  "body": "Your domain plumbandheatcare.co.uk doesn't load at all, so anyone in Islington who searches for you or taps your link hits nothing â€” which reads as 'business closed.' Meanwhile the calls go to the next plumber down the list. I can get a proper, working, mobile-friendly site live for you within 48 hours at a fixed price â€” want me to show you?"
+ },
+ "Highgate Plumbing And Electrical": {
+  "email": "aubv76@gmail.com",
+  "subject": "Highgate customers are finding your competitors, not you",
+  "body": "When Highgate homeowners search for a plumber a completely different company comes up, because you've only got a UENI microsite and your own business stays invisible. Every one of those searches is a lost call. For a fixed one-off price I'll build you a fast, professional website live within 48 hours â€” shall I send a mockup?"
+ },
+ "Plumbing Heating Services": {
+  "email": "iulianhoga@ymail.com",
+  "subject": "Enfield's searching for a plumber â€” you're not showing up",
+  "body": "Right now people in Enfield are on Google looking for a plumber, and with only an auto-generated UENI page your business doesn't appear where it counts. That's daily work going straight to a competitor with a real site. I can build and launch a proper mobile-friendly website for you within 48 hours at a fixed fee â€” want to see what it'd look like?"
+ },
+ "JBS Roofing Services": {
+  "email": "jbsroofing1234@gmail.com",
+  "subject": "Your Ilford roofing site is dated to the year 2000",
+  "body": "I found JBS Roofing while looking at roofers in Ilford, and the footer literally still says copyright 2000 â€” it's a table-based page with no mobile version, so on a phone it's almost unusable. Homeowners take that as a sign the business is long gone. I can rebuild it into something clean, fast and mobile-first for a fixed one-off price, live in a few days â€” want me to send a quick mockup?"
+ },
+ "Best Gas London Ltd": {
+  "email": "bestgas@yahoo.co.uk",
+  "subject": "Your Dagenham plumbing site â€” those aren't your photos",
+  "body": "Looking at plumbers around Dagenham I came across your site, and it openly says the images are stock photos while the gallery files are just image-1 through image-8, so it reads as generic and unfinished. Real photos of your own work on a modern site would build far more trust and win more calls. I can rebuild it for a fixed fee with a quick turnaround â€” happy to show you a sample?"
+ },
+ "KFM Roofing": {
+  "email": "info@kfmsolutions.co.uk",
+  "subject": "A quick note on your Stratford roofing site",
+  "body": "I had a look at KFM Roofing while checking roofers in Stratford, and the site's an early-2010s layout with a 2021 copyright and headings crammed with repeated roofing keywords, which makes it feel dated and a bit spammy. A cleaner, modern site would present your work far better to anyone comparing quotes. I can rebuild it for a fixed one-off price, live within days â€” want to see a design first?"
+ },
+ "Eastend Plumbers": {
+  "email": "info@eastendplumbers.co.uk",
+  "subject": "Broken images on your Stratford plumbing site",
+  "body": "On your Eastend Plumbers homepage several images are broken empty placeholders, so a visitor in Stratford sees blank boxes instead of your work â€” an instant trust-killer. Combined with the repeated 'Stratford plumber' text, the page feels unfinished. I can fix or rebuild it for a fixed price with a fast turnaround â€” shall I send a quick preview?"
+ },
+ "HouseProud Roofing": {
+  "email": "enquiries@houseproudroofing.co.uk",
+  "subject": "Your Plumstead roofing site doesn't work on a phone",
+  "body": "I found HouseProud Roofing while looking at roofers in Plumstead, and it's built as old static pages with no mobile setup, so on a phone â€” where most people now search â€” it's a struggle to read. That first impression quietly loses you calls. I can rebuild it clean and mobile-first for a fixed one-off price, live in a few days â€” want a mockup?"
+ },
+ "SW6 Fulham Ltd": {
+  "email": "info@sw6fulham.co.uk",
+  "subject": "Your Fulham roofing site has blank images",
+  "body": "Looking at roofers in Fulham I came across SW6 Fulham, and the homepage serves empty placeholder image boxes on a dated layout, so it looks half-loaded and neglected. A modern site with real photos would match the quality of your work far better. I can rebuild it for a fixed fee with a quick turnaround â€” happy to send a design over?"
+ },
+ "MPE Plumbing Heating Gas": {
+  "email": "kevin@mpeservices.com",
+  "subject": "Your Hounslow plumbing site is looking dated",
+  "body": "I had a look at MPE while checking plumbers around Hounslow, and it's a mid-2010s template with a copyright now stuck three years back, which makes an active business look like it's drifted. A fresh, modern site would win you more of the homeowners comparing options. I can rebuild it for a fixed one-off price, live within days â€” want to see what it'd look like?"
+ },
+ "JP Building Services": {
+  "email": "jp.buildingservices@mail.com",
+  "subject": "A few things hurting your Wandsworth site",
+  "body": "Looking at roofers in Wandsworth I found JP Building Services, and the site's a dated WordPress build with several images that don't load and a free @mail.com contact address, which together undercut trust for a homeowner. Small fixes there would make a real difference to how many visitors call. I can tidy or rebuild it for a fixed fee with a fast turnaround â€” shall I send a couple of ideas?"
+ },
+ "System Electrics (Contracts) Ltd": {
+  "email": "info@systemelectrics.co.uk",
+  "subject": "Your Hounslow electrical site looks abandoned",
+  "body": "I came across System Electrics while looking at electricians in Hounslow, and the site's an early-2010s .php build with a 2020 copyright and a latest news post from 2021, so it reads as if the business has wound down. That's a false impression that's costing you enquiries. I can rebuild it clean and modern for a fixed one-off price, live in days â€” want a mockup?"
+ },
+ "ETS Roofing Services Ltd": {
+  "email": "info@etsroofingltd.co.uk",
+  "subject": "Your Hammersmith roofing site on mobile",
+  "body": "I had a look at ETS Roofing while checking roofers in Hammersmith, and it's a mid-2010s .php site built around image-based nav tabs and an old banner carousel that don't sit well on a phone. Most of your customers are searching on mobile, and the dated feel loses some of them. I can rebuild it fast and modern for a fixed fee â€” want to see a design first?"
+ },
+ "L Jeffery Roofing": {
+  "email": "info@ljefferyroofing.com",
+  "subject": "Placeholder images left on your Haringey site",
+  "body": "Looking at roofers in Haringey I found L Jeffery Roofing, and the homepage slider still shows the template's 'dummy' placeholder images with a 2018 copyright underneath, so it looks unfinished and dated. Swapping to your real work on a modern site would build much more trust. I can rebuild it for a fixed one-off price with a quick turnaround â€” happy to send a mockup?"
+ },
+ "Advanced Professional Plumbing & Heating Services London": {
+  "email": "office@advancedheatinglondon.co.uk",
+  "subject": "Your Southwark plumbing site is frozen in 2011",
+  "body": "I came across Advanced Heating while looking at plumbers in Southwark, and the copyright says 2011 with awards that stop at 2012 and no mobile version at all, so it looks abandoned even though you're clearly still trading. Every phone visitor is meeting a decade-old page. I can rebuild it clean and mobile-first for a fixed fee, live within days â€” want to see what it'd look like?"
+ },
+ "R&P Roofing Brixton": {
+  "email": "info@rproofingbrixton.co.uk",
+  "subject": "Your whole portfolio gallery is broken",
+  "body": "Your R&P Roofing site is otherwise tidy, but every single photo in the Brixton portfolio gallery is a broken missing-image placeholder â€” so the one section meant to prove your work shows nothing but empty boxes. That's an easy fix that would noticeably lift enquiries. I can sort the gallery and sharpen the rest for a fixed price, fast â€” shall I send you a quick preview?"
+ },
+ "Flowline Heating & Plumbing Ltd": {
+  "email": "info@flowline247.co.uk",
+  "subject": "Your Hackney plumbing site looks off-the-shelf",
+  "body": "I came across Flowline while looking at plumbers in Hackney, and the site's a dated template leaning on generic stock photos with a 2022 copyright, so it reads as off-the-shelf rather than a real local firm. Homeowners trust a site that clearly shows your own work and looks current. I can rebuild it modern and mobile-first for a fixed one-off price, live in a few days â€” want me to send a quick mockup?"
+ },
+ "Greenstone Electrical Ltd": {
+  "email": "info@greenstoneelectrical.co.uk",
+  "subject": "A quick note on your Hackney electrical site",
+  "body": "Looking at electricians in Hackney I found Greenstone, and the site's a dated, basic layout padded with stock images and repeated copy, which really undersells an established electrician. A cleaner, modern site would build far more trust with homeowners comparing options. I can rebuild it for a fixed one-off price with a quick turnaround â€” happy to send a design over?"
+ },
+ "Bromley Roofer Ltd": {
+  "email": "bromleyrooferltd@gmail.com",
+  "subject": "Your Bromley roofing site still has the demo content",
+  "body": "I had a look at Bromley Roofer, and the website still has the WordPress theme's demo content left in â€” placeholder filler text and 'project' links that point back to the theme author's demo site rather than your work. It looks half-built, which costs you trust the moment someone in Bromley lands on it. I can finish it properly or rebuild it clean for a fixed fee, fast â€” shall I send you a preview?"
+ },
+ "K2 Gas Plumbing & Heating": {
+  "email": "info@k2gas.co.uk",
+  "subject": "Placeholder images on your Croydon plumbing site",
+  "body": "Checking plumbers around Croydon I came across K2 Gas, and the homepage still shows the slider plugin's 'dummy' placeholder images with no copyright year, so it looks unfinished and dated. Swapping in your real work on a modern site would win more of the homeowners comparing quotes. I can rebuild it for a fixed one-off price with a quick turnaround â€” want to see a design first?"
+ },
+ "Ohmatic Electrical Ltd": {
+  "email": "info@ohmaticelectrical.co.uk",
+  "subject": "Your Peckham electrical site says 'Â© [year]'",
+  "body": "I found Ohmatic while looking at electricians in Peckham, and the footer literally still reads 'Â© [year]' â€” the template placeholder was never filled in â€” with fairly generic service copy throughout. Little unfinished details like that quietly make people doubt a business. I can rebuild it into something clean, modern and properly finished for a fixed fee, fast â€” want me to mock one up?"
+ },
+ "Mr Banah Gas & Electrical": {
+  "email": "Mrbanahgas@hotmail.com",
+  "subject": "Lewisham customers can't find you online",
+  "body": "When people in Lewisham search Google for a gas or heating engineer you don't come up â€” your own domain is dead and all that's left is a free Wix page and a Facebook profile, so you're effectively invisible. Every one of those searches is a job going to a competitor with a proper site. I can build and launch a professional, mobile-friendly website for you within 48 hours at a fixed one-off price â€” want to see what it'd look like?"
+ },
+ "Hai Cafe": {
+  "email": "haicafelondon@gmail.com",
+  "subject": "Your Hackney website",
+  "body": "I came across Hai Cafe while looking at cafÃ©s around Hackney, and the work looks solid â€” but the website is quietly letting you down. The site is a dated Squarespace build with a 2018 copyright and no online ordering, an out-of-date first impression for a popular cafÃ©. I build clean, modern, mobile-first sites for a fixed 449 pounds, live within 48 hours â€” want me to send a quick preview?"
+ },
+ "Petitou Cafe": {
+  "email": "petitoucafe@gmail.com",
+  "subject": "A quick note on Petitou Cafe's site",
+  "body": "You're clearly a busy cafÃ© in Peckham, so it's a shame the website isn't doing you justice. It is a tired stock Squarespace template with no refresh signals and no online ordering, looking plain next to modern cafÃ© sites. I could rebuild it properly for a fixed 449 pounds, live in a couple of days â€” shall I put together a free preview so you can see it?"
+ },
+ "Maggie's Cafe and Restaurant": {
+  "email": "info@maggiesrestaurant.co.uk",
+  "subject": "Maggie's Cafe and Restaurant â€” your website on mobile",
+  "body": "I had a look at Maggie's Cafe and Restaurant's site while checking cafÃ©s in Lewisham, and one thing really stood out. It is an aging site with several broken images and duplicated contact and hours blocks. For a fixed 449 pounds I'd have a fresh, fast, mobile-friendly site live for you within 48 hours â€” want to see a mockup first?"
+ },
+ "West London Gardeners": {
+  "email": "kieranleonardcontact@gmail.com",
+  "subject": "Your Ealing website",
+  "body": "Looking at West London Gardeners in Ealing, the website is the weak link. The footer copyright is frozen at 2012 and it is a non-responsive early-2010s banner design, making the business look defunct. I build clean, modern, mobile-first sites for a fixed 449 pounds, live within 48 hours â€” want me to send a quick preview?"
+ },
+ "MC Paving & Landscaping Ltd": {
+  "email": "info@mcpavingandlandscaping.co.uk",
+  "subject": "A quick note on MC Paving & Landscaping Ltd's site",
+  "body": "I came across MC Paving & Landscaping Ltd while looking at driveway specialists around Barnet, and the work looks solid â€” but the website is quietly letting you down. It runs on an early-2010s jQuery carousel with generic placeholder banners and almost no real portfolio photography. I could rebuild it properly for a fixed 449 pounds, live in a couple of days â€” shall I put together a free preview so you can see it?"
+ },
+ "Masonside Ltd": {
+  "email": "info@masonsidedrivesandpatios.co.uk",
+  "subject": "Masonside Ltd â€” your website on mobile",
+  "body": "You're clearly a busy driveway specialist in Croydon, so it's a shame the website isn't doing you justice. The testimonials page linked in the nav just says 'COMING SOON', and the rest is a dated 2000s-style banner layout. For a fixed 449 pounds I'd have a fresh, fast, mobile-friendly site live for you within 48 hours â€” want to see a mockup first?"
+ },
+ "Cornerstone Paving Ltd": {
+  "email": "info@cornerstonepavingltd.co.uk",
+  "subject": "Your Harrow driveway specialist site",
+  "body": "Quick, honest note about your Harrow website. It relies on basic carousel sliders and simplistic graphics rather than any modern design, so it reads as an old template. I can sort all of this with a modern rebuild for a fixed 449 pounds, live in 48 hours â€” want to see what it'd look like?"
+ },
+ "TW Contractors": {
+  "email": "twcontractorsuk@gmail.com",
+  "subject": "Your Bexleyheath website",
+  "body": "I was comparing driveway specialists in Bexleyheath and landed on TW Contractors â€” and the site is holding you back. The footer copyright is stuck at 2022 and it uses 2010s-era sliders, signalling neglect for an award-winning firm. I build clean, modern, mobile-first sites for a fixed 449 pounds, live within 48 hours â€” want me to send a quick preview?"
+ },
+ "K&J Surfacing Ltd": {
+  "email": "info@kandjsurfacing.co.uk",
+  "subject": "A quick note on K&J Surfacing Ltd's site",
+  "body": "Looking at K&J Surfacing Ltd in Croydon, the website is the weak link. A mid-2010s jQuery slider design leaning on generic placeholder banners rather than real project work. I could rebuild it properly for a fixed 449 pounds, live in a couple of days â€” shall I put together a free preview so you can see it?"
+ },
+ "London Tree Specialist": {
+  "email": "info@londontreesandlandscapes.co.uk",
+  "subject": "London Tree Specialist â€” your website on mobile",
+  "body": "I came across London Tree Specialist while looking at gardeners around Barnet, and the work looks solid â€” but the website is quietly letting you down. An early-2010s design with cluttered, redundant navigation and generic stock landscaping photos. For a fixed 449 pounds I'd have a fresh, fast, mobile-friendly site live for you within 48 hours â€” want to see a mockup first?"
+ },
+ "LC Driveways Limited": {
+  "email": "info@lcdriveways.co.uk",
+  "subject": "Your Romford driveway specialist site",
+  "body": "I had a look at LC Driveways Limited's site while checking driveway specialists in Romford, and one thing really stood out. The footer copyright is frozen at 2023 with dated styling and generic illustration images in the service sections. I can sort all of this with a modern rebuild for a fixed 449 pounds, live in 48 hours â€” want to see what it'd look like?"
+ },
+ "Majestic Drives & Patios Ltd": {
+  "email": "info@majesticdrivesandpatiosltd.co.uk",
+  "subject": "Your Ilford website",
+  "body": "Quick, honest note about your Ilford website. A banner-heavy layout with dated gradient effects and weak visual hierarchy that reads as an old carousel template. I build clean, modern, mobile-first sites for a fixed 449 pounds, live within 48 hours â€” want me to send a quick preview?"
+ },
+ "A. Locksmith": {
+  "email": "info@alocksmithilford.co.uk",
+  "subject": "A quick note on A. Locksmith's site",
+  "body": "I was comparing locksmiths in Ilford and landed on A. Locksmith â€” and the site is holding you back. Multiple broken image files render as blank placeholders across key service sections, undermining the whole page. I could rebuild it properly for a fixed 449 pounds, live in a couple of days â€” shall I put together a free preview so you can see it?"
+ },
+ "Marwan Motors": {
+  "email": "info@marwanmotors.co.uk",
+  "subject": "Marwan Motors â€” your website on mobile",
+  "body": "Looking at Marwan Motors in Woolwich, the website is the weak link. The footer copyright reads 2020-2021 and the page is keyword-stuffed with broken placeholder images and empty testimonials. For a fixed 449 pounds I'd have a fresh, fast, mobile-friendly site live for you within 48 hours â€” want to see a mockup first?"
+ },
+ "PD Motors Ltd": {
+  "email": "pdmot1@aol.com",
+  "subject": "Spotted something on your Croydon site",
+  "body": "I came across PD Motors Ltd while looking at garages around Croydon, and the work looks solid â€” but the website is quietly letting you down. A dated template layout with pixelated low-resolution banner graphics and no copyright year anywhere. A modern rebuild is a one-off 449 pounds, live within 48 hours â€” happy to send a preview if useful?"
+ },
+ "Croydon MOT Tyre and Service Centre": {
+  "email": "info@croydonmotcentre.co.uk",
+  "subject": "Your Croydon garage site",
+  "body": "You're clearly a busy garage in Croydon, so it's a shame the website isn't doing you justice. It uses irrelevant low-res placeholder photos on an automotive site, with contact details cluttered across the header. I can sort all of this with a modern rebuild for a fixed 449 pounds, live in 48 hours â€” want to see what it'd look like?"
+ },
+ "Blackhorse Service Station": {
+  "email": "blackhorseservicestation@hotmail.co.uk",
+  "subject": "Your South Norwood website",
+  "body": "I had a look at Blackhorse Service Station's site while checking garages in South Norwood, and one thing really stood out. The footer reads 2017 and it is an untouched 2017 build with dated imagery and a broken contact form. I build clean, modern, mobile-first sites for a fixed 449 pounds, live within 48 hours â€” want me to send a quick preview?"
+ },
+ "Armer Fit Personal Training": {
+  "email": "tom@armerfit.com",
+  "subject": "Armer Fit Personal Training â€” your website on mobile",
+  "body": "I was comparing personal trainers in Enfield and landed on Armer Fit Personal Training â€” and the site is holding you back. The footer reads 2020 and it is a sparse layout with a broken social widget and stock banner images. For a fixed 449 pounds I'd have a fresh, fast, mobile-friendly site live for you within 48 hours â€” want to see a mockup first?"
+ },
+ "U-Shape": {
+  "email": "nadya@u-shape.co.uk",
+  "subject": "Spotted something on your Wandsworth site",
+  "body": "Looking at U-Shape in Wandsworth, the website is the weak link. The footer reads copyright 2018 on a dated framework with basic typography and minimal image optimisation. A modern rebuild is a one-off 449 pounds, live within 48 hours â€” happy to send a preview if useful?"
+ },
+ "Amelia Fitness": {
+  "email": "info@ameliafitness.co.uk",
+  "subject": "Your Barnet personal trainer site",
+  "body": "I came across Amelia Fitness while looking at personal trainers around Barnet, and the work looks solid â€” but the website is quietly letting you down. The footer reads 2018 and several main-nav links resolve to the same page, so it is stale and partly non-functional. I can sort all of this with a modern rebuild for a fixed 449 pounds, live in 48 hours â€” want to see what it'd look like?"
+ },
+ "Cut & Bubble": {
+  "email": "kevin@cutandbubble.co.uk",
+  "subject": "A quick note on Cut & Bubble's site",
+  "body": "I had a look at Cut & Bubble's site while checking dog groomers in Romford, and one thing really stood out. A low-polish Wix template with generic stock imagery and multiple duplicated opening-hours sections. I could rebuild it properly for a fixed 449 pounds, live in a couple of days â€” shall I put together a free preview so you can see it?"
+ },
+ "Groom for Improvement": {
+  "email": "info@groomforimprovement.uk",
+  "subject": "Groom for Improvement â€” your website on mobile",
+  "body": "Quick, honest note about your Sutton website. The footer reads 2018 and the live site leaks internal staging URLs with placeholder Instagram images instead of real content. For a fixed 449 pounds I'd have a fresh, fast, mobile-friendly site live for you within 48 hours â€” want to see a mockup first?"
+ },
+ "Walthamstow Removals": {
+  "email": "info@walthamstowremovals.co.uk",
+  "subject": "Spotted something on your Walthamstow site",
+  "body": "I was comparing removals firms in Walthamstow and landed on Walthamstow Removals â€” and the site is holding you back. A dated single-page brochure with a 2019 copyright and a duplicated footer, showing no updates in years. A modern rebuild is a one-off 449 pounds, live within 48 hours â€” happy to send a preview if useful?"
+ },
+ "Barnet Removals": {
+  "email": "contact@barnetremovals.co.uk",
+  "subject": "Your Barnet removals firm site",
+  "body": "Looking at Barnet Removals in Barnet, the website is the weak link. The main 'request a quote' buttons are broken due to malformed links, so your key conversion buttons do not work. I can sort all of this with a modern rebuild for a fixed 449 pounds, live in 48 hours â€” want to see what it'd look like?"
+ },
+ "Enfield Removal Services": {
+  "email": "bpcollisers@gmail.com",
+  "subject": "Your Enfield website",
+  "body": "I came across Enfield Removal Services while looking at removals firms around Enfield, and the work looks solid â€” but the website is quietly letting you down. The homepage carousel still shows default placeholder text like 'Slide title' and stock images, looking abandoned mid-build. I build clean, modern, mobile-first sites for a fixed 449 pounds, live within 48 hours â€” want me to send a quick preview?"
+ },
+ "The Groom Lounge": {
+  "email": "info@thegroomlounge.co.uk",
+  "subject": "The Groom Lounge â€” your website on mobile",
+  "body": "I had a look at The Groom Lounge's site while checking barbershops in Peckham, and one thing really stood out. The homepage footer has been compromised with injected spam links and the copyright is stuck at 2020, signalling a neglected site. For a fixed 449 pounds I'd have a fresh, fast, mobile-friendly site live for you within 48 hours â€” want to see a mockup first?"
+ },
+ "Dak'Sheens Hair & Beauty": {
+  "email": "enquiries@daksheen.co.uk",
+  "subject": "Spotted something on your Lewisham site",
+  "body": "Quick, honest note about your Lewisham website. A dated early-2010s website-builder template with leftover placeholder text and generic carousel slides. A modern rebuild is a one-off 449 pounds, live within 48 hours â€” happy to send a preview if useful?"
+ },
+ "CC Creations Hair & Beauty": {
+  "email": "caroncousinscc2@gmail.com",
+  "subject": "Your Lewisham salon site",
+  "body": "I was comparing salons in Lewisham and landed on CC Creations Hair & Beauty â€” and the site is holding you back. There is no online booking (only a callback form), low-resolution gallery images and a basic template layout. I can sort all of this with a modern rebuild for a fixed 449 pounds, live in 48 hours â€” want to see what it'd look like?"
+ },
+ "Mode Hair & Beauty": {
+  "email": "naikarado@hotmail.com",
+  "subject": "Your Croydon website",
+  "body": "Looking at Mode Hair & Beauty in Croydon, the website is the weak link. The footer copyright is stuck at 2022, there is no online booking, and the galleries are basic mid-2010s design. I build clean, modern, mobile-first sites for a fixed 449 pounds, live within 48 hours â€” want me to send a quick preview?"
+ },
+ "Vintage 62": {
+  "email": "info@salonvintage62.co.uk",
+  "subject": "A quick note on Vintage 62's site",
+  "body": "I came across Vintage 62 while looking at salons around Croydon, and the work looks solid â€” but the website is quietly letting you down. The homepage renders blank placeholder images instead of real photos and has minimal responsive styling. I could rebuild it properly for a fixed 449 pounds, live in a couple of days â€” shall I put together a free preview so you can see it?"
+ },
+ "Hair Salon Image": {
+  "email": "info@hairsalonimage.co.uk",
+  "subject": "Hair Salon Image â€” your website on mobile",
+  "body": "You're clearly a busy salon in Brockley, so it's a shame the website isn't doing you justice. A dated design relying on blank placeholder graphics with no online booking, just a contact form. For a fixed 449 pounds I'd have a fresh, fast, mobile-friendly site live for you within 48 hours â€” want to see a mockup first?"
+ },
+ "Slims Barbers": {
+  "email": "info@slimsbarbers.co.uk",
+  "subject": "Spotted something on your Tottenham site",
+  "body": "I had a look at Slims Barbers's site while checking barbershops in Tottenham, and one thing really stood out. A basic, dated layout with no mobile design and no online booking â€” just static hours and a price list. A modern rebuild is a one-off 449 pounds, live within 48 hours â€” happy to send a preview if useful?"
+ },
+ "Broadway Beauty Salon": {
+  "email": "info@broadwaybeauty.salon",
+  "subject": "Your Ilford nail salon site",
+  "body": "Quick, honest note about your Ilford website. Built on a dated free WordPress.com template, and its booking system says it is 'currently under development'. I can sort all of this with a modern rebuild for a fixed 449 pounds, live in 48 hours â€” want to see what it'd look like?"
+ },
+ "Hair Club Camden": {
+  "email": "camdenhairclub@gmail.com",
+  "subject": "Your Camden website",
+  "body": "I was comparing salons in Camden and landed on Hair Club Camden â€” and the site is holding you back. The homepage still shows unedited template placeholder text and broken opening hours ('Sunday: 10:00 PM - 7:00 PM'). I build clean, modern, mobile-first sites for a fixed 449 pounds, live within 48 hours â€” want me to send a quick preview?"
+ },
+ "Rose Hair and Beauty": {
+  "email": "rose@rosehairandbeauty.co.uk",
+  "subject": "A quick note on Rose Hair and Beauty's site",
+  "body": "Looking at Rose Hair and Beauty in Ealing, the website is the weak link. The copyright reads 2021, the hero is a credited stock photo, and there is no online booking. I could rebuild it properly for a fixed 449 pounds, live in a couple of days â€” shall I put together a free preview so you can see it?"
+ },
+ "Hanan Beauty Salon": {
+  "email": "info@hananbeautysalon.co.uk",
+  "subject": "Hanan Beauty Salon â€” your website on mobile",
+  "body": "I came across Hanan Beauty Salon while looking at salons around Shepherds Bush, and the work looks solid â€” but the website is quietly letting you down. A dated mid-2010s static site with keyword-stuffed copy and no online booking. For a fixed 449 pounds I'd have a fresh, fast, mobile-friendly site live for you within 48 hours â€” want to see a mockup first?"
+ },
+ "Jackie & Co": {
+  "email": "jackieandco@hotmail.com",
+  "subject": "Spotted something on your Hammersmith site",
+  "body": "You're clearly a busy salon in Hammersmith, so it's a shame the website isn't doing you justice. A dated Weebly site with no copyright year and a static, image-heavy early-web layout. A modern rebuild is a one-off 449 pounds, live within 48 hours â€” happy to send a preview if useful?"
+ },
+ "RAM Barbers": {
+  "email": "info@rambarbers.com",
+  "subject": "Your Walthamstow barbershop site",
+  "body": "I had a look at RAM Barbers's site while checking barbershops in Walthamstow, and one thing really stood out. A generic Wix template on stock photos with a 2023 footer and no phone number listed anywhere on the site. I can sort all of this with a modern rebuild for a fixed 449 pounds, live in 48 hours â€” want to see what it'd look like?"
+ },
+ "Iva Cleaning Services": {
+  "email": "office@iva-cleaninglondon.co.uk",
+  "subject": "Iva Cleaning Services â€” your website on mobile",
+  "body": "Looking at Iva Cleaning Services in Enfield, the website is the weak link. The logo renders as raw placeholder code and the payment icons are broken, on a generic template with a boilerplate 2026 copyright. For a fixed 449 pounds I'd have a fresh, fast, mobile-friendly site live for you within 48 hours â€” want to see a mockup first?"
+ },
+ "Busy Hands Cleaners": {
+  "email": "info@busyhandscleaners.co.uk",
+  "subject": "Spotted something on your Croydon site",
+  "body": "I came across Busy Hands Cleaners while looking at cleaning companys around Croydon, and the work looks solid â€” but the website is quietly letting you down. A dated early-2010s design with placeholder 'dummy.png' images in the slideshow and heavy postcode keyword-stuffing. A modern rebuild is a one-off 449 pounds, live within 48 hours â€” happy to send a preview if useful?"
+ },
+ "Carpets 4 Life": {
+  "email": "sales@carpets4life.co.uk",
+  "subject": "A quick note on Carpets 4 Life's site",
+  "body": "Quick, honest note about your Woolwich website. The site still shows Lorem Ipsum placeholder text and broken images, with service links misrouting and keyword-stuffed page titles. I could rebuild it properly for a fixed 449 pounds, live in a couple of days â€” shall I put together a free preview so you can see it?"
+ },
+ "Farrants Flooring & Carpet Fitter": {
+  "email": "info@farrantsflooring.co.uk",
+  "subject": "Your Sutton flooring company site",
+  "body": "I came across Farrants Flooring & Carpet Fitter while looking at flooring companys around Sutton, and the work looks solid â€” but the website is quietly letting you down. A basic mid-2010s layout with a template copyright bug showing 2026 and stock imagery â€” functional but visually dated. I can sort all of this with a modern rebuild for a fixed 449 pounds, live in 48 hours â€” want to see what it'd look like?"
+ },
+ "Oakhill Fencing": {
+  "email": "info@oakhillfencing.co.uk",
+  "subject": "Spotted something on your Kingston site",
+  "body": "I was comparing fencing contractors in Kingston and landed on Oakhill Fencing â€” and the site is holding you back. A dated aesthetic with a broken homepage banner, cluttered nested menus and a copyright frozen at 2019. A modern rebuild is a one-off 449 pounds, live within 48 hours â€” happy to send a preview if useful?"
+ },
+ "Bromley Tiler": {
+  "email": "info@bromleytiler.co.uk",
+  "subject": "Your Bexleyheath website",
+  "body": "I came across Bromley Tiler while looking at tilers around Bexleyheath, and the work looks solid â€” but the website is quietly letting you down. An otherwise-modern site undermined by a broken stats counter reading '0 Years' experience and long keyword-heavy area lists. I build clean, modern, mobile-first sites for a fixed 449 pounds, live within 48 hours â€” want me to send a quick preview?"
+ },
+ "PR Henry Builder": {
+  "email": "info@prhenrybuilder.co.uk",
+  "subject": "Spotted something on your Walthamstow site",
+  "body": "Quick, honest note about your Walthamstow website. The footer copyright is stuck at 2024 and nearly every heading repeats 'Plasterer Walthamstow' / 'plastering company in Walthamstow', giving a keyword-stuffed feel. A modern rebuild is a one-off 449 pounds, live within 48 hours â€” happy to send a preview if useful?"
+ },
+ "Rob The Builder": {
+  "email": "info@robthebuilder.co.uk",
+  "subject": "Your Ilford painter & decorator site",
+  "body": "I was comparing painter & decorators in Ilford and landed on Rob The Builder â€” and the site is holding you back. The footer copyright reads 2024 and the decorating page repeatedly stuffs 'Painting & decorating Ilford, IG1' into headings and body copy. I can sort all of this with a modern rebuild for a fixed 449 pounds, live in 48 hours â€” want to see what it'd look like?"
+ },
+ "S&J Webster Decorators": {
+  "email": "sj.webster2017@yahoo.com",
+  "subject": "Your Bexleyheath website",
+  "body": "Looking at S&J Webster Decorators in Bexleyheath, the website is the weak link. The 'General Small Building Works' section shows empty placeholder images instead of real photos, and the footer carries a long list of ~15 area-name links that reads as location keyword stuffing. I build clean, modern, mobile-first sites for a fixed 449 pounds, live within 48 hours â€” want me to send a quick preview?"
+ },
+ "Imperial Plasterers & Builders": {
+  "email": "imperialplasterers@hotmail.co.uk",
+  "subject": "Catford customers can't find Imperial Plasterers & Builders online",
+  "body": "Has no standalone website at all, only a Facebook page plus directory listings, despite 16+ years trading and a published mobile, landline and email address. Right now Catford customers are searching for a plasterer and landing on competitors instead. I can build and launch a professional, mobile-friendly website for you within 48 hours for a fixed 449 pounds â€” want to see what it'd look like?"
+ },
+ "Edmonton Green Painters & Decorators": {
+  "email": "infolondonpainters@gmail.com",
+  "subject": "Edmonton customers can't find Edmonton Green Painters & Decorators online",
+  "body": "No real website, only a free Google Sites page on a sites.google.com/view subdomain, despite a published mobile, email and a 5-star Google review. Right now Edmonton customers are searching for a painter & decorator and landing on competitors instead. I can build and launch a professional, mobile-friendly website for you within 48 hours for a fixed 449 pounds â€” want to see what it'd look like?"
+ },
+ "The Flower Shop Enfield": {
+  "email": "caroline4flowers@yahoo.co.uk",
+  "subject": "Spotted something on your Enfield site",
+  "body": "I had a look at The Flower Shop Enfield's site while checking florists in Enfield, and one thing really stood out. It is a visibly dated brochure site still carrying IE8/IE9-specific stylesheets and a shelved '2020 redesign', with basic product pages and no modern mobile-first layout. A modern rebuild is a one-off 449 pounds, live within 48 hours â€” happy to send a preview if useful?"
+ },
+ "PML Handyman": {
+  "email": "info@pmlhandyman.co.uk",
+  "subject": "Something on your Wandsworth homepage",
+  "body": "Your Wandsworth site pulls in a live Google review feed, and right now one of the first ones a visitor sees is a bad one sitting just above your phone number â€” you probably can't control which it shows. That's the first thing a customer reads before they decide to call, and the service photos alongside it are from 2018. I can rebuild it so your best work leads instead, for a fixed one-off price â€” want me to send a quick mockup?"
+ },
+ "Building & Handyman": {
+  "email": "info@buildinghandyman.com",
+  "subject": "Battersea Handyman Site",
+  "body": "Your site's a Battersea handyman service with 2018 stock photos and a long block of text on the homepage, making prices hard to find on a phone. This costs you work as people pick the next result quickly. I can fix this for a fixed one-off price, want me to send a quick mockup?"
+ },
+ "The Local Handyman London": {
+  "email": "info@localhm.co.uk",
+  "subject": "Slow Greenford Site",
+  "body": "The Local Handyman London's homepage has large uncompressed images, making it slow on mobile and hiding services. This costs you work as users pick the next result quickly. I can fix it for a fixed one-off price, want me to send a quick mockup?"
+ },
+ "Top Dog Joinery Limited": {
+  "email": "john@topdogjoinery.co.uk",
+  "subject": "Leytonstone carpentry online",
+  "body": "Top Dog Joinery Limited in Leytonstone has no website. Locals searching for a carpenter pick the next result in seconds. I can build your site for a fixed one-off price, want me to send a quick mockup?"
+ },
+ "John Lawler": {
+  "email": "info@johnlawlerupholstery.co.uk",
+  "subject": "Crouch End Upholsterer",
+  "body": "John Lawler's site lacks SSL, showing 'Not secure' in Chrome. This costs work as people pick the next result. I can fix it for a fixed one-off price, want me to send a quick mockup?"
+ },
+ "Muswell Hill Joinery": {
+  "email": "muswellhilljoinery@gmail.com",
+  "subject": "Crouch End carpentry online",
+  "body": "Muswell Hill Joinery in Crouch End has no site. Locals search and pick the next result. Want me to send a quick mockup?"
+ },
+ "Tablemaker": {
+  "email": "hello@tablemaker.co.uk",
+  "subject": "Crouch End Carpenter",
+  "body": "Tablemaker in Crouch End has no clickable phone number on its homepage. This costs work as customers pick the next result. I can fix it for a fixed one-off price, want me to send a quick mockup?"
+ },
+ "Meta Scaffolding": {
+  "email": "info@metascaffolding.co.uk",
+  "subject": "Barnet scaffolder site",
+  "body": "Meta Scaffolding in Barnet has a nearly empty homepage with barely any content. This costs you work as people pick the next result in seconds. I can fix it for a fixed one-off price, want me to send a quick mockup?"
+ },
+ "Kings of London": {
+  "email": "book@drakesoflondon.com",
+  "subject": "Kings of London website",
+  "body": "Hi Kings of London, as a hair salon in Greenwich, your site's missing a clickable phone number on the homepage, which costs you calls. Someone searching for a salon will pick the next result in seconds if they can't quickly get in touch. We can build you a modern, clean site from Â£449 one-off, with a Â£39/month care plan optional, want me to send a quick mockup?"
+ },
+ "Nouvelle hair and beauty": {
+  "email": "hello@nouvellese20.co.uk",
+  "subject": "Nouvelle hair and beauty site",
+  "body": "Hi Nouvelle hair and beauty, as a hair salon in Penge, your site's missing a clickable phone number on the homepage, meaning customers have to search to get in touch. This costs you work as someone will pick the next result in seconds. We can build you a modern, clean site from Â£449 one-off, with an optional Â£39/month care plan, want me to send a quick mockup?"
+ },
+ "Blackbird Bakery": {
+  "email": "blackbirdbakerylondon@gmail.com",
+  "subject": "Penge bakery phone issue",
+  "body": "Hi Blackbird Bakery, as a Penge bakery, your site's missing a clickable phone number on the homepage, which costs you calls when someone's ready to order but can't quickly get in touch. We can build you a modern, clean site from Â£449 one-off, with an optional Â£39/month care plan to keep it updated and working. Want me to send a quick mockup?"
+ },
+ "Richard Ward": {
+  "email": "info@richardward.com",
+  "subject": "Richard Ward site",
+  "body": "Hi Richard Ward, as a hair salon in Chelsea, your site's missing a clickable phone number on the homepage, which means customers have to search for a way to get in touch. This costs you bookings as someone will pick the next result in seconds. We can build you a modern, clean site from £449 one-off, with an optional £39/month care plan, want me to send a quick mockup?"
+ },
+ "Hammersmith Tattoo London": {
+  "email": "info@hammersmithtattoo.co.uk",
+  "subject": "Hammersmith Tattoo phone issue",
+  "body": "Hi Hammersmith Tattoo London, as a West Kensington tattoo studio, your site's missing a clickable phone number on the homepage, which means customers have to search for a way to get in touch. This costs you work as someone will pick the next result in seconds. We can build you a modern, clean site from £449 one-off, with an optional £39/month care plan, want me to send a quick mockup?"
+ },
+ "TC&D Construction": {
+  "email": "enquiries@tcdconstruction.co.uk",
+  "subject": "TC&D Construction website",
+  "body": "Hi TC&D Construction, as a builder in Sidcup, your site's got filler text that was never replaced, which makes it look unfinished. This costs you work as people will pick the next result in seconds. We can build you a modern, clean site from £449 one-off, with an optional £39/month care plan, want me to send a quick mockup?"
+ },
+ "Tula Rose": {
+  "email": "info@tularose.com",
+  "subject": "Tula Rose website",
+  "body": "Hi Tula Rose, as a beauty salon in Camberwell, your site's nearly empty homepage doesn't give customers much to go on. Someone searching for a salon will pick the next result in seconds if they can't find what they're looking for. We can build you a modern, clean site from £449 one-off, with an optional £39/month care plan, want me to send a quick mockup?"
+ },
+ "Meat Jon": {
+  "email": "order@meatjon.com",
+  "subject": "Meat Jon website review",
+  "body": "Hi Meat Jon, as a Ladywell butcher, your site's homepage is nearly empty, which means customers have nothing to read and Google's got nothing to index. This costs you work as people will pick the next result in seconds. We can build you a modern, clean site from £449 one-off, with an optional £39/month care plan, want me to send a quick mockup?"
+ },
+ "Elite Hair Lounge": {
+  "email": "lewisham@elitehairlounge.co.uk",
+  "subject": "Empty Homepage",
+  "body": "Hi Elite Hair Lounge, as a hair salon in Lewisham, your site's homepage is almost blank, which costs you work as people will pick the next result in seconds. We can build you a modern, clean site from £449 one-off, with an optional £39/month care plan to keep it updated. Want me to send a quick mockup?"
+ },
+ "Billings": {
+  "email": "sales@shopbillings.co.uk",
+  "subject": "Billings Butcher site security",
+  "body": "Hi Billings, as a Sydenham butcher, your site's http connection shows a 'Not secure' warning in Chrome, which likely loses you work as people quickly pick the next result. This costs you customers as they don't want to risk their info on an insecure site. We can build you a modern, clean site from £449 one-off and offer an optional £39/month care plan, want me to send a quick mockup?"
+ }
 }
