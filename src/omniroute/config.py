@@ -123,12 +123,15 @@ class Settings:
                 key, _, val = line.partition("=")
                 key = key.strip()
                 val = val.strip()
-                # Strip inline comments (space before #)
-                idx = val.find(" #")
-                if idx >= 0:
-                    val = val[:idx].rstrip()
+                quoted = len(val) >= 2 and val[0] == val[-1] and val[0] in ("'", '"')
+                # Strip inline comments (space before #) ONLY on unquoted values —
+                # a quoted value can legitimately contain " #" (e.g. an app password).
+                if not quoted:
+                    idx = val.find(" #")
+                    if idx >= 0:
+                        val = val[:idx].rstrip()
                 # Strip surrounding quotes (single or double)
-                if len(val) >= 2 and val[0] == val[-1] and val[0] in ("'", '"'):
+                if quoted:
                     val = val[1:-1]
                 os.environ.setdefault(key, val)
 
