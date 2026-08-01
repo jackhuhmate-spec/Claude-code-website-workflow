@@ -342,6 +342,52 @@ describe("payments", () => {
     expect(report?.problems[0]).toContain("unrecognised payment type");
     expect(await handle.db.select().from(payments)).toHaveLength(0);
   });
+
+  it("understands every status the payment recorder can write", async () => {
+    // `ops/record_payment.py` writes paid | deposit | quoted | overdue | refunded. Each has
+    // to land somewhere true; a status falling through to a default would misreport cash.
+    await importAll(ctx, {
+      "leads.csv": LEADS_CSV,
+      "payments.csv": [
+        "date,business,amount_gbp,type,status,notes",
+        "2026-08-01,1st Plumbers,224.50,build,deposit,50% up front",
+        "2026-08-02,Bromley Roofer Ltd,449.00,build,quoted,",
+        "2026-08-03,Farrants Flooring,449.00,build,overdue,chased twice",
+      ].join("\n"),
+    });
+
+    const rows = await handle.db.select().from(payments);
+    expect(rows).toHaveLength(3);
+
+    // A deposit is money already received, and is a part payment — filing it as a full
+    // build would report the sale as settled and stop the balance being chased.
+    const deposit = rows.find((row) => row.amountPence === 22_450);
+    expect(deposit?.status).toBe("paid");
+    expect(deposit?.kind).toBe("build_deposit");
+    expect(deposit?.paidAt).toEqual(new Date("2026-08-01T00:00:00.000Z"));
+
+    // Quoted and overdue are both genuinely unpaid; the schema separates them by dueAt.
+    const outstanding = rows.filter((row) => row.status === "due");
+    expect(outstanding).toHaveLength(2);
+    expect(outstanding.every((row) => row.paidAt === null)).toBe(true);
+    expect(outstanding.every((row) => row.dueAt !== null)).toBe(true);
+    expect(outstanding.every((row) => row.kind === "build_full")).toBe(true);
+  });
+
+  it("refuses to guess at an unrecognised payment status", async () => {
+    const result = await importAll(ctx, {
+      "leads.csv": LEADS_CSV,
+      "payments.csv": [
+        "date,business,amount_gbp,type,status,notes",
+        "2026-08-01,1st Plumbers,449.00,build,maybe,",
+      ].join("\n"),
+    });
+
+    const report = result.reports.find((r) => r.source === "payments.csv");
+    expect(report?.stats.skipped).toBe(1);
+    expect(report?.problems[0]).toContain("unrecognised payment status");
+    expect(await handle.db.select().from(payments)).toHaveLength(0);
+  });
 });
 
 describe("parseGbpToPence", () => {

@@ -48,10 +48,26 @@ const KIND_BY_TYPE = new Map<string, PaymentKind>([
   ["refund", "refund"],
 ]);
 
+/**
+ * Every status `ops/record_payment.py` can write, plus the obvious synonyms.
+ *
+ * That script is the only producer of this file, and its vocabulary is
+ * `paid | deposit | quoted | overdue | refunded`. Anything it emits must map to something
+ * true here: an unmapped status silently falling back to `due` would record money that has
+ * already been received as outstanding.
+ *
+ * `deposit` is the awkward one. It is written in the status column but describes the *kind*
+ * of payment — a 50% deposit that has in fact been taken — so it means paid, and the kind is
+ * narrowed alongside it in `resolveKind`. `quoted` and `overdue` are both genuinely unpaid
+ * and the schema distinguishes them by `dueAt`, not by a separate state.
+ */
 const STATUS_BY_TEXT = new Map<string, PaymentStatus>([
   ["paid", "paid"],
   ["received", "paid"],
+  ["deposit", "paid"],
   ["due", "due"],
+  ["quoted", "due"],
+  ["overdue", "due"],
   ["pending", "due"],
   ["outstanding", "due"],
   ["failed", "failed"],
@@ -59,6 +75,18 @@ const STATUS_BY_TEXT = new Map<string, PaymentStatus>([
   ["written_off", "written_off"],
   ["write_off", "written_off"],
 ]);
+
+/**
+ * A deposit recorded as `--type build --status deposit` is a part payment, not the full
+ * £449. Filing it as `build_full` would report the build as settled and stop the balance
+ * ever being chased.
+ */
+function resolveKind(kind: PaymentKind, statusText: string): PaymentKind {
+  if (statusText === "deposit" && (kind === "build_full" || kind === "build_balance")) {
+    return "build_deposit";
+  }
+  return kind;
+}
 
 /**
  * Pounds to pence, without floating point.
@@ -101,8 +129,8 @@ export async function importPayments(
       continue;
     }
 
-    const kind = KIND_BY_TYPE.get(record.get("type").trim().toLowerCase());
-    if (kind === undefined) {
+    const declaredKind = KIND_BY_TYPE.get(record.get("type").trim().toLowerCase());
+    if (declaredKind === undefined) {
       // Money is never guessed at. An unrecognised type is escalated as a defect rather
       // than filed under a plausible-looking kind that would then be reported as revenue.
       stats.skipped += 1;
@@ -110,7 +138,17 @@ export async function importPayments(
       continue;
     }
 
-    const status = STATUS_BY_TEXT.get(record.get("status").trim().toLowerCase()) ?? "due";
+    const statusText = record.get("status").trim().toLowerCase();
+    const status = STATUS_BY_TEXT.get(statusText);
+    if (status === undefined) {
+      // Same rule as the type column: a status nobody has taught this importer about could
+      // mean paid or unpaid, and the difference is the whole point of the file.
+      stats.skipped += 1;
+      problems.add(record.line, `unrecognised payment status "${record.get("status")}"`);
+      continue;
+    }
+
+    const kind = resolveKind(declaredKind, statusText);
     const reference = paymentReference(name, dateText, amountPence);
 
     const existing = await ctx.db
