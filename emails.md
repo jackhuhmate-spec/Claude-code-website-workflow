@@ -171,3 +171,17 @@ Meta Scaffolding in Barnet has a nearly empty homepage with barely any content. 
 **Subject:** Kings of London website
 
 Hi Kings of London, as a hair salon in Greenwich, your site's missing a clickable phone number on the homepage, which costs you calls. Someone searching for a salon will pick the next result in seconds if they can't quickly get in touch. We can build you a modern, clean site from £449 one-off, with a £39/month care plan optional, want me to send a quick mockup?
+
+---
+
+## Nouvelle hair and beauty — Hair Salon, Penge ✅ hello@nouvellese20.co.uk
+**Subject:** Nouvelle hair and beauty site
+
+Hi Nouvelle hair and beauty, as a hair salon in Penge, your site's missing a clickable phone number on the homepage, meaning customers have to search to get in touch. This costs you work as someone will pick the next result in seconds. We can build you a modern, clean site from £449 one-off, with an optional £39/month care plan, want me to send a quick mockup?
+
+---
+
+## Blackbird Bakery — Bakery, Penge ✅ blackbirdbakerylondon@gmail.com
+**Subject:** Penge bakery phone issue
+
+Hi Blackbird Bakery, as a Penge bakery, your site's missing a clickable phone number on the homepage, which costs you calls when someone's ready to order but can't quickly get in touch. We can build you a modern, clean site from £449 one-off, with an optional £39/month care plan to keep it updated and working. Want me to send a quick mockup?
