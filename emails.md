@@ -234,3 +234,24 @@ Hi Elite Hair Lounge, as a hair salon in Lewisham, your site's homepage is almos
 **Subject:** Billings Butcher site security
 
 Hi Billings, as a Sydenham butcher, your site's http connection shows a 'Not secure' warning in Chrome, which likely loses you work as people quickly pick the next result. This costs you customers as they don't want to risk their info on an insecure site. We can build you a modern, clean site from £449 one-off and offer an optional £39/month care plan, want me to send a quick mockup?
+
+---
+
+## Little Details Property Services Ltd — Plumber, Raynes Park ✅ little-details@hotmail.co.uk
+**Subject:** Little Details site issue
+
+Hi Little Details Property Services Ltd, your site doesn't load when I click the link, which means people searching for a plumber in Raynes Park can't find you. This costs you work as someone will pick the next result in seconds. We can build you a modern, clean site from £449 one-off and offer a £39/month care plan, optional - want me to send a quick mockup?
+
+---
+
+## Manor Glass and Glazing — Glazier, Wallington ✅ manor.glass@tiscali.co.uk
+**Subject:** Manor Glass site issue
+
+Hi Manor Glass and Glazing, as a Wallington glazier, your site not loading is a major problem - it doesn't matter how good your services are if no one can see them. Someone searching for a glazier in Wallington will just pick the next result in seconds. We can build you a modern, clean site from £449 one-off, with an optional £39/month care plan, want me to send a quick mockup?
+
+---
+
+## Stained Glass Guild — Glazier, Kingston upon Thames ✅ contact@stainedglassguild.com
+**Subject:** Secure your site
+
+Hi Stained Glass Guild, as a Kingston upon Thames glazier, your site has a couple of issues - it's still on http and has no SSL certificate, so Chrome flags it as 'Not secure', and there's no clickable phone number on the homepage. This costs you work as people can quickly pick the next result. We can build you a modern, clean site from £449 one-off, with an optional £39/month care plan, want me to send a quick mockup?
