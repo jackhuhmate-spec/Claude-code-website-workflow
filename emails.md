@@ -255,3 +255,10 @@ Hi Manor Glass and Glazing, as a Wallington glazier, your site not loading is a 
 **Subject:** Secure your site
 
 Hi Stained Glass Guild, as a Kingston upon Thames glazier, your site has a couple of issues - it's still on http and has no SSL certificate, so Chrome flags it as 'Not secure', and there's no clickable phone number on the homepage. This costs you work as people can quickly pick the next result. We can build you a modern, clean site from £449 one-off, with an optional £39/month care plan, want me to send a quick mockup?
+
+---
+
+## Sargeant & Son Ltd. — Plumber, Hayes ✅ info@sargeantandson.co.uk
+**Subject:** Update for Sargeant & Son Ltd
+
+Hi Sargeant & Son Ltd, as a plumber in Hayes, your site's footer still saying 2018 makes it look like you're not active. That costs you work as people pick the next result in seconds. We can build you a modern, clean site from £449 one-off, with an optional £39/month care plan, want me to send a quick mockup?
