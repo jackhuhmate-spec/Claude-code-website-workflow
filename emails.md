@@ -290,3 +290,17 @@ Hi Taylor Taylor, as a hair salon in Whitechapel, your site's near-empty homepag
 **Subject:** Diamond Dry Cleaner site update
 
 Hi Diamond, as a dry cleaner in Whitechapel, your site's footer still says 2021, which might make people think you're no longer trading and pick the next result instead. This costs you work as someone will choose another cleaner in seconds. We can build you a modern, clean site from £449 one-off, with an optional £39/month care plan, want me to send a quick mockup?
+
+---
+
+## Phoenix Beauty Point — Beauty Salon, Lambeth ✅ phoenixbeautypoint@gmail.com
+**Subject:** Phoenix Beauty Point site update
+
+Hi Phoenix Beauty Point, as a beauty salon in Lambeth, your site has a footer that still says 2019, which might make people think you're not trading. This costs you work as someone will pick the next result in seconds. We can build you a modern, clean site from £449 one-off, with an optional £39/month care plan, want me to send a quick mockup?
+
+---
+
+## The Creaky Shed — Greengrocer, Greenwich ✅ jason@thecreakyshed.co.uk
+**Subject:** The Creaky Shed's empty homepage
+
+Hi The Creaky Shed, as a Greenwich greengrocer, your site's homepage is nearly empty, which costs you work as people pick the next result in seconds. We can build you a modern, clean site from £449 one-off, with an optional £39/month care plan to keep it updated. Want me to send a quick mockup?
