@@ -304,3 +304,31 @@ Hi Phoenix Beauty Point, as a beauty salon in Lambeth, your site has a footer th
 **Subject:** The Creaky Shed's empty homepage
 
 Hi The Creaky Shed, as a Greenwich greengrocer, your site's homepage is nearly empty, which costs you work as people pick the next result in seconds. We can build you a modern, clean site from £449 one-off, with an optional £39/month care plan to keep it updated. Want me to send a quick mockup?
+
+---
+
+## Anytime Locksmith — Locksmith, Finchley ✅ info@anytimelocksmiths.co.uk
+**Subject:** Update for Anytime Locksmith
+
+Hi Anytime Locksmith, as a Finchley locksmith, your site's footer still says 2007, which might make people think you're no longer in business. Someone searching for a locksmith in Finchley will probably pick the next result if they think you're not active. We can build you a modern, clean site from £449 one-off, with an optional £39/month care plan, want me to send a quick mockup?
+
+---
+
+## Whiskeys Grooming — Dog Groomer, New Southgate ✅ info@whiskeysgrooming.co.uk
+**Subject:** Whiskeys Grooming site
+
+Hi Whiskeys Grooming, as a dog groomer in New Southgate, your site's missing a clickable phone number on the homepage, which means customers have to search for a way to get in touch. This costs you work as someone will pick the next result in seconds. We can build you a modern, clean site from £449 one-off, with an optional £39/month care plan, want me to send a quick mockup?
+
+---
+
+## Green & Blossoms — Greengrocer, Muswell Hill ✅ sales@greenandblossoms.co.uk
+**Subject:** Muswell Hill Greengrocer Site
+
+Hi Green & Blossoms, as a Muswell Hill greengrocer, your site's missing a clickable phone number, so customers have to search for a way to call. That costs you work as someone will pick the next result in seconds. We can build you a modern, clean site from £449 one-off, with an optional £39/month care plan, want me to send a quick mockup?
+
+---
+
+## Trojan Ink Studio — Tattoo Studio, Southgate ✅ trojaninkltd@gmail.com
+**Subject:** Trojan Ink Studio website
+
+Hi Trojan Ink Studio, as a Southgate tattoo studio, your site's missing a clickable phone number on the homepage, which can cost you calls when someone's ready to book. Someone picks the next result in seconds if they can't quickly get in touch. We can build you a modern, clean site from £449 one-off, with an optional £39/month care plan, want me to send a quick mockup?
