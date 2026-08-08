@@ -332,3 +332,24 @@ Hi Green & Blossoms, as a Muswell Hill greengrocer, your site's missing a clicka
 **Subject:** Trojan Ink Studio website
 
 Hi Trojan Ink Studio, as a Southgate tattoo studio, your site's missing a clickable phone number on the homepage, which can cost you calls when someone's ready to book. Someone picks the next result in seconds if they can't quickly get in touch. We can build you a modern, clean site from £449 one-off, with an optional £39/month care plan, want me to send a quick mockup?
+
+---
+
+## Pure Synergie — Beauty Salon, Greenwich ✅ puresynergie@hotmail.co.uk
+**Subject:** Pure Synergie site review
+
+Hi Pure Synergie, as a beauty salon in Greenwich, your site's missing a clickable phone number on the homepage, so customers have to search for a way to get in touch. This costs you work as someone will pick the next result in seconds. We can build you a modern, clean site from £449 one-off, with an optional £39/month care plan, want me to send a quick mockup?
+
+---
+
+## Headlinerz Barbershop — Hair Salon, Greenwich ✅ info@headlinerzbarbershop.co.uk
+**Subject:** Headlinerz update
+
+Hi Headlinerz Barbershop, your site says you're a hair salon in Greenwich but the footer still says 2019, which makes you look closed. Someone searching for a barber in Greenwich will pick the next result if they think you're not active. We can build you a modern, clean site from £449 one-off, with an optional £39/month care plan, want me to send a quick mockup?
+
+---
+
+## EALING ELECTRICIANS LTD — Electrician, Perivale ✅ info@ealingelectricians.com
+**Subject:** Ealing Electricians site update
+
+Hi Ealing Electricians, as an electrician in Perivale, your site's footer still says 2023 which can make you look inactive. Someone searching for an electrician will pick the next result in seconds if they think you're not trading. We can build you a modern, clean site from £449 one-off, with an optional £39/month care plan, want me to send a quick mockup?
