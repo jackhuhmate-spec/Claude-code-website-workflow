@@ -353,3 +353,31 @@ Hi Headlinerz Barbershop, your site says you're a hair salon in Greenwich but th
 **Subject:** Ealing Electricians site update
 
 Hi Ealing Electricians, as an electrician in Perivale, your site's footer still says 2023 which can make you look inactive. Someone searching for an electrician will pick the next result in seconds if they think you're not trading. We can build you a modern, clean site from £449 one-off, with an optional £39/month care plan, want me to send a quick mockup?
+
+---
+
+## Mem's Barbers — Hair Salon, Lewisham ✅ memsbarbers@hotmail.co.uk
+**Subject:** update for Mem's Barbers
+
+Hi Mem's Barbers, as a hair salon in Lewisham, your site's footer still says 2015, which might make people think you're no longer in business and pick the next result instead. We can build you a modern, clean site from £449 one-off, with an optional £39/month care plan to keep it updated and working. Want me to send a quick mockup?
+
+---
+
+## Branching Out — Florist, Beckenham ✅ heyyou@branchingoutshop.com
+**Subject:** Branching Out site issue
+
+Hi Branching Out, your site doesn't load when I try to visit, which is a problem for a florist in Beckenham as people will just click the next result. This costs you work as it only takes seconds to choose another option. We can build you a modern, clean site from £449 one-off, with an optional £39/month care plan, want me to send a quick mockup?
+
+---
+
+## Inspire Beauty — Beauty Salon, Catford ✅ se6@inspirebeautyuk.com
+**Subject:** Inspire Beauty online
+
+Hi Inspire Beauty, as a Beauty Salon in Catford, your lack of a site means locals can't find you when searching online, so they're picking the next result in seconds. We can build you a modern, clean site from £449 one-off, with an optional £39/month care plan to keep it updated and working. Want me to send a quick mockup?
+
+---
+
+## Brothers Bakery — Bakery, Blackheath ✅ kazimkilic81@gmail.com
+**Subject:** Brothers Bakery site issue
+
+Hi Brothers Bakery, as a Blackheath bakery, your site's main address doesn't load, it just says 'page not found' - that costs you work as people pick the next result in seconds. We can build you a modern, clean site from £449 one-off, with an optional £39/month care plan to keep it updated and working. Want me to send a quick mockup?
