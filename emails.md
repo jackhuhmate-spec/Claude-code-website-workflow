@@ -381,3 +381,24 @@ Hi Inspire Beauty, as a Beauty Salon in Catford, your lack of a site means local
 **Subject:** Brothers Bakery site issue
 
 Hi Brothers Bakery, as a Blackheath bakery, your site's main address doesn't load, it just says 'page not found' - that costs you work as people pick the next result in seconds. We can build you a modern, clean site from £449 one-off, with an optional £39/month care plan to keep it updated and working. Want me to send a quick mockup?
+
+---
+
+## Pop — Hair Salon, West Norwood ✅ info@popwestnorwood.co.uk
+**Subject:** Pop Hair Salon site
+
+Hi Pop, as a West Norwood hair salon, your site's missing a clickable phone number on the homepage, which costs you calls as people pick the next result in seconds. We can build you a modern, clean site from £449 one-off, with an optional £39/month care plan to keep it updated and working. Want me to send a quick mockup?
+
+---
+
+## Earlsfield Dry Cleaning Co. — Dry Cleaner, Wandsworth ✅ theearlsfielddrycleaningcompany@outlook.com
+**Subject:** Earlsfield Dry Cleaning Co website
+
+Hi Earlsfield Dry Cleaning Co, as a Wandsworth dry cleaner, your site's missing a clickable phone number on the homepage, which costs you work as someone will pick the next result in seconds. We can build you a modern, clean site from £449 one-off, with an optional £39/month care plan to keep it updated and working. Want me to send a quick mockup?
+
+---
+
+## Bubbles Hair Studio — Hair Salon, Wandsworth ✅ info@bubbleshairstudio.co.uk
+**Subject:** Bubbles Hair Studio security
+
+Hi Bubbles Hair Studio, as a hair salon in Wandsworth, your site's lack of SSL certificate means Chrome shows a 'Not secure' warning, which likely loses you bookings as people quickly pick another salon. This costs you work as users choose the next result in seconds. We can build you a modern, clean site from £449 one-off, with an optional £39/month care plan to keep it updated and working, want me to send a quick mockup?

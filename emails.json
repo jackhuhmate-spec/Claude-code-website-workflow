@@ -618,5 +618,20 @@
   "email": "kazimkilic81@gmail.com",
   "subject": "Brothers Bakery site issue",
   "body": "Hi Brothers Bakery, as a Blackheath bakery, your site's main address doesn't load, it just says 'page not found' - that costs you work as people pick the next result in seconds. We can build you a modern, clean site from £449 one-off, with an optional £39/month care plan to keep it updated and working. Want me to send a quick mockup?"
+ },
+ "Pop": {
+  "email": "info@popwestnorwood.co.uk",
+  "subject": "Pop Hair Salon site",
+  "body": "Hi Pop, as a West Norwood hair salon, your site's missing a clickable phone number on the homepage, which costs you calls as people pick the next result in seconds. We can build you a modern, clean site from £449 one-off, with an optional £39/month care plan to keep it updated and working. Want me to send a quick mockup?"
+ },
+ "Earlsfield Dry Cleaning Co.": {
+  "email": "theearlsfielddrycleaningcompany@outlook.com",
+  "subject": "Earlsfield Dry Cleaning Co website",
+  "body": "Hi Earlsfield Dry Cleaning Co, as a Wandsworth dry cleaner, your site's missing a clickable phone number on the homepage, which costs you work as someone will pick the next result in seconds. We can build you a modern, clean site from £449 one-off, with an optional £39/month care plan to keep it updated and working. Want me to send a quick mockup?"
+ },
+ "Bubbles Hair Studio": {
+  "email": "info@bubbleshairstudio.co.uk",
+  "subject": "Bubbles Hair Studio security",
+  "body": "Hi Bubbles Hair Studio, as a hair salon in Wandsworth, your site's lack of SSL certificate means Chrome shows a 'Not secure' warning, which likely loses you bookings as people quickly pick another salon. This costs you work as users choose the next result in seconds. We can build you a modern, clean site from £449 one-off, with an optional £39/month care plan to keep it updated and working, want me to send a quick mockup?"
  }
 }
