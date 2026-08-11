@@ -402,3 +402,31 @@ Hi Earlsfield Dry Cleaning Co, as a Wandsworth dry cleaner, your site's missing 
 **Subject:** Bubbles Hair Studio security
 
 Hi Bubbles Hair Studio, as a hair salon in Wandsworth, your site's lack of SSL certificate means Chrome shows a 'Not secure' warning, which likely loses you bookings as people quickly pick another salon. This costs you work as users choose the next result in seconds. We can build you a modern, clean site from £449 one-off, with an optional £39/month care plan to keep it updated and working, want me to send a quick mockup?
+
+---
+
+## The Bakers — Bakery, Ealing ✅ orders@thebakersofealing.com
+**Subject:** Ealing Bakery Site
+
+Hi The Bakers, as a bakery in Ealing, your site's footer still says 2015 and there's no clickable phone number on the homepage. That costs you work as someone will pick the next result in seconds. We can build you a modern, clean site from £449 one-off and an optional £39/month care plan, want me to send a quick mockup?
+
+---
+
+## Greenka — Florist, Ealing ✅ info@greenka.uk
+**Subject:** Ealing florist online
+
+Hi Greenka, as a florist in Ealing, not having a site means locals can't find you when searching online, so they pick the next result in seconds. We can build you a modern, clean site from £449 one-off, with an optional £39/month care plan to keep it updated and working. Want me to send a quick mockup?
+
+---
+
+## Nu-Wave Medi Spa — Beauty Salon, Ealing ✅ info@nuwavelaserclinic.com
+**Subject:** Nu-Wave Medi Spa site issue
+
+Hi Nu-Wave Medi Spa, as a beauty salon in Ealing, your site's missing a clickable phone number on the homepage, so customers have to search for a way to contact you. This costs you work as someone will pick the next result in seconds. We can build you a modern, clean site from £449 one-off, with an optional £39/month care plan, want me to send a quick mockup?
+
+---
+
+## Nails By Moniss — Beauty Salon, Colindale ✅ tepeleancuta@gmail.com
+**Subject:** Nails By Moniss site issue
+
+Hi Nails By Moniss, your site doesn't load at all, which is a problem for a Colindale beauty salon. This costs you work as people will just pick the next result in seconds. We can build you a modern, clean site from £449 one-off, with an optional £39/month care plan, want me to send a quick mockup?
