@@ -430,3 +430,17 @@ Hi Nu-Wave Medi Spa, as a beauty salon in Ealing, your site's missing a clickabl
 **Subject:** Nails By Moniss site issue
 
 Hi Nails By Moniss, your site doesn't load at all, which is a problem for a Colindale beauty salon. This costs you work as people will just pick the next result in seconds. We can build you a modern, clean site from £449 one-off, with an optional £39/month care plan, want me to send a quick mockup?
+
+---
+
+## Signorelli — Bakery, Olympic Park ✅ ciao@signorelli.co.uk
+**Subject:** Olympic Park Bakery Site
+
+Hi Signorelli, as an Olympic Park bakery, your site's missing a clickable phone number on the homepage, so customers have to search for it. That costs you calls, as people pick the next result in seconds. We can build you a modern, clean site from £449 one-off, with an optional £39/month care plan, want me to send a quick mockup?
+
+---
+
+## Charlie's Barber — Hair Salon, Stratford ✅ charliesbarber@gmail.com
+**Subject:** Stratford hair salon online
+
+Hi Charlie's Barber, as a hair salon in Stratford, not having a site means locals can't find you when searching online. This costs you work as people pick the next result in seconds. We can build you a modern, clean site from £449 one-off, with an optional £39/month care plan, want me to send a quick mockup?
