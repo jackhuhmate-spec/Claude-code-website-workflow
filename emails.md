@@ -444,3 +444,38 @@ Hi Signorelli, as an Olympic Park bakery, your site's missing a clickable phone 
 **Subject:** Stratford hair salon online
 
 Hi Charlie's Barber, as a hair salon in Stratford, not having a site means locals can't find you when searching online. This costs you work as people pick the next result in seconds. We can build you a modern, clean site from £449 one-off, with an optional £39/month care plan, want me to send a quick mockup?
+
+---
+
+## RWL Carpentry — Carpenter, Bromley ✅ rwlcarpentry@gmail.com
+**Subject:** RWL Carpentry site update
+
+Hi RWL Carpentry, as a Bromley-based carpenter, your site's footer still says 2019, which might make customers think you're no longer trading. Someone looking for a carpenter in Bromley will pick the next result in seconds if they think you're inactive. We can build you a modern, clean site from £449 one-off, with an optional £39/month care plan, want me to send a quick mockup?
+
+---
+
+## Home Painting and Decorating Ltd — Painter & Decorator, Bromley ✅ info@home-painting-decorating.co.uk
+**Subject:** Update for Home Painting
+
+Hi Home Painting and Decorating Ltd, as a painter and decorator in Bromley, your site's footer still says 2023, which might make it seem like you're no longer active. Someone searching for a painter in Bromley will likely pick the next result if they think you're not in business. We can build you a modern, clean site from £449 one-off, with an optional £39/month care plan, want me to send a quick mockup?
+
+---
+
+## Alex Painter — Painter & Decorator, Bromley ✅ painter.alex.uk@gmail.com
+**Subject:** Bromley painter site update
+
+Hi Alex Painter, as a painter and decorator in Bromley, your site's footer still says 2017 and there's no clickable phone number on the homepage, so someone looking for a decorator might pick the next result in seconds. That's losing you work. We can build you a modern, clean site from £449 one-off, with an optional £39/month care plan to keep it updated and working. Want me to send a quick mockup?
+
+---
+
+## CUT & DRIP — Hair Salon, Bromley ✅ info@cutanddrip.com
+**Subject:** CUT & DRIP site update
+
+Hi CUT & DRIP, as a hair salon in Bromley, your site's footer still says 2019, which might make customers think you're no longer trading. If someone searches for a salon and sees that, they'll pick the next result in seconds. We can build you a modern, clean site from £449, with an optional £39/month care plan to keep it updated and working - want me to send a quick mockup?
+
+---
+
+## ﻿Metroglaze London Ltd — Window Fitter, Bromley ✅ info@metroglaze.co.uk
+**Subject:** Metroglaze site security
+
+Hi Metroglaze London Ltd, as a Bromley window fitter, your site's lack of SSL certificate means Chrome shows a 'Not secure' warning, so visitors may pick a rival in seconds. We can build you a modern, clean site from £449 one-off, with an optional £39/month care plan to keep it updated and working. Want me to send a quick mockup?
