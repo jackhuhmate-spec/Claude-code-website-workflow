@@ -479,3 +479,31 @@ Hi CUT & DRIP, as a hair salon in Bromley, your site's footer still says 2019, w
 **Subject:** Metroglaze site security
 
 Hi Metroglaze London Ltd, as a Bromley window fitter, your site's lack of SSL certificate means Chrome shows a 'Not secure' warning, so visitors may pick a rival in seconds. We can build you a modern, clean site from £449 one-off, with an optional £39/month care plan to keep it updated and working. Want me to send a quick mockup?
+
+---
+
+## Stone Age — Stonemason, Fulham ✅ info@stone-age.co.uk
+**Subject:** Fulham Stonemason Site
+
+Hi Stone Age, as a Fulham stonemason, your site's footer still says 2010, which can make you look inactive. Someone searching for a stonemason in Fulham will pick the next result in seconds if they think you're no longer trading. We can build you a modern, clean site from £449 one-off, with an optional £39/month care plan, want me to send a quick mockup?
+
+---
+
+## Element7 Warehouse — Flooring Fitter, Fulham ✅ sales@element7.co.uk
+**Subject:** Element7 Warehouse phone issue
+
+Hi Element7 Warehouse, as a Flooring Fitter in Fulham, your site's missing a clickable phone number on the homepage, which costs you work as someone will pick the next result in seconds. We can build you a modern, clean site from £449 one-off, with an optional £39/month care plan to keep it updated and working. Want me to send a quick mockup?
+
+---
+
+## Personal Eyez — Optician, Hampstead ✅ contact@personaleyez-me.co.uk
+**Subject:** Hampstead optician site update
+
+Hi Personal Eyez, as an optician in Hampstead, your site's footer still says 2023, which can make you look closed to people checking if you're still open. Someone searching for an optician will pick the next result in seconds if they think you're not active. We can build you a modern, clean site from £449 one-off, with an optional £39/month care plan, want me to send a quick mockup?
+
+---
+
+## Master Plumbers — Plumber, Ilford ✅ gassafemasterplumbers@gmail.com
+**Subject:** Master Plumbers site update
+
+Hi Master Plumbers, as a plumber in Ilford, your site's footer still saying 2016 makes it look like you're not active, so people will pick the next plumber in seconds. We can build you a modern, clean site from £449 one-off, with an optional £39/month care plan to keep it updated and working. Want me to send a quick mockup?
