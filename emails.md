@@ -521,3 +521,45 @@ Hi ACH Landscapes, as a landscape gardener in Romford, your site doesn't fit a p
 **Subject:** Flawless Landscaping site update
 
 Hi Flawless Landscaping, as a Romford landscape gardener, your site shows it's not been updated recently, like the footer still saying 2015. That can cost you work as people will pick the next result if they think you're no longer trading. We can build you a modern, clean site from £449 one-off, and a £39/month care plan is optional, want me to send a quick mockup?
+
+---
+
+## B S Electrical Services Uk Ltd — Electrician, Ilford ✅ info@bs-electrical.co.uk
+**Subject:** BS Electrical update
+
+Hi B S Electrical Services Uk Ltd, as an Ilford electrician, your site's footer still says 2015, which might make people think you're no longer trading and pick the next result. We can build you a modern, clean site from £449 one-off and offer an optional £39/month care plan to keep it updated. Want me to send a quick mockup?
+
+---
+
+## Acute Roofing Ltd — Roofer, London ✅ acuteroofing@mail.com
+**Subject:** Acute Roofing Ltd site
+
+Hi Acute Roofing Ltd, as a London roofer, your site's 'coming soon' page isn't giving customers any info about your services. This costs you work as someone will pick the next result in seconds. We can build you a modern, clean site from £449 one-off, with an optional £39/month care plan, want me to send a quick mockup?
+
+---
+
+## LT carpentry Ltd — Carpenter, London ✅ info@ltcarpentry.co.uk
+**Subject:** LT carpentry Ltd website issue
+
+Hi LT carpentry Ltd, as a London carpenter, your site has a 'Not secure' warning in Chrome due to no SSL certificate and the footer still says 2015, which likely costs you work as people quickly pick the next result. We can build you a modern, clean site from £449 one-off, with an optional £39/month care plan to keep it updated and working. Want me to send a quick mockup?
+
+---
+
+## Captivating Carpentry — Carpenter, London ✅ info@c-carpentry.co.uk
+**Subject:** Update Your Site
+
+Hi Captivating Carpentry, as a London carpenter, your site's footer still says 2015 and there's no clickable phone number on the homepage, so someone looking for a carpenter in London might think you're no longer trading and pick the next result instead. That's losing you work, as people won't wait to find a way to contact you. We can build you a modern, clean site from £449 one-off and an optional £39/month care plan to keep it updated and working, want me to send a quick mockup?
+
+---
+
+## Kiwi Landscapes — Landscape Gardener, London ✅ info@kiwilandscapes.com
+**Subject:** Kiwi Landscapes site issue
+
+Hi Kiwi Landscapes, as a London landscape gardener, your site's homepage doesn't have a clickable phone number, so customers have to search for a way to contact you. This costs you work as someone will pick the next result in seconds. We can build you a modern, clean site from £449 one-off, with an optional £39/month care plan, want me to send a quick mockup?
+
+---
+
+## Jane Ashley Garden Design — Landscape Gardener, London ✅ janeashleygardens@gmail.com
+**Subject:** Jane Ashley Garden Design site
+
+Hi Jane Ashley Garden Design, as a London landscape gardener, your site's missing a clickable phone number on the homepage, so customers have to search for a way to get in touch. That costs you work, as someone will pick the next result in seconds. We can build you a modern, clean site from £449 one-off, with an optional £39/month care plan, want me to send a quick mockup?
